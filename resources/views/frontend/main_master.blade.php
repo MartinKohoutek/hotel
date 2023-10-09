@@ -28,6 +28,7 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 <body>
@@ -60,6 +61,20 @@
     <script src="{{ asset('frontend/js/datepicker_search.js') }}"></script>
     <script src="{{ asset('frontend/js/datepicker_inline.js') }}"></script>
     <script src="{{ asset('frontend/phpmailer/validate.js') }}"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @if (Session::has('message'))
+    <script>
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        toastr.options.closeButton = true;
+        switch (type) {
+            case 'info': toastr.info("{{ Session::get('message') }}"); break;
+            case 'success': toastr.success("{{ Session::get('message') }}"); break;
+            case 'warning': toastr.warning("{{ Session::get('message') }}"); break;
+            case 'error': toastr.error("{{ Session::get('message') }}"); break;
+        }
+    </script>
+    @endif
 
 </body>
 

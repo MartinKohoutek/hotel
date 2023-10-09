@@ -20,7 +20,8 @@
                 <div class="service-article p-3">
                     <section class="checkout-area pb-70">
                         <div class="container">
-                            <form>
+                            <form action="{{ route('user.profile.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="billing-details">
@@ -47,7 +48,7 @@
                                                 <div class="col-lg-6 col-md-6">
                                                     <div class="form-group">
                                                         <label>Phone <span class="required">*</span></label>
-                                                        <input type="text" name="phone" class="form-control" value="{{ $user->photo }}">
+                                                        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 col-md-6">
@@ -63,7 +64,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-profile">Save Changes </button>
+                                            <button type="submit" class="btn btn-profile">Update Profile </button>
                                         </div>
                                     </div>
                                 </div>

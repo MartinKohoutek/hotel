@@ -16,4 +16,27 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         return view('frontend.dashboard.user_profile', compact('user'));
     }
+
+    public function UserProfileStore(Request $request) {
+        $data = User::findOrFail(Auth::user()->id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            @unlink(public_path('/upload/user_images/'.$data->photo));
+            $fileName = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('/upload/user_images'), $fileName);
+            $data['photo'] = $fileName;
+        }
+        $data->save();
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'User Profile Updated Successfully!',
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }
