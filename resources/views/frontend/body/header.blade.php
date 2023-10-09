@@ -9,7 +9,7 @@
             <div class="col-9">
                 <div class="main-menu">
                     <a href="#" class="closebt open_close_menu"><i class="bi bi-x"></i></a>
-                    <div class="logo_panel"><img src="{{ asset('frontend/img/logo_sticky.png') }}" width="135" height="45" alt=""></div>
+                    <div class="logo_panel"><img src="{{ asset('frontend/img/logo_sticky.png    ') }}" width="135" height="45" alt=""></div>
                     <nav id="mainNav">
                         <ul>
                             <li class="submenu">
@@ -52,6 +52,8 @@
                             </li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="{{ route('login') }}"><i class='bx bx-user'></i>Login</a></li>
+                            <li><a href="{{ route('register') }}"><i class='bx bx-user'></i>Register</a></li>
                             <li><a href="#booking_section" class="btn_1">Book Now</a></li>
                         </ul>
                     </nav>
