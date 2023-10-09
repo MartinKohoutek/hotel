@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 	<title>Admin Dashboard</title>
 </head>
 
@@ -52,7 +53,7 @@
 		@include('admin.body.footer')
 	</div>
 	<!--end wrapper-->
-	
+
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('backend/assets/js/bootstrap.bundle.min.js') }}"></script>
 	<!--plugins-->
@@ -68,12 +69,26 @@
 	<script src="{{ asset('backend/assets/plugins/highcharts/js/export-data.js') }}"></script>
 	<script src="{{ asset('backend/assets/plugins/highcharts/js/accessibility.js') }}"></script>
 	<script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
-    <script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script>
 		new PerfectScrollbar('.dashboard-top-countries');
 	</script>
 	<script src="{{ asset('backend/assets/js/index.js') }}"></script>
 	<!--app JS-->
 	<script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+	@if (Session::has('message'))
+	<script>
+		var type = "{{ Session::get('alert-type', 'info') }}";
+		toastr.options.closeButton = true;
+		switch (type) {
+			case 'info': toastr.info("{{ Session::get('message') }}"); break;
+			case 'success': toastr.success("{{ Session::get('message') }}"); break;
+			case 'warning': toastr.warning("{{ Session::get('message') }}"); break;
+			case 'error': toastr.error("{{ Session::get('message') }}"); break;
+		}
+	</script>
+	@endif
 </body>
 
 </html>

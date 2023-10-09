@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(UserController::class)->group(function(){
+    Route::get('/', 'Index');
 });
 
 Route::get('/dashboard', function () {
@@ -36,6 +37,8 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/admin/logout', 'AdminLogout')->name('admin.logout');
         Route::get('/admin/profile', 'AdminProfile')->name('admin.profile');
         Route::post('/admin/profile/store', 'AdminProfileStore')->name('admin.profile.store');
+        Route::get('/admin/change/password', 'AdminChangePassword')->name('admin.change.password');
+        Route::post('/admin/password/update', 'AdminPasswordUpdate')->name('admin.password.update');
     });
 });
 
