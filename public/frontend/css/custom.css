@@ -59,3 +59,71 @@
 .contact-form .account-desc a:hover {
     color: #ad7103;
 }
+
+/* Frontend User Dashboard */
+
+.services-bar-widget {
+    margin-bottom: 35px;
+    background-color: #ede8dd;
+}
+
+.services-bar-widget .title {
+    font-size: 20px;
+    color: #292323;
+    padding: 20px 20px 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.services-bar-widget .side-bar-categories {
+    padding: 10px 15px 20px;
+}
+
+.services-bar-widget .side-bar-categories ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.services-bar-widget .side-bar-categories ul li {
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #FEF7F6;
+    border: 1px solid #978667;
+}
+
+.services-bar-widget .side-bar-categories ul li:hover {
+    background-color: #978667;
+}
+
+.services-bar-widget .side-bar-categories ul li:hover a {
+    color: white;
+}
+
+.services-bar-widget .side-bar-categories ul li a {
+    display: inline-block;
+    color: #1B2132;
+    font-weight: normal;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.services-bar-widget .side-bar-categories ul li a:hover {
+    color: white;
+}
+
+.service-article .service-article-title h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+.service-article .service-article-img {
+    margin-bottom: 30px;
+}
+
+.service-article-content p {
+    margin-bottom: 20px;
+}
