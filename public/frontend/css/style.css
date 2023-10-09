@@ -4512,10 +4512,10 @@ img.rounded-img {
 
 .form-control {
   border-color: #ededed;
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 17px;
+  /* font-size: 0.875rem; */
   color: #333;
-  height: 50px;
+  /* height: 50px; */
 }
 .form-control:focus {
   border-color: #ddd;
