@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/user/logout', 'UserLogout')->name('user.logout');
         Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
         Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
+    });
+
+    Route::controller(TeamController::class)->group(function(){
+        Route::get('/all/team', 'AllTeam')->name('all.team');
     });
 });
 

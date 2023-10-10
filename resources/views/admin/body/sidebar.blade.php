@@ -22,12 +22,12 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-spa'></i>
                 </div>
-                <div class="menu-title">Application</div>
+                <div class="menu-title">Manage Team</div>
             </a>
             <ul>
-                <li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
+                <li> <a href="{{ route('all.team') }}"><i class="bx bx-right-arrow-alt"></i>All Team Members</a>
                 </li>
-                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
+                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Add Team Member</a>
                 </li>
             </ul>
         </li>
