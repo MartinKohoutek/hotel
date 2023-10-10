@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary">Add Team Member</button>
+                <a href="{{ route('add.team') }}" role="button" class="btn btn-primary">Add Team Member</a>
             </div>
         </div>
     </div>
@@ -28,32 +28,61 @@
                 <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
+                            <th>Id</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Facebook</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($team as $key => $item)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td>{{ $key+1 }}</td>
+                            <td><img src="{{ asset($item->photo) }}" alt="" style="width: 60px; height: 50px"></td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->position }}</td>
+                            <td>
+                                @if ($item->facebook)
+                                <button type="button" class="btn btn-success"><i class="bx bxl-facebook-square me-0"></i></button>
+                                @else
+                                <button type="button" class="btn btn-dark"><i class="bx bxl-facebook-square me-0"></i></button>    
+                                @endif
+
+                                @if ($item->twitter)
+                                <button type="button" class="btn btn-success"><i class="bx bxl-twitter me-0"></i></button>
+                                @else
+                                <button type="button" class="btn btn-dark"><i class="bx bxl-twitter me-0"></i></button>
+                                @endif
+
+                                @if ($item->instagram)
+                                <button type="button" class="btn btn-success"><i class="bx bxl-linkedin-square me-0"></i></button>
+                                @else
+                                <button type="button" class="btn btn-dark"><i class="bx bxl-linkedin-square me-0"></i></button>
+                                @endif
+
+                                @if ($item->pinterest)
+                                <button type="button" class="btn btn-success"><i class="bx bxl-pinterest me-0"></i></button>
+                                @else
+                                <button type="button" class="btn btn-dark"><i class="bx bxl-pinterest me-0"></i></button>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="#" class="btn btn-danger px-3 radius-30">Delete</a>
+                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th>Id</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Facebook</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>

@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(TeamController::class)->group(function(){
         Route::get('/all/team', 'AllTeam')->name('all.team');
+        Route::get('/add/team', 'AddTeam')->name('add.team');
+        Route::post('/team/store', 'StoreTeam')->name('team.store');
     });
 });
 
