@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/team/store', 'StoreTeam')->name('team.store');
         Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
         Route::post('/team/update', 'UpdateTeam')->name('team.update');
+        Route::get('/delete/team/{id}', 'DeleteTeam')->name('delete.team');
     });
 });
 

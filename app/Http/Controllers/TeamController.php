@@ -53,7 +53,7 @@ class TeamController extends Controller
 
         if ($request->file('photo')) {
             $image = $request->file('photo');
-            @unlink(public_path($team->photo));
+            @unlink($team->photo);
             $imageName = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(550, 670)->save('upload/team/'.$imageName);
             $saveUrl = 'upload/team/'.$imageName;
@@ -76,5 +76,18 @@ class TeamController extends Controller
         ];
 
         return redirect()->route('all.team')->with($notification);
+    }
+
+    public function DeleteTeam($id) {
+        $team = Team::findOrFail($id);
+        @unlink($team->photo);
+        $team->delete();
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Team Member Deleted Successfully!',
+        ];
+
+        return back()->with($notification);
     }
 }
