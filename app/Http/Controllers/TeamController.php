@@ -42,4 +42,39 @@ class TeamController extends Controller
 
         return redirect()->route('all.team')->with($notification);
     }
+
+    public function EditTeam($id) {
+        $team = Team::findOrFail($id);
+        return view('backend.team.edit_team', compact('team'));
+    }
+
+    public function UpdateTeam(Request $request) {
+        $team = Team::findOrFail($request->id);
+
+        if ($request->file('photo')) {
+            $image = $request->file('photo');
+            @unlink(public_path($team->photo));
+            $imageName = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(550, 670)->save('upload/team/'.$imageName);
+            $saveUrl = 'upload/team/'.$imageName;
+            $team->update(['photo' => $saveUrl]);
+        }
+        
+        $team->update([
+            'name' => $request->name,
+            'position' => $request->position,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'pinterest' => $request->pinterest,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Team Member Updated Successfully!',
+        ];
+
+        return redirect()->route('all.team')->with($notification);
+    }
 }

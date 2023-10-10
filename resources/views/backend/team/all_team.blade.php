@@ -32,7 +32,7 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Facebook</th>
+                            <th>Social Media</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -69,7 +69,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
                                 <a href="#" class="btn btn-danger px-3 radius-30">Delete</a>
                             </td>
                         </tr>
@@ -81,7 +81,7 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Facebook</th>
+                            <th>Social Media</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
