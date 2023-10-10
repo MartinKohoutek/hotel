@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(UserController::class)->group(function(){
         Route::get('/profile', 'UserProfile')->name('user.profile');
         Route::post('/profile/store', 'UserProfileStore')->name('user.profile.store');
+        Route::get('/user/logout', 'UserLogout')->name('user.logout');
     });
 });
 

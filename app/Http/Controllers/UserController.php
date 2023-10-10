@@ -39,4 +39,20 @@ class UserController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function UserLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'User Logout Successfully!',
+        ];
+
+        return redirect('/login')->with($notification);
+    }
 }
