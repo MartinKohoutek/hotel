@@ -31,15 +31,15 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-label">UI Elements</li>
+        <li class="menu-label">Sections Setup</li>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart-alt'></i>
                 </div>
-                <div class="menu-title">eCommerce</div>
+                <div class="menu-title">Manage About Us</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Products</a>
+                <li> <a href="{{ route('about.us.update') }}"><i class="bx bx-right-arrow-alt"></i>Update About Us</a>
                 </li>
                 <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
                 </li>

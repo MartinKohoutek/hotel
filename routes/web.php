@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
@@ -41,6 +42,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
         Route::post('/team/update', 'UpdateTeam')->name('team.update');
         Route::get('/delete/team/{id}', 'DeleteTeam')->name('delete.team');
+    });
+
+    Route::controller(AboutUsController::class)->group(function(){
+        Route::get('/about/us/update', 'AboutUsUpdate')->name('about.us.update');
+        Route::post('/about/us/store', 'AboutUsStore')->name('about.us.store');
     });
 });
 
