@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -54,5 +55,36 @@ class UserController extends Controller
         ];
 
         return redirect('/login')->with($notification);
+    }
+
+    public function UserChangePassword() {
+        return view('frontend.dashboard.user_change_password');
+    }
+
+    public function UserPasswordUpdate(Request $request) {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        if (!Hash::check($request->old_password, Auth::user()->password)) {
+            $notification = [
+                'alert-type' => 'error',
+                'message' => 'Old Password Does Not Match!'
+            ];
+
+            return back()->with($notification);
+        }
+
+        User::whereId(Auth::user()->id)->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Password Changed Successfully!',
+        ];
+
+        return back()->with($notification);
     }
 }

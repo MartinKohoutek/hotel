@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-3">
-                <a href="index.html" class="logo_normal"><img src="{{ asset('frontend/img/logo.png') }}" width="135" height="45" alt=""></a>
-                <a href="index.html" class="logo_sticky"><img src="{{ asset('frontend/img/logo_sticky.png') }}" width="135" height="45" alt=""></a>
+                <a href="{{ url('/') }}" class="logo_normal"><img src="{{ asset('frontend/img/logo.png') }}" width="135" height="45" alt=""></a>
+                <a href="{{ url('/') }}" class="logo_sticky"><img src="{{ asset('frontend/img/logo_sticky.png') }}" width="135" height="45" alt=""></a>
             </div>
             <div class="col-9">
                 <div class="main-menu">
@@ -52,8 +52,13 @@
                             </li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
+                            @auth
+                            <li><a href="{{ route('dashboard') }}"><i class='bx bx-user'></i>Dashboard</a></li>
+                            <li><a href="{{ route('user.logout') }}"><i class='bx bx-user'></i>Logout</a></li>
+                            @else
                             <li><a href="{{ route('login') }}"><i class='bx bx-user'></i>Login</a></li>
                             <li><a href="{{ route('register') }}"><i class='bx bx-user'></i>Register</a></li>
+                            @endauth
                             <li><a href="#booking_section" class="btn_1">Book Now</a></li>
                         </ul>
                     </nav>

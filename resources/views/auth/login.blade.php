@@ -50,7 +50,7 @@
                 </div>
             </div>
             <p class="mt-3">
-                <input type="submit" value="Submit" class="btn_1 outline w-100 d-block mx-auto">
+                <input type="submit" value="Sign In" class="btn_1 outline w-100 d-block mx-auto">
             </p>
             <div class="col-12">
                 <p class="account-desc">
