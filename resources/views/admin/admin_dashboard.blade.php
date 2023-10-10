@@ -78,6 +78,7 @@
 	<!--app JS-->
 	<script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+	<script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
 	

@@ -22,13 +22,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('team.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('team.store') }}" method="post" enctype="multipart/form-data" id="myForm">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Name</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 text-secondary">
                                         <input type="text" name="name" class="form-control"  />
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Position</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 text-secondary">
                                         <input type="text" name="position" class="form-control"  />
                                     </div>
                                 </div>
@@ -73,15 +73,15 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-sm-3">
+                                    <div class="form-group col-sm-3">
                                         <h6 class="mb-0">Photo</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 text-secondary">
                                         <input type="file" name="photo" class="form-control" id="image" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-sm-3">
+                                    <div class="form-group col-sm-3">
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
@@ -112,5 +112,34 @@
             reader.readAsDataURL(e.target.files['0']);
         });
     });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#myForm').validate({
+            rules: {
+                name: { required : true, },         
+                position: { required: true, },
+                photo: { required: true, },
+            },
+            messages :{
+                name: { required : 'Please Enter Name', }, 
+                position: { required: 'Please Enter Position' },
+                photo: { required: 'Please Enter Photo' },
+            },
+            errorElement : 'span', 
+            errorPlacement: function (error,element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight : function(element, errorClass, validClass){
+                $(element).addClass('is-invalid');
+            },
+            unhighlight : function(element, errorClass, validClass){
+                $(element).removeClass('is-invalid');
+            },
+        });
+    });
+    
 </script>
 @endsection
