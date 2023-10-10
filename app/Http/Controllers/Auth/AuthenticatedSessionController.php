@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,7 +37,14 @@ class AuthenticatedSessionController extends Controller
             $url = 'dashboard';
         }
 
-        return redirect()->intended($url);
+        $user = User::findOrFail(Auth::user()->id);
+
+        $notification = [
+            'alert-type' => 'info',
+            'message' => 'User '.$user->name.' Login Successfully!',
+        ];
+
+        return redirect()->intended($url)->with($notification);
     }
 
     /**
