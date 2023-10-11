@@ -71,12 +71,12 @@
                                                         <input type="file" name="multi_image[]" class="form-control" id="multiImg" accept="image/jpeg, image/jpg, image/gif, image/png" multiple>
                                                         <div class="mt-2" id="previewImg">
                                                             @foreach ($multiImgs as $item)
-                                                                <div class="d-inline-block position-relative">
-                                                                    <img src="{{ (!empty($item->room_img)) ? url('upload/roomimg/multi_img/'.$item->room_img) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px;">
-                                                                    <span class="position-absolute top-0 end-0 m-1 badge rounded-pill bg-primary"><a href="{{ route('multi.image.delete', $item->id) }}" class="text-white"><i class="lni lni-close"></i></a><span class="visually-hidden">unread messages</span></span>
-                                                                    
+                                                            <div class="d-inline-block position-relative">
+                                                                <img src="{{ (!empty($item->room_img)) ? url('upload/roomimg/multi_img/'.$item->room_img) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px;">
+                                                                <span class="position-absolute top-0 end-0 m-1 badge rounded-pill bg-primary"><a href="{{ route('multi.image.delete', $item->id) }}" class="text-white"><i class="lni lni-close"></i></a><span class="visually-hidden">unread messages</span></span>
 
-                                                                </div>
+
+                                                            </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@
                                                         <label for="inputState" class="form-label">Bed Style</label>
                                                         <select name="bed_style" id="inputState" class="form-select">
                                                             <option selected="">Choose...</option>
-                                                            <option value="Queen Bed" {{ $room->bed_style == 'Queen Bed' ? 'selected' : '' }} >Queen Bed</option>
+                                                            <option value="Queen Bed" {{ $room->bed_style == 'Queen Bed' ? 'selected' : '' }}>Queen Bed</option>
                                                             <option value="Twin Bed" {{ $room->bed_style == 'Twin Bed' ? 'selected' : '' }}>Twin Bed</option>
                                                             <option value="King Bed" {{ $room->bed_style == 'King Bed' ? 'selected' : '' }}>King Bed</option>
                                                         </select>
@@ -197,7 +197,53 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <a class="card-title btn btn-primary float-right" onclick="addRoomNo()" id="addRoomNo">
+                                                <i class="lni lni-plus"></i>Add New
+                                            </a>
+                                            <div class="room-number-hide" id="room-number-hide">
+                                                <form action="">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="room_number" class="form-label">Room Number</label>
+                                                            <input type="text" name="room_number" class="form-control" id="room_number">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="inputState" class="form-label">Status</label>
+                                                            <select name="view" id="inputState" class="form-select">
+                                                                <option selected="">Select Status...</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="InActive">InActive</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="submit" class="btn btn-success" style="margin-top: 28px;">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <table class="table mb-0 table-striped" id="room-view">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Room Number</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>
+                                                            <a href="" class="btn btn-primary px-3 radius-30">Edit</a>
+                                                            <a href="" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,31 +337,31 @@
     <div class="whole_extra_item_add" id="whole_extra_item_add">
         <div class="basic_facility_section_remove" id="basic_facility_section_remove">
             <!-- <div class="container mt-2"> -->
-                <div class="row mt-2">
-                    <div class="form-group col-md-8">
-                        <!-- <label for="basic_facility_name">Room Facilities</label> -->
-                        <select name="facility_name[]" id="basic_facility_name" class="form-control">
-                            <option value="">Select Facility</option>
-                            <option value="Complimentary Breakfast">Complimentary Breakfast</option>
-                            <option value="32/42 inch LED TV"> 32/42 inch LED TV</option>
-                            <option value="Smoke alarms">Smoke alarms</option>
-                            <option value="Minibar"> Minibar</option>
-                            <option value="Work Desk">Work Desk</option>
-                            <option value="Free Wi-Fi">Free Wi-Fi</option>
-                            <option value="Safety box">Safety box</option>
-                            <option value="Rain Shower">Rain Shower</option>
-                            <option value="Slippers">Slippers</option>
-                            <option value="Hair dryer">Hair dryer</option>
-                            <option value="Wake-up service">Wake-up service</option>
-                            <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning</option>
-                            <option value="Electronic door lock">Electronic door lock</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <span class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></span>
-                        <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
-                    </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-8">
+                    <!-- <label for="basic_facility_name">Room Facilities</label> -->
+                    <select name="facility_name[]" id="basic_facility_name" class="form-control">
+                        <option value="">Select Facility</option>
+                        <option value="Complimentary Breakfast">Complimentary Breakfast</option>
+                        <option value="32/42 inch LED TV"> 32/42 inch LED TV</option>
+                        <option value="Smoke alarms">Smoke alarms</option>
+                        <option value="Minibar"> Minibar</option>
+                        <option value="Work Desk">Work Desk</option>
+                        <option value="Free Wi-Fi">Free Wi-Fi</option>
+                        <option value="Safety box">Safety box</option>
+                        <option value="Rain Shower">Rain Shower</option>
+                        <option value="Slippers">Slippers</option>
+                        <option value="Hair dryer">Hair dryer</option>
+                        <option value="Wake-up service">Wake-up service</option>
+                        <option value="Laundry & Dry Cleaning">Laundry & Dry Cleaning</option>
+                        <option value="Electronic door lock">Electronic door lock</option>
+                    </select>
                 </div>
+                <div class="form-group col-md-4">
+                    <span class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></span>
+                    <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
+                </div>
+            </div>
             <!-- </div> -->
         </div>
     </div>
@@ -330,11 +376,22 @@
             counter++;
         });
         $(document).on("click", ".removeeventmore", function(event) {
-            
-                $(this).closest("#basic_facility_section_remove").remove();
-                counter -= 1
-            
+
+            $(this).closest("#basic_facility_section_remove").remove();
+            counter -= 1
+
         });
     });
+</script>
+
+<script>
+    $('#room-number-hide').hide();
+    $('#room-view').show();
+
+    function addRoomNo() {
+        $('#room-number-hide').show();
+        $('#room-view').hide();
+        $('#addRoomNo').hide();
+    }
 </script>
 @endsection
