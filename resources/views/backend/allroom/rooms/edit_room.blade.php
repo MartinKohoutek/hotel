@@ -47,10 +47,11 @@
                                     <div class="col">
                                         <div class="card border border-0 border-4 border-primary">
                                             <div class="card-body p-5">
-                                                <form class="row g-3">
+                                                <form class="row g-3" action="{{ route('update.room', $room->id) }}" method="post" enctype="multipart/form-data">
+                                                    @csrf
                                                     <div class="col-md-4">
                                                         <label for="inputFirstName" class="form-label">Room Type</label>
-                                                        <input type="text" class="form-control" id="inputFirstName" value="{{ $room->roomtype->name }}">
+                                                        <input type="text" name="roomtype_id" class="form-control" id="inputFirstName" value="{{ $room->roomtype->name }}">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="inputLastName" class="form-label">Total Adult</label>
@@ -72,15 +73,19 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <label for="inputFirstName" class="form-label">Room Price</label>
                                                         <input type="text" name="price" class="form-control" id="inputFirstName" value="{{ $room->price }}">
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <label for="inputLastName" class="form-label">Discount (%)</label>
                                                         <input type="text" name="discount" class="form-control" id="inputLastName" value="{{ $room->discount }}">
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
+                                                        <label for="inputLastName" class="form-label">Size</label>
+                                                        <input type="text" name="size" class="form-control" id="inputLastName" value="{{ $room->size }}">
+                                                    </div>
+                                                    <div class="col-md-3">
                                                         <label for="inputEmail" class="form-label">Room Capacity</label>
                                                         <input type="text" name="room_capacity" class="form-control" id="inputEmail" value="{{ $room->room_capacity }}">
                                                     </div>
