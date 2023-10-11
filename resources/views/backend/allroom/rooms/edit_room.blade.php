@@ -64,7 +64,7 @@
                                                     <div class="col-md-6">
                                                         <label for="inputPassword" class="form-label">Main Image</label>
                                                         <input type="file" name="image" class="form-control mb-2" id="image">
-                                                        <img id="showImage" src="{{ (!empty($room->image)) ? url('upload/rooms/'.$room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px">
+                                                        <img id="showImage" src="{{ (!empty($room->image)) ? url('upload/roomimg/'.$room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="multiImg" class="form-label">Gallery Images</label>
@@ -93,17 +93,17 @@
                                                         <label for="inputState" class="form-label">Room View</label>
                                                         <select name="view" id="inputState" class="form-select">
                                                             <option selected="">Choose...</option>
-                                                            <option value="Sea View">Sea View</option>
-                                                            <option value="Hill View">Hill View</option>
+                                                            <option value="Sea View" {{ $room->view == 'Sea View' ? 'selected' : ''}}>Sea View</option>
+                                                            <option value="Hill View" {{ $room->view == 'Hill View' ? 'selected' : '' }}>Hill View</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="inputState" class="form-label">Bed Style</label>
                                                         <select name="bed_style" id="inputState" class="form-select">
                                                             <option selected="">Choose...</option>
-                                                            <option value="Queen Bed">Queen Bed</option>
-                                                            <option value="Twin Bed">Twin Bed</option>
-                                                            <option value="King Bed">King Bed</option>
+                                                            <option value="Queen Bed" {{ $room->bed_style == 'Queen Bed' ? 'selected' : '' }} >Queen Bed</option>
+                                                            <option value="Twin Bed" {{ $room->bed_style == 'Twin Bed' ? 'selected' : '' }}>Twin Bed</option>
+                                                            <option value="King Bed" {{ $room->bed_style == 'King Bed' ? 'selected' : '' }}>King Bed</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-12">
@@ -116,11 +116,11 @@
                                                     </div>
                                                     <div class="row mt-2">
                                                         <div class="col-md-12 mb-3">
+                                                            <label for="facility_name" class="form-label"> Room Facilities </label>
                                                             @forelse ($basic_facility as $item)
                                                             <div class="basic_facility_section_remove" id="basic_facility_section_remove">
-                                                                <div class="row add_item">
+                                                                <div class="row add_item mb-2">
                                                                     <div class="col-md-8">
-                                                                        <label for="facility_name" class="form-label"> Room Facilities </label>
                                                                         <select name="facility_name[]" id="facility_name" class="form-control">
                                                                             <option value="">Select Facility</option>
                                                                             <option value="Complimentary Breakfast" {{$item->facility_name == 'Complimentary Breakfast'?'selected':''}}>Complimentary Breakfast</option>
@@ -139,9 +139,9 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group" style="padding-top: 30px;">
-                                                                            <a class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i></a>
-                                                                            <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle"></i></span>
+                                                                        <div class="form-group">
+                                                                            <a class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></a>
+                                                                            <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -149,9 +149,9 @@
 
                                                             @empty
                                                             <div class="basic_facility_section_remove" id="basic_facility_section_remove">
-                                                                <div class="row add_item">
-                                                                    <div class="col-md-6">
-                                                                        <label for="basic_facility_name" class="form-label">Room Facilities </label>
+                                                                <!-- <label for="basic_facility_name" class="form-label">Room Facilities </label> -->
+                                                                <div class="row add_item mb-2">
+                                                                    <div class="col-md-8">
                                                                         <select name="facility_name[]" id="basic_facility_name" class="form-control">
                                                                             <option value="">Select Facility</option>
                                                                             <option value="Complimentary Breakfast">Complimentary Breakfast</option>
@@ -169,8 +169,8 @@
                                                                             <option value="Electronic door lock">Electronic door lock</option>
                                                                         </select>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group" style="padding-top: 30px;">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
                                                                             <a class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></a>
                                                                             <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
                                                                         </div>
@@ -284,8 +284,8 @@
     <div class="whole_extra_item_add" id="whole_extra_item_add">
         <div class="basic_facility_section_remove" id="basic_facility_section_remove">
             <!-- <div class="container mt-2"> -->
-                <div class="row mt-1">
-                    <div class="form-group col-md-6">
+                <div class="row mt-2">
+                    <div class="form-group col-md-8">
                         <!-- <label for="basic_facility_name">Room Facilities</label> -->
                         <select name="facility_name[]" id="basic_facility_name" class="form-control">
                             <option value="">Select Facility</option>
@@ -304,7 +304,7 @@
                             <option value="Electronic door lock">Electronic door lock</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <span class="btn btn-success addeventmore"><i class="lni lni-circle-plus"></i></span>
                         <span class="btn btn-danger removeeventmore"><i class="lni lni-circle-minus"></i></span>
                     </div>
@@ -323,8 +323,10 @@
             counter++;
         });
         $(document).on("click", ".removeeventmore", function(event) {
-            $(this).closest("#basic_facility_section_remove").remove();
-            counter -= 1
+            
+                $(this).closest("#basic_facility_section_remove").remove();
+                counter -= 1
+            
         });
     });
 </script>
