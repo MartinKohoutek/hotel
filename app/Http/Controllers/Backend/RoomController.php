@@ -10,17 +10,20 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use PHPUnit\Framework\Constraint\Count;
 
+use function PHPUnit\Framework\fileExists;
+
 class RoomController extends Controller
 {
     public function EditRoom($id) {
         $room = Room::findOrFail($id);
         $basic_facility = Facility::where('rooms_id', $id)->get();
-        return view('backend.allroom.rooms.edit_room', compact('room', 'basic_facility'));
+        $multiImgs = RoomImage::where('rooms_id', $id)->get();
+        return view('backend.allroom.rooms.edit_room', compact('room', 'basic_facility', 'multiImgs'));
     }
 
     public function UpdateRoom(Request $request, $id) {
         $room = Room::findOrFail($id);
-        $room->roomtype_id = $id;
+        $room->roomtype_id = $room->roomtype_id;
         $room->total_adult = $request->total_adult;
         $room->total_child = $request->total_child;
         $room->room_capacity = $request->room_capacity;
@@ -39,7 +42,7 @@ class RoomController extends Controller
             $image = $request->file('image');
             @unlink($room->image);
             $imageName = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(500, 500)->save('upload/roomimg/'.$imageName);
+            Image::make($image)->resize(1600, 1000)->save('upload/roomimg/'.$imageName);
             $room->image = $imageName;
         }
 
@@ -95,5 +98,26 @@ class RoomController extends Controller
         }
 
       
+    }
+
+    public function MultiImageDelete($id) {
+        $deleteData = RoomImage::where('id', $id)->first();
+        if ($deleteData) {
+            $imagePath = 'upload/roomimg/multi_img/'.$deleteData->room_img;
+            if (fileExists($imagePath)) {
+                unlink($imagePath);
+                echo "Image Unlinked Successfully";
+            } else {
+                echo "Image does not exist";
+            }
+            RoomImage::where('id', $id)->delete();
+        }
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Image Deleted Successfully!',
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

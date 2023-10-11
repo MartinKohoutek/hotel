@@ -69,8 +69,15 @@
                                                     <div class="col-md-6">
                                                         <label for="multiImg" class="form-label">Gallery Images</label>
                                                         <input type="file" name="multi_image[]" class="form-control" id="multiImg" accept="image/jpeg, image/jpg, image/gif, image/png" multiple>
-                                                        <div class="row mt-2" id="previewImg">
+                                                        <div class="mt-2" id="previewImg">
+                                                            @foreach ($multiImgs as $item)
+                                                                <div class="d-inline-block position-relative">
+                                                                    <img src="{{ (!empty($item->room_img)) ? url('upload/roomimg/multi_img/'.$item->room_img) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px;">
+                                                                    <span class="position-absolute top-0 end-0 m-1 badge rounded-pill bg-primary"><a href="{{ route('multi.image.delete', $item->id) }}" class="text-white"><i class="lni lni-close"></i></a><span class="visually-hidden">unread messages</span></span>
+                                                                    
 
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -225,7 +232,7 @@
                         var fRead = new FileReader(); //new filereader
                         fRead.onload = (function(file) { //trigger function on successful read
                             return function(e) {
-                                var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(100)
+                                var img = $('<img/>').addClass('thumb mx-1').attr('src', e.target.result).width(100)
                                     .height(80); //create image element 
                                 $('#previewImg').append(img); //append image to output element
                             };
