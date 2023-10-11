@@ -69,12 +69,12 @@
 	<script src="{{ asset('backend/assets/plugins/highcharts/js/variable-pie.js') }}"></script>
 	<script src="{{ asset('backend/assets/plugins/highcharts/js/export-data.js') }}"></script>
 	<script src="{{ asset('backend/assets/plugins/highcharts/js/accessibility.js') }}"></script>
-	<script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
+	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script>
 		new PerfectScrollbar('.dashboard-top-countries');
 	</script>
-	<script src="{{ asset('backend/assets/js/index.js') }}"></script>
+	
 	<!--app JS-->
 	<script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
@@ -83,7 +83,7 @@
 	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
 	<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+	<script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTable').DataTable();

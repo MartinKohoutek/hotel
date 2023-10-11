@@ -1,5 +1,8 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+<script src="{{ asset('backend/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
+<script src="{{ asset('backend/assets/js/index.js') }}"></script>
 <div class="page-content">
 
     <div class="dash-wrapper bg-dark">
