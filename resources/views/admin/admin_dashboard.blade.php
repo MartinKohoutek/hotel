@@ -81,13 +81,22 @@
 	<script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
-	
+
 	<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTable').DataTable();
-		  } );
+		});
+	</script>
+
+	<script src="https://cdn.tiny.cloud/1/i1sr52wto9c0w6rx51se5ohgpmvtyf14twa9tru9i2mur9lv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({
+			selector: 'textarea#tinymce', // Replace this CSS selector to match the placeholder element for TinyMCE
+			plugins: 'code table lists',
+			toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+		});
 	</script>
 
 	@if (Session::has('message'))
@@ -95,10 +104,18 @@
 		var type = "{{ Session::get('alert-type', 'info') }}";
 		toastr.options.closeButton = true;
 		switch (type) {
-			case 'info': toastr.info("{{ Session::get('message') }}"); break;
-			case 'success': toastr.success("{{ Session::get('message') }}"); break;
-			case 'warning': toastr.warning("{{ Session::get('message') }}"); break;
-			case 'error': toastr.error("{{ Session::get('message') }}"); break;
+			case 'info':
+				toastr.info("{{ Session::get('message') }}");
+				break;
+			case 'success':
+				toastr.success("{{ Session::get('message') }}");
+				break;
+			case 'warning':
+				toastr.warning("{{ Session::get('message') }}");
+				break;
+			case 'error':
+				toastr.error("{{ Session::get('message') }}");
+				break;
 		}
 	</script>
 	@endif

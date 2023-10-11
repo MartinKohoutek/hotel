@@ -45,62 +45,72 @@
                             <div class="tab-content py-3">
                                 <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
                                     <div class="col">
-                                        <div class="card border-top border-0 border-4 border-primary">
+                                        <div class="card border border-0 border-4 border-primary">
                                             <div class="card-body p-5">
-                                                <div class="card-title d-flex align-items-center">
-                                                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
-                                                    </div>
-                                                    <h5 class="mb-0 text-primary">User Registration</h5>
-                                                </div>
-                                                <hr>
                                                 <form class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <label for="inputFirstName" class="form-label">First Name</label>
-                                                        <input type="email" class="form-control" id="inputFirstName">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputLastName" class="form-label">Last Name</label>
-                                                        <input type="password" class="form-control" id="inputLastName">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEmail" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="inputEmail">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputPassword" class="form-label">Password</label>
-                                                        <input type="password" class="form-control" id="inputPassword">
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <label for="inputAddress" class="form-label">Address</label>
-                                                        <textarea class="form-control" id="inputAddress" placeholder="Address..." rows="3"></textarea>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <label for="inputAddress2" class="form-label">Address 2</label>
-                                                        <textarea class="form-control" id="inputAddress2" placeholder="Address 2..." rows="3"></textarea>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputCity" class="form-label">City</label>
-                                                        <input type="text" class="form-control" id="inputCity">
+                                                    <div class="col-md-4">
+                                                        <label for="inputFirstName" class="form-label">Room Type</label>
+                                                        <input type="text" class="form-control" id="inputFirstName" value="{{ $room->roomtype->name }}">
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label for="inputState" class="form-label">State</label>
-                                                        <select id="inputState" class="form-select">
-                                                            <option selected="">Choose...</option>
-                                                            <option>...</option>
-                                                        </select>
+                                                        <label for="inputLastName" class="form-label">Total Adult</label>
+                                                        <input type="text" name="total_adult" class="form-control" id="inputLastName" value="{{ $room->total_adult }}">
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label for="inputZip" class="form-label">Zip</label>
-                                                        <input type="text" class="form-control" id="inputZip">
+                                                    <div class="col-md-4">
+                                                        <label for="inputEmail" class="form-label">Total Child</label>
+                                                        <input type="text" name="total_child" class="form-control" id="inputEmail" value="{{ $room->total_child }}">
                                                     </div>
-                                                    <div class="col-12">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                            <label class="form-check-label" for="gridCheck">Check me out</label>
+                                                    <div class="col-md-6">
+                                                        <label for="inputPassword" class="form-label">Main Image</label>
+                                                        <input type="file" name="image" class="form-control mb-2" id="image">
+                                                        <img id="showImage" src="{{ (!empty($room->image)) ? url('upload/rooms/'.$room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height: 80px">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="multiImg" class="form-label">Gallery Images</label>
+                                                        <input type="file" name="multi_image[]" class="form-control" id="multiImg" accept="image/jpeg, image/jpg, image/gif, image/png" multiple>
+                                                        <div class="row mt-2" id="previewImg">
+
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        <label for="inputFirstName" class="form-label">Room Price</label>
+                                                        <input type="text" name="price" class="form-control" id="inputFirstName" value="{{ $room->price }}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="inputLastName" class="form-label">Discount (%)</label>
+                                                        <input type="text" name="discount" class="form-control" id="inputLastName" value="{{ $room->discount }}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="inputEmail" class="form-label">Room Capacity</label>
+                                                        <input type="text" name="room_capacity" class="form-control" id="inputEmail" value="{{ $room->room_capacity }}">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputState" class="form-label">Room View</label>
+                                                        <select name="view" id="inputState" class="form-select">
+                                                            <option selected="">Choose...</option>
+                                                            <option value="Sea View">Sea View</option>
+                                                            <option value="Hill View">Hill View</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputState" class="form-label">Bed Style</label>
+                                                        <select name="bed_style" id="inputState" class="form-select">
+                                                            <option selected="">Choose...</option>
+                                                            <option value="Queen Bed">Queen Bed</option>
+                                                            <option value="Twin Bed">Twin Bed</option>
+                                                            <option value="King Bed">King Bed</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="col-12">
-                                                        <button type="submit" class="btn btn-primary px-5">Register</button>
+                                                        <label for="inputAddress2" class="form-label">Short Description</label>
+                                                        <textarea name="short_description" class="form-control" id="inputAddress2" rows="3">{{ $room->short_description }}</textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputAddress2" class="form-label">Description</label>
+                                                        <textarea name="description" class="form-control" id="tinymce" rows="3">{!! $room->short_description !!}</textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary px-5">Save Changes</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -111,83 +121,6 @@
                                     <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="{{ route('team.store') }}" method="post" enctype="multipart/form-data" id="myForm">
-                                @csrf
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Name</h6>
-                                    </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Position</h6>
-                                    </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" name="position" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Facebook</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="facebook" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Twitter</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="twitter" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Instagram</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="instagram" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Pinterest</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="pinterest" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="form-group col-sm-3">
-                                        <h6 class="mb-0">Photo</h6>
-                                    </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <input type="file" name="photo" class="form-control" id="image" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="form-group col-sm-3">
-                                        <h6 class="mb-0"></h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <img id="showImage" src="{{ url('upload/no_image.jpg') }}" alt="" style="width: 80px; height: 80px;" class="p-1 bg-primary">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="submit" class="btn btn-primary px-4" value="Store Data" />
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -203,6 +136,35 @@
                 $('#showImage').attr('src', e.target.result);
             }
             reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#multiImg').on('change', function() { //on file input change
+            $('#previewImg').empty();
+            if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+            {
+                var data = $(this)[0].files; //this file data
+
+                $.each(data, function(index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function(file) { //trigger function on successful read
+                            return function(e) {
+                                var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(100)
+                                    .height(80); //create image element 
+                                $('#previewImg').append(img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+
+            } else {
+                alert("Your browser doesn't support File API!"); //if File API is absent
+            }
         });
     });
 </script>
