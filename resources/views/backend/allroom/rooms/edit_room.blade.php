@@ -203,7 +203,9 @@
                                                 <i class="lni lni-plus"></i>Add New
                                             </a>
                                             <div class="room-number-hide" id="room-number-hide">
-                                                <form action="">
+                                                <form action="{{ route('store.room.number', $room->id) }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="roomtype_id" value="{{ $room->roomtype_id }}">
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label for="room_number" class="form-label">Room Number</label>
@@ -211,7 +213,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="inputState" class="form-label">Status</label>
-                                                            <select name="view" id="inputState" class="form-select">
+                                                            <select name="status" id="inputState" class="form-select">
                                                                 <option selected="">Select Status...</option>
                                                                 <option value="Active">Active</option>
                                                                 <option value="InActive">InActive</option>
@@ -232,14 +234,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($allRoomNumbers as $item)
                                                     <tr>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
+                                                        <td>{{ $item->room_number }}</td>
+                                                        <td>{{ $item->status }}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-primary px-3 radius-30">Edit</a>
-                                                            <a href="" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                                            <a href="{{ route('edit.room.number', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                                            <a href="{{ route('delete.room.number', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                                                         </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

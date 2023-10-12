@@ -73,6 +73,11 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/edit/room/{id}', 'EditRoom')->name('edit.room');
         Route::post('/update/room/{id}', 'UpdateRoom')->name('update.room');
         Route::get('/multi/image/delete/{id}', 'MultiImageDelete')->name('multi.image.delete');
+        Route::post('/store/room/number/{id}', 'StoreRoomNumber')->name('store.room.number');
+        Route::get('/edit/room/number/{id}', 'EditRoomNumber')->name('edit.room.number');
+        Route::post('/update/room/number/{id}', 'UpdateRoomNumber')->name('update.room.number');
+        Route::get('/delete/room/number/{id}', 'DeleteRoomNumber')->name('delete.room.number');
+        Route::get('/delete/room/{id}', 'DeleteRoom')->name('delete.room');
     });
 });
 
