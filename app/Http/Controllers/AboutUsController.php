@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookArea;
+use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -51,5 +52,10 @@ class AboutUsController extends Controller
         ];
 
         return back()->with($notification);
+    }
+
+    public function AboutUs() {
+        $members = Team::latest()->get();
+        return view('frontend.about.about_us', compact('members'));
     }
 }

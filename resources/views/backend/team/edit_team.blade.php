@@ -22,14 +22,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('team.store') }}" method="post" enctype="multipart/form-data" id="myForm">
+                            <form action="{{ route('team.update') }}" method="post" enctype="multipart/form-data" id="myForm">
+                                <input type="hidden" name="id" value="{{ $team->id }}">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Name</h6>
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" name="name" class="form-control"  />
+                                        <input type="text" name="name" class="form-control" value="{{ $team->name }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -37,7 +38,7 @@
                                         <h6 class="mb-0">Position</h6>
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" name="position" class="form-control"  />
+                                        <input type="text" name="position" class="form-control" value="{{ $team->position }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -45,7 +46,7 @@
                                         <h6 class="mb-0">Facebook</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="facebook" class="form-control"  />
+                                        <input type="text" name="facebook" class="form-control" value="{{ $team->facebook }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -53,7 +54,7 @@
                                         <h6 class="mb-0">Twitter</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="twitter" class="form-control"  />
+                                        <input type="text" name="twitter" class="form-control" value="{{ $team->twitter }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -61,7 +62,7 @@
                                         <h6 class="mb-0">Instagram</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="instagram" class="form-control"  />
+                                        <input type="text" name="instagram" class="form-control" value="{{ $team->instagram }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -69,7 +70,7 @@
                                         <h6 class="mb-0">Pinterest</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="pinterest" class="form-control"  />
+                                        <input type="text" name="pinterest" class="form-control" value="{{ $team->pinterest }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -85,13 +86,13 @@
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img id="showImage" src="{{ url('upload/no_image.jpg') }}" alt="" style="width: 80px; height: 80px;" class="p-1 bg-primary">
+                                        <img id="showImage" src="{{ (!empty($team->photo)) ? url($team->photo) : url('upload/no_image.jpg') }}" alt="" style="width: 80px; height: 80px;" class="p-1 bg-primary">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="submit" class="btn btn-primary px-4" value="Store Data" />
+                                        <input type="submit" class="btn btn-primary px-4" value="Update Data" />
                                     </div>
                                 </div>
                             </form>
@@ -120,12 +121,10 @@
             rules: {
                 name: { required : true, },         
                 position: { required: true, },
-                photo: { required: true, },
             },
             messages :{
                 name: { required : 'Please Enter Name', }, 
                 position: { required: 'Please Enter Position' },
-                photo: { required: 'Please Enter Photo' },
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {

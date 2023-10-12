@@ -50,7 +50,7 @@
                                     <li><a href="menu-4.html">Menu Version 4</a></li>
                                 </ul>
                             </li>
-                            <li><a href="about.html">About</a></li>
+                            <li><a href="{{ route('about.us') }}">About</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
                             @auth
                             <li><a href="{{ route('dashboard') }}"><i class='bx bx-user'></i>Dashboard</a></li>

@@ -81,6 +81,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
     });
 });
 
+Route::controller(AboutUsController::class)->group(function(){
+    Route::get('/aboutus', 'AboutUs')->name('about.us');
+});
+
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 require __DIR__.'/auth.php';
