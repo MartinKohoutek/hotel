@@ -13,7 +13,7 @@
                     <nav id="mainNav">
                         <ul>
                             <li class="submenu">
-                                <a href="#0" class="show-submenu">Home</a>
+                                <a href="{{ url('/') }}" class="show-submenu">Home</a>
                                 <ul>
                                     <li><a href="index.html">Home Video Bg</a></li>
                                     <li><a href="index-2.html">Home Carousel</a></li>
@@ -26,12 +26,13 @@
                             </li>
                             <li class="submenu">
                                 <a href="{{ route('rooms') }}" class="show-submenu">Rooms & Suites</a>
+                                @php
+                                    $rooms = \App\Models\Room::latest()->get();
+                                @endphp
                                 <ul>
-                                    <li><a href="room-list-1.html">Room list 1</a></li>
-                                    <li><a href="room-list-2.html">Room list 2</a></li>
-                                    <li><a href="room-list-3.html">Room list 3</a></li>
-                                    <li><a href="room-details.html">Room details</a></li>
-                                    <li><a href="room-details-booking.html">Working Booking Request</a></li>
+                                    @foreach ($rooms as $room)
+                                    <li><a href="room-list-1.html">{{ $room->roomtype->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="submenu">
