@@ -25,7 +25,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="#0" class="show-submenu">Rooms & Suites</a>
+                                <a href="{{ route('rooms') }}" class="show-submenu">Rooms & Suites</a>
                                 <ul>
                                     <li><a href="room-list-1.html">Room list 1</a></li>
                                     <li><a href="room-list-2.html">Room list 2</a></li>

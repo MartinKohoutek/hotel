@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomTypeController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
@@ -83,6 +84,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
 
 Route::controller(AboutUsController::class)->group(function(){
     Route::get('/aboutus', 'AboutUs')->name('about.us');
+});
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/rooms', 'Rooms')->name('rooms');
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
