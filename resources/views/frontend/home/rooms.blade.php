@@ -8,7 +8,7 @@
 <div class="row justify-content-center add_bottom_90" data-cues="slideInUp" data-delay="300">
     @foreach ($rooms as $room)
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-        <a href="room-details.html" class="box_cat_rooms">
+        <a href="{{ route('room.details', $room->id) }}" class="box_cat_rooms">
             <figure>
                 <div class="background-image" data-background="url({{ asset('upload/roomimg/'.$room->image) }})"></div>
                 <div class="info">
