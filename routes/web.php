@@ -88,6 +88,7 @@ Route::controller(AboutUsController::class)->group(function(){
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/rooms', 'Rooms')->name('rooms');
+    Route::get('/room/details/{id}', 'RoomDetails')->name('room.details');
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');

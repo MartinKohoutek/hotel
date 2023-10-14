@@ -31,7 +31,7 @@
                                 @endphp
                                 <ul>
                                     @foreach ($rooms as $room)
-                                    <li><a href="room-list-1.html">{{ $room->roomtype->name }}</a></li>
+                                    <li><a href="{{ url('room/details/'.$room->id) }}">{{ $room->roomtype->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>

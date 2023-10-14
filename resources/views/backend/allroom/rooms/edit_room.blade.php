@@ -130,6 +130,18 @@
                                                                     <div class="col-md-8">
                                                                         <select name="facility_name[]" id="facility_name" class="form-control">
                                                                             <option value="">Select Facility</option>
+                                                                            <option value="King Size Bed" {{$item->facility_name == 'King Size Bed' ? 'selected' : ''}}>King Size Bed</option>
+                                                                            <option value="Balcony" {{$item->facility_name == 'Balcony' ? 'selected' : ''}}>Balcony</option>
+                                                                            <option value="Disable Access" {{$item->facility_name == 'Disable Access' ? 'selected' : ''}}>Disable Access</option>
+                                                                            <option value="Welcome Bottle" {{$item->facility_name == 'Welcome Bottle' ? 'selected' : ''}}>Welcome Bottle</option>
+                                                                            <option value="Air Dryer" {{$item->facility_name == 'Air Dryer' ? 'selected' : ''}}>Air Dryer</option>
+                                                                            <option value="Loundry Service" {{$item->facility_name == 'Loundry Service' ? 'selected' : ''}}>Loundry Service</option>
+                                                                            <option value="Safety Box" {{$item->facility_name == 'Safety Box' ? 'selected' : ''}}>Safety Box</option>
+                                                                            <option value="32 Inch TV" {{$item->facility_name == '32 Inch TV' ? 'selected' : ''}}>32 Inch TV</option>
+                                                                            <option value="Pet Allowed" {{$item->facility_name == 'Pet Allowed' ? 'selected' : ''}}>Pet Allowed</option>
+                                                                            <option value="Wifi / Netflix access" {{$item->facility_name == 'Wifi / Netflix access' ? 'selected' : ''}}>Wifi / Netflix access</option>
+                                                                            <option value="Air Condition" {{$item->facility_name == 'Air Condition' ? 'selected' : ''}}>Air Condition</option>
+
                                                                             <option value="Complimentary Breakfast" {{$item->facility_name == 'Complimentary Breakfast'?'selected':''}}>Complimentary Breakfast</option>
                                                                             <option value="32/42 inch LED TV" {{$item->facility_name == 'Complimentary Breakfast'?'selected':''}}> 32/42 inch LED TV</option>
                                                                             <option value="Smoke alarms" {{$item->facility_name == 'Smoke alarms'?'selected':''}}>Smoke alarms</option>
@@ -161,6 +173,18 @@
                                                                     <div class="col-md-8">
                                                                         <select name="facility_name[]" id="basic_facility_name" class="form-control">
                                                                             <option value="">Select Facility</option>
+                                                                            <option value="King Size Bed">King Size Bed</option>
+                                                                            <option value="Balcony">Balcony</option>
+                                                                            <option value="Disable Access">Disable Access</option>
+                                                                            <option value="Welcome Bottle">Welcome Bottle</option>
+                                                                            <option value="Air Dryer">Air Dryer</option>
+                                                                            <option value="Loundry Service">Loundry Service</option>
+                                                                            <option value="Safety Box">Safety Box</option>
+                                                                            <option value="32 Inch TV">32 Inch TV</option>
+                                                                            <option value="Pet Allowed">Pet Allowed</option>
+                                                                            <option value="Wifi / Netflix access">Wifi / Netflix access</option>
+                                                                            <option value="Air Condition">Air Condition</option>
+
                                                                             <option value="Complimentary Breakfast">Complimentary Breakfast</option>
                                                                             <option value="32/42 inch LED TV"> 32/42 inch LED TV</option>
                                                                             <option value="Smoke alarms">Smoke alarms</option>
