@@ -19,6 +19,7 @@ class HomeController extends Controller
         $room = Room::findOrFail($id);
         $images = RoomImage::where('rooms_id', $room->id)->get();
         $facilities = Facility::where('rooms_id', $room->id)->get();
-        return view('frontend.rooms.room_details', compact('room', 'images', 'facilities'));
+        $rooms = Room::where('id', '!=', $id)->orderBy('id', 'DESC')->limit(3)->get();
+        return view('frontend.rooms.room_details', compact('room', 'images', 'facilities', 'rooms'));
     }
 }

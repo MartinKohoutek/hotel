@@ -67,22 +67,16 @@
                     <img src="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}" alt="">
                 </div>
                 @endforeach
-                <div class="item">
-                    <img src="img/rooms/opt_1.jpg" alt="">
-                </div>
-                <div class="item">
-                    <img src="img/rooms/opt_4.jpg" alt="">
-                </div>
-                <div class="item">
-                    <img src="img/rooms/opt_6.jpg" alt="">
-                </div>
             </div>
         </div>
         <div class="text-center mt-5">
-            <a class="btn_1 outline" data-fslightbox="gallery_1" data-type="image" href="img/rooms/opt_5.jpg">FullScreen Gallery</a>
-            <a data-fslightbox="gallery_1" data-type="image" href="img/rooms/opt_1.jpg"></a>
-            <a data-fslightbox="gallery_1" data-type="image" href="img/rooms/opt_4.jpg"></a>
-            <a data-fslightbox="gallery_1" data-type="image" href="img/rooms/opt_6.jpg"></a>
+            @foreach ($images as $key => $image)
+                @if ($key == 0)
+                <a class="btn_1 outline" data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}">FullScreen Gallery</a>
+                @else
+                <a data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}"></a>
+                @endif
+            @endforeach
         </div>
     </div>
 </div>
@@ -216,45 +210,23 @@
         <div data-cue="slideInUp">
             <div class="title">
                 <small>Paradise Hotel</small>
-                <h2>Similar Rooms</h2>
+                <h2>Other Rooms</h2>
             </div>
             <div class="row" data-cues="slideInUp" data-delay="800">
+                @foreach ($rooms as $room)
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <a href="room-list-1.html" class="box_cat_rooms">
+                    <a href="{{ route('room.details', $room->id) }}" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/1.jpg)"></div>
+                            <div class="background-image" data-background="url({{ asset('upload/roomimg/'.$room->image) }})"></div>
                             <div class="info">
-                                <small>From $150/night</small>
-                                <h3>Double Room</h3>
+                                <small>From ${{ $room->price }}/night</small>
+                                <h3>{{ $room->roomtype->name }}</h3>
                                 <span>Read more</span>
                             </div>
                         </figure>
                     </a>
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <a href="room-list-1.html" class="box_cat_rooms">
-                        <figure>
-                            <div class="background-image" data-background="url(img/rooms/2.jpg)"></div>
-                            <div class="info">
-                                <small>From $190/night</small>
-                                <h3>Deluxe Room</h3>
-                                <span>Read more</span>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                    <a href="room-list-1.html" class="box_cat_rooms">
-                        <figure>
-                            <div class="background-image" data-background="url(img/rooms/3.jpg)"></div>
-                            <div class="info">
-                                <small>From $240/night</small>
-                                <h3>Superior Room</h3>
-                                <span>Read more</span>
-                            </div>
-                        </figure>
-                    </a>
-                </div>
+                @endforeach
             </div>
             <!-- /row-->
         </div>
