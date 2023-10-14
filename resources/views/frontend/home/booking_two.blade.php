@@ -12,44 +12,46 @@
         </div>
         <div class="col-xl-7">
             <div data-cue="slideInUp" data-delay="200">
-                <div class="booking_wrapper">
-                    <div class="col-12">
-                        <input type="hidden" id="date_booking" name="date_booking">
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="custom_select">
-                                <select class="wide">
-                                    <option>Select Room</option>
-                                    <option>Double Room</option>
-                                    <option>Deluxe Room</option>
-                                    <option>Superior Room</option>
-                                    <option>Junior Suite</option>
-                                </select>
-                            </div>
+                <form action="{{ route('booking.search') }}" method="get">
+                    <div class="booking_wrapper">
+                        <div class="col-12">
+                            <input type="hidden" id="date_booking" name="date_booking">
                         </div>
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="qty-buttons mb-3 version_2">
-                                        <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                        <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
-                                        <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="mb-3 qty-buttons mb-3 version_2">
-                                        <input type="button" value="+" class="qtyplus" name="childs_booking">
-                                        <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                        <input type="button" value="-" class="qtyminus" name="childs_booking">
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="custom_select">
+                                    <select class="wide">
+                                        <option>Select Room</option>
+                                        <option>Double Room</option>
+                                        <option>Deluxe Room</option>
+                                        <option>Superior Room</option>
+                                        <option>Junior Suite</option>
+                                    </select>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
+                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
+                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3 qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
+                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
+                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- / row -->
-                <p class="text-end mt-4"><a href="#0" class="btn_1 outline">Book Now</a></p>
+                    <!-- / row -->
+                    <p class="text-end mt-4"><input type="submit" value="Book Now" class="btn_1 outline" /></p>
+                </form>
             </div>
         </div>
         <!-- /col -->

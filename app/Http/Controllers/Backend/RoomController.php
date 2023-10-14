@@ -39,6 +39,7 @@ class RoomController extends Controller
 
         $room->short_description = $request->short_description;
         $room->description = $request->description;
+        $room->status = 1;
         $room->save();
 
         if ($request->file('image')) {
