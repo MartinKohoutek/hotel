@@ -1,5 +1,11 @@
 @extends('frontend.main_master')
 @section('main')
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+<!-- <script src="{{ asset('frontend/js/datepicker_search.js') }}"></script> -->
+<script src="{{ asset('frontend/js/datepicker_inline.js') }}"></script>
 <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
     <img class="jarallax-img kenburns" src="{{ asset('upload/roomimg/'.$room->image) }}" alt="">
     <div class="wrapper opacity-mask d-flex align-items-center  text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
@@ -35,7 +41,7 @@
             <div class="col-lg-6">
                 <div class="room_facilities_list">
                     <ul data-cues="slideInLeft">
-                        @foreach ($facilities as $fac) 
+                        @foreach ($facilities as $fac)
                         <li><i class="icon-hotel-double_bed_2"></i>{{ $fac->facility_name }}</li>
                         @endforeach
                         <li><i class="icon-hotel-safety_box"></i> Safety Box</li>
@@ -71,11 +77,11 @@
         </div>
         <div class="text-center mt-5">
             @foreach ($images as $key => $image)
-                @if ($key == 0)
-                <a class="btn_1 outline" data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}">FullScreen Gallery</a>
-                @else
-                <a data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}"></a>
-                @endif
+            @if ($key == 0)
+            <a class="btn_1 outline" data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}">FullScreen Gallery</a>
+            @else
+            <a data-fslightbox="gallery_1" data-type="image" href="{{ asset('upload/roomimg/multi_img/'.$image->room_img) }}"></a>
+            @endif
             @endforeach
         </div>
     </div>
@@ -235,4 +241,5 @@
 <!-- /bg_white -->
 
 @include('frontend.home.booking_two')
+
 @endsection

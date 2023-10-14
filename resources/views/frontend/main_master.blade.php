@@ -58,9 +58,8 @@
     <!-- COMMON SCRIPTS -->
     <script src="{{ asset('frontend/js/common_scripts.js') }}"></script>
     <script src="{{ asset('frontend/js/common_functions.js') }}"></script>
-    <script src="{{ asset('frontend/js/datepicker_search.js') }}"></script>
-    <script src="{{ asset('frontend/js/datepicker_inline.js') }}"></script>
     <script src="{{ asset('frontend/phpmailer/validate.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @if (Session::has('message'))

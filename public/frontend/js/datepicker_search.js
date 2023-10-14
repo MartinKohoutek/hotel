@@ -42,7 +42,7 @@
 		const picker = new easepick.create({
 			element: document.getElementById('dates'),
 			css: [
-				'frontend/css/daterangepicker_v2.css',
+				site_url + 'frontend/css/daterangepicker_v2.css',
 			],
 			lang: 'en-EN', // Language tags https://www.techonthenet.com/js/language_tags.php
 			format: "MM/DD/YYYY",
