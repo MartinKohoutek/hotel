@@ -260,14 +260,15 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="custom_select">
-                                    <select class="wide" name="rooms_booking" id="rooms_booking">
-                                        <option value="">Select Room</option>
-                                        <option value="Double Room">Double Room</option>
-                                        <option value="Deluxe Room">Deluxe Room</option>
-                                        <option value="Superior Room">Superior Room</option>
-                                        <option value="Junior Suite">Junior Suite</option>
+                                    <select class="wide numer_of_rooms" name="number_of_rooms" id="select_room">
+                                        <option selected>Number of Rooms</option>
+                                        @for ($i=1; $i <= 5; $i++) 
+                                            <option value="0{{$i}}">0{{$i}}</option>
+                                        @endfor
                                     </select>
                                 </div>
+                                <input type="hidden" name="available_rooms" id="available_rooms">
+                                <p class="available_rooms"></p>
                             </div>
                             <div class="col-lg-6">
                                 <div class="row">
@@ -276,6 +277,9 @@
                                             <input type="button" value="+" class="qtyplus" name="adults_booking" id="number_person">
                                             <input type="text" name="adults_booking" id="adults_booking" value="{{ old('adults') ? old('adults') : '1' }}" class="qty form-control" placeholder="Adults">
                                             <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                            <input type="hidden" name="total_adult" value="{{ $room->total_adult }}">
+                                            <input type="hidden" name="room_price" value="{{ $room->price }}">
+                                            <input type="hidden" name="discount_price" value="{{ $room->discount }}">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -286,6 +290,26 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>SubTotal</th>
+                                            <td class="text-end"><span class="t_subtotal"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Discount</th>
+                                            <td class="text-end"><span class="t_discount">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td class="text-end"><span class="t_g_total">0</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <!-- / row -->
