@@ -65,4 +65,16 @@ class HomeController extends Controller
 
         return view('frontend.rooms.search_room', compact('rooms', 'check_date_booking_ids'));
     }
+
+    public function SearchRoomDetails(Request $request, $id) {
+        $request->flash();
+
+        $room = Room::findOrFail($id);
+        $images = RoomImage::where('rooms_id', $room->id)->get();
+        $facilities = Facility::where('rooms_id', $room->id)->get();
+        $rooms = Room::where('id', '!=', $id)->orderBy('id', 'DESC')->limit(3)->get();
+
+        $room_id = $id;
+        return view('frontend.rooms.search_room_details', compact('room', 'images', 'facilities', 'rooms', 'room_id'));
+    }
 }

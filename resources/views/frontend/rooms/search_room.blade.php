@@ -62,7 +62,7 @@
                             </span>
                             <span class="button-text">Book Now</span>
                         </a>
-                        <a href="{{ route('room.details', $room->id) }}" class="animated_link">
+                        <a href="{{ route('search.room.details', $room->id.'&check_in='.old('check_in').'&check_out='.old('check_out').'&person='.old('person') }}" class="animated_link">
                             <strong>Read more</strong>
                         </a>
                     </div>
