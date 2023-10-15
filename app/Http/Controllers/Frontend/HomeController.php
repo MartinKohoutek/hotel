@@ -30,8 +30,12 @@ class HomeController extends Controller
 
     public function BookingSearch(Request $request) {
         $request->flash();
-        
-        $date = explode(' - ', $request->date_booking);
+        $date = '';
+        if ($request->date_booking) {
+            $date = explode(' - ', $request->date_booking);
+        } elseif ($request->dates) {
+            $date = explode(' - ', $request->dates);
+        }
         $check_in = str_replace('/', '-', $date[0]);
         $check_out = str_replace('/', '-', $date[1]);
         

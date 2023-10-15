@@ -45,7 +45,7 @@
 				site_url + 'frontend/css/daterangepicker_v2.css',
 			],
 			lang: 'en-EN', // Language tags https://www.techonthenet.com/js/language_tags.php
-			format: "MM/DD/YYYY",
+			format: "DD/MM/YYYY",
 			calendars: 2,
 			grid: 2,
 			zIndex: 99999,

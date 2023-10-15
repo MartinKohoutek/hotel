@@ -19,10 +19,16 @@
         $bookings = \App\Models\Booking::withCount('assignRooms')->whereIn('id', $check_date_booking_ids)->where('rooms_id', $room->id)->get()->toArray();
         $total_book_room = array_sum(array_column($bookings, 'assignRooms_count'));
         $avg_room = @$room->room_numbers_count - $total_book_room;
-        echo $total_book_room.'----------------'.$avg_room;
+        $adults = NULL;
+        
+        if (old('adults') !== NULL) {
+            $adults = old('adults');
+        } elseif (old('adults_booking') !== NULL) {
+            $adults = old('adults_booking');
+        }
     @endphp
-
-    @if ($avg_room > 0 && old('adults_booking') <= $room->total_adult)
+        
+    @if ($avg_room > 0 && $adults <= $room->total_adult)
     <div class="row_list_version_1">
         <div class="pinned-image rounded_container pinned-image--medium">
             <div class="pinned-image__container">
