@@ -20,11 +20,18 @@
         $total_book_room = array_sum(array_column($bookings, 'assignRooms_count'));
         $avg_room = @$room->room_numbers_count - $total_book_room;
         $adults = NULL;
+        $dates = NULL;
         
         if (old('adults') !== NULL) {
             $adults = old('adults');
         } elseif (old('adults_booking') !== NULL) {
             $adults = old('adults_booking');
+        }
+
+        if (old('dates') !== NULL) {
+            $dates = old('dates');
+        } elseif (old('date_booking') !== NULL) {
+            $dates = old('date_booking');
         }
     @endphp
         
@@ -56,13 +63,13 @@
                         </ul>
                     </div>
                     <div class="box_item_footer d-flex align-items-center justify-content-between">
-                        <a href="#0" class="btn_4 learn-more">
+                        <a href="{{ route('search.room.details', $room->id.'?dates='.urlencode($dates).'&adults='.$adults)}}" class="btn_4 learn-more">
                             <span class="circle">
                                 <span class="icon arrow"></span>
                             </span>
                             <span class="button-text">Book Now</span>
                         </a>
-                        <a href="{{ route('search.room.details', $room->id.'&check_in='.old('check_in').'&check_out='.old('check_out').'&person='.old('person') }}" class="animated_link">
+                        <a href="{{ route('search.room.details', $room->id.'?dates='.urlencode($dates).'&adults='.$adults)}}" class="animated_link">
                             <strong>Read more</strong>
                         </a>
                     </div>
@@ -87,4 +94,5 @@
     @endif
 
 </div>
+
 @endsection

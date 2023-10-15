@@ -30,6 +30,12 @@ class HomeController extends Controller
 
     public function BookingSearch(Request $request) {
         $request->flash();
+
+        $request->validate([
+            'dates' => 'required_without:date_booking',
+            'date_booking' => 'required_without:dates',
+        ]);
+
         $date = '';
         if ($request->date_booking) {
             $date = explode(' - ', $request->date_booking);

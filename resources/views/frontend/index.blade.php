@@ -7,6 +7,15 @@
 <script src="{{ asset('frontend/js/datepicker_search.js') }}"></script>
 <script src="{{ asset('frontend/js/datepicker_inline.js') }}"></script>
 @include('frontend.home.booking_one')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="pattern_2">
     @include('frontend.home.about_us')
