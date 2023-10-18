@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Facility;
 use App\Models\Room;
 use App\Models\RoomBookedDate;
 use App\Models\RoomImage;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use DateTime;
 use Illuminate\Http\Request;
 
-use function Ramsey\Uuid\v1;
 
 class HomeController extends Controller
 {
@@ -82,5 +83,29 @@ class HomeController extends Controller
 
         $room_id = $id;
         return view('frontend.rooms.search_room_details', compact('room', 'images', 'facilities', 'rooms', 'room_id'));
+    }
+
+    public function CheckRoomAvailability(Request $request) {
+        $start_date = DateTime::createFromFormat('d-m-Y', $request->check_in)->format('Y-m-d');
+        $end_date = DateTime::createFromFormat('d-m-Y', $request->check_out)->format('Y-m-d');
+        $alldate = Carbon::create($end_date)->subDay();
+        $d_period = CarbonPeriod::create($start_date, $alldate);  
+        
+        $day_array = [];
+        foreach ($d_period as $period) {
+            array_push($day_array, date('Y-m-d', strtotime($period)));
+        }
+
+        $check_date_booking_ids = RoomBookedDate::whereIn('book_date', $day_array)->distinct()->pluck('booking_id')->toArray();
+        $room = Room::withCount('room_numbers')->find($request->room_id);
+        $bookings = Booking::withCount('assignRooms')->whereIn('id', $check_date_booking_ids)->where('rooms_id', $room->id)->get()->toArray();
+        $total_book_room = array_sum(array_column($bookings, 'assignRooms_count'));
+        $avg_room = @$room->room_numbers_count - $total_book_room;
+
+        $toDate = Carbon::parse($start_date);
+        $fromDate = Carbon::parse($end_date);
+        $nights = $toDate->diffInDays($fromDate);
+        
+        return response()->json(['available_rooms' => $avg_room, 'total_nights' => $nights]);
     }
 }

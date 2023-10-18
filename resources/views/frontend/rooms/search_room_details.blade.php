@@ -1,8 +1,8 @@
 @extends('frontend.main_master')
 @section('main')
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<!-- <script src="{{ asset('frontend/js/datepicker_search.js') }}"></script> -->
-<script src="{{ asset('frontend/js/datepicker_inline.js') }}"></script>
+<script src="{{ asset('frontend/js/daterangepicker.js') }}"></script>
+
 <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
     <img class="jarallax-img kenburns" src="{{ asset('upload/roomimg/'.$room->image) }}" alt="">
     <div class="wrapper opacity-mask d-flex align-items-center  text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
@@ -252,19 +252,24 @@
         <div class="col-xl-7">
             <div data-cue="slideInUp">
                 <div id="message-booking"></div>
-                <form method="post" action="phpmailer/reserve_template_email.php" id="bookingform" autocomplete="off">
+                <form method="post" action="" id="booking_form" autocomplete="off">
+                    @csrf
+                    <input type="hidden" name="room_id" value="{{ $room->id }}">
+                    <input type="text" id="total_adult" value="{{ $room->total_adult }}">
+                    <input type="text" id="room_price" value="{{ $room->price }}">
+                    <input type="text" id="discount_price" value="{{ $room->discount }}">
+
                     <div class="booking_wrapper">
-                        <div class="col-12">
-                            <input type="hidden" id="date_booking" name="date_booking" value="{{ old('dates') ? urldecode(old('dates')) : '' }}">
+                        <div class="col-12" id="daterangepicker-embedded-container">
+                            <input type="text" id="date_booking" name="date_booking" value="{{ old('dates') ? urldecode(old('dates')) : '' }}">
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="custom_select">
-                                    <select class="wide numer_of_rooms" name="number_of_rooms" id="select_room">
-                                        <option selected>Number of Rooms</option>
-                                        @for ($i=1; $i <= 5; $i++) 
-                                            <option value="0{{$i}}">0{{$i}}</option>
-                                        @endfor
+                                    <select class="wide number_of_rooms" name="number_of_rooms" id="select_room">
+                                        <!-- <option selected>Number of Rooms</option> -->
+                                        @for ($i=1; $i <= 5; $i++) <option value="0{{$i}}">0{{$i}}</option>
+                                            @endfor
                                     </select>
                                 </div>
                                 <input type="hidden" name="available_rooms" id="available_rooms">
@@ -274,12 +279,10 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="adults_booking" id="number_person">
-                                            <input type="text" name="adults_booking" id="adults_booking" value="{{ old('adults') ? old('adults') : '1' }}" class="qty form-control" placeholder="Adults">
+                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
+                                            <input type="text" name="adults_booking" id="number_person" value="{{ old('adults') ? old('adults') : '1' }}" class="qty form-control" placeholder="Adults">
                                             <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                            <input type="hidden" name="total_adult" value="{{ $room->total_adult }}">
-                                            <input type="hidden" name="room_price" value="{{ $room->price }}">
-                                            <input type="hidden" name="discount_price" value="{{ $room->discount }}">
+
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -298,7 +301,7 @@
                                     <tbody>
                                         <tr>
                                             <th>SubTotal</th>
-                                            <td class="text-end"><span class="t_subtotal"></span></td>
+                                            <td class="text-end"><span class="t_subtotal">0</span></td>
                                         </tr>
                                         <tr>
                                             <th>Discount</th>
@@ -349,6 +352,90 @@
     </div>
     <!-- /row -->
 </div>
-@include('frontend.home.booking_two')
 
+<script>
+    $(document).ready(function() {
+        var picker = $('#date_booking').daterangepicker({
+            parentEl: '#daterangepicker-embedded-container',
+            autoUpdateInput: true,
+            autoApply: true,
+            alwaysShowCalendars: true,
+            locale: {
+                format: 'DD-MM-YYYY',
+            }
+        });
+
+        picker.on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+            getAvailability(check_in, check_out, room_id);
+        });
+
+        //   picker.data('daterangepicker').hide = function () {};
+        picker.data('daterangepicker').show();
+
+        var check_in = $('#date_booking').data('daterangepicker').startDate.format('DD-MM-YYYY');
+        var check_out = $('#date_booking').data('daterangepicker').endDate.format('DD-MM-YYYY');
+        var room_id = "{{ $room_id }}";
+        if (check_in != '' && check_out != '') {
+            getAvailability(check_in, check_out, room_id);
+        }
+
+        $('.number_of_rooms').on('change', function() {
+            var check_in = $('#date_booking').data('daterangepicker').startDate.format('DD-MM-YYYY');
+            var check_out = $('#date_booking').data('daterangepicker').endDate.format('DD-MM-YYYY');
+            if (check_in != '' && check_out != '') {
+                getAvailability(check_in, check_out, room_id);
+            }
+        });
+
+        function getAvailability() {
+            $.ajax({
+                type: 'GET',
+                url: '/check_room_availability',
+                data: {
+                    room_id: '1',
+                    check_in: check_in,
+                    check_out: check_out
+                },
+                success: function(data) {
+                    $(".available_rooms").html('Availability : <span class="text-success">' + data['available_rooms'] + ' Rooms</span>');
+                    $("#available_rooms").val(data['available_rooms']);
+                    price_calculate(data['total_nights']);
+                },
+                error: function() {
+                    console.log('error');
+                }
+            });
+        }
+
+        function price_calculate(total_nights) {
+            var room_price = $('#room_price').val();
+            var discount_p = $('#discount_price').val();
+            var select_room = $('#select_room').val();
+
+            var sub_total = room_price * total_nights * parseInt(select_room);
+            var discount_price = (parseInt(discount_p) / 100) * sub_total;
+
+            $('.t_subtotal').text(sub_total);
+            $('.t_discount').text(discount_price);
+            $('.t_g_total').text(sub_total - discount_price);
+        }
+
+        $('#booking_form').on('submit', function() {
+            var avg_room = $('#available_rooms').val();
+            var select_room = $('#select_room').val();
+            if (parseInt(select_room) > avg_room) {
+                alert('Sorry, you select maximum number of rooms');
+                return false;
+            }
+
+            var number_of_person = $('#number_person').val();
+            var total_adult = $('#total_adult').val();
+            if (parseInt(number_of_person) > parseInt(total_adult)) {
+                alert('Sorry, you select maximum number of person');
+                return false;
+            }
+        });
+    });
+</script>
 @endsection

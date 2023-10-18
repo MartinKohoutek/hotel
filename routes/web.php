@@ -91,6 +91,8 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/room/details/{id}', 'RoomDetails')->name('room.details');
     Route::get('/booking', 'BookingSearch')->name('booking.search');
     Route::get('/search/room/details/{id}', 'SearchRoomDetails')->name('search.room.details');
+    
+    Route::get('/check_room_availability/', 'CheckRoomAvailability')->name('check_room_availability');
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
