@@ -252,12 +252,14 @@
         <div class="col-xl-7">
             <div data-cue="slideInUp">
                 <div id="message-booking"></div>
-                <form method="post" action="" id="booking_form" autocomplete="off">
+                <form method="post" action="{{ route('user_booking_store') }}" id="booking_form" autocomplete="off">
                     @csrf
                     <input type="hidden" name="room_id" value="{{ $room->id }}">
                     <input type="text" id="total_adult" value="{{ $room->total_adult }}">
                     <input type="text" id="room_price" value="{{ $room->price }}">
                     <input type="text" id="discount_price" value="{{ $room->discount }}">
+                    <input type="text" name="check_in" id="check_in" value="">
+                    <input type="text" name="check_out" id="check_out" value="">
 
                     <div class="booking_wrapper">
                         <div class="col-12" id="daterangepicker-embedded-container">
@@ -343,7 +345,7 @@
                         <!-- / row -->
                     </div>
                     <!-- / booking_wrapper -->
-                    <p class="text-end mt-4"><input class="btn_1 outline" type="submit" value="Check Now" id="submit-booking"></p>
+                    <p class="text-end mt-4"><input class="btn_1 outline" type="submit" value="Check Now" id=""></p>
                 </form>
             </div>
             <!-- /data cue -->
@@ -389,6 +391,8 @@
         });
 
         function getAvailability() {
+            $('#check_in').val($('#date_booking').data('daterangepicker').startDate.format('DD-MM-YYYY'));
+            $('#check_out').val($('#date_booking').data('daterangepicker').endDate.format('DD-MM-YYYY'));
             $.ajax({
                 type: 'GET',
                 url: '/check_room_availability',
@@ -424,6 +428,8 @@
         $('#booking_form').on('submit', function() {
             var avg_room = $('#available_rooms').val();
             var select_room = $('#select_room').val();
+            console.log(select_room);
+            console.log(avg_room);
             if (parseInt(select_room) > avg_room) {
                 alert('Sorry, you select maximum number of rooms');
                 return false;
@@ -431,6 +437,8 @@
 
             var number_of_person = $('#number_person').val();
             var total_adult = $('#total_adult').val();
+            console.log(number_of_person);
+            console.log(total_adult);
             if (parseInt(number_of_person) > parseInt(total_adult)) {
                 alert('Sorry, you select maximum number of person');
                 return false;
