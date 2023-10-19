@@ -23,87 +23,182 @@
 <!-- /Background Img Parallax -->
 
 <div class="container margin_120_95" id="booking_section">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between gx-5">
         <div class="col-xl-4">
-            <div data-cue="slideInUp">
-                <div class="title">
-                    <small>Paradise Hotel</small>
-                    <h2>Check Availability</h2>
+            <section class="checkout-area pb-70">
+                <div class="card-body">
+                    <div class="slideInUp" style="background-color: #f5f2ee; padding: 25px">
+                        <div class="title">
+                            <small>Paradise Hotel</small>
+                            <h2>Booking Summary</h2>
+                        </div>
+                        <hr>
+                        <div style="display: flex; justify-content: space-between;">
+                            <img style="height:100px; width:120px;object-fit: cover" src=" " alt="Images" alt="Images">
+                            <div style="padding-left: 10px;">
+                                <a href=" " style="font-size: 20px; color: #595959;font-weight: bold">Room Name</a>
+                                <p><b>120 / Night</b></p>
+                            </div>
+                        </div>
+                        <br>
+                        <table class="table" style="width: 100%">
+                            <tr>
+                                <td>
+                                    <p>Total Night ( 4)</p>
+                                </td>
+                                <td style="text-align: right">
+                                    <p>Room Name</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Total Room</p>
+                                </td>
+                                <td style="text-align: right">
+                                    <p>3</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Subtotal</p>
+                                </td>
+                                <td style="text-align: right">
+                                    <p>200</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Discount</p>
+                                </td>
+                                <td style="text-align:right">
+                                    <p>Discount</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Total</p>
+                                </td>
+                                <td style="text-align:right">
+                                    <p>Total</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. </p>
-                <div class="phone_element no_borders"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></div>
-            </div>
+            </section>
         </div>
-        <div class="col-xl-7">
+        <div class="col-xl-8">
             <div data-cue="slideInUp">
                 <div id="message-booking"></div>
                 <form method="post" action="phpmailer/reserve_template_email.php" id="bookingform" autocomplete="off">
                     <div class="booking_wrapper">
-                        <div class="col-12">
-                            <input type="text" id="date_booking" name="date_booking">
-                        </div>
-
-                        {{ json_encode(session('book_date')) }}
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="custom_select">
-                                    <select class="wide" name="rooms_booking" id="rooms_booking">
-                                        <option value="">Select Room</option>
-                                        <option value="Double Room">Double Room</option>
-                                        <option value="Deluxe Room">Deluxe Room</option>
-                                        <option value="Superior Room">Superior Room</option>
-                                        <option value="Junior Suite">Junior Suite</option>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="custom_select form-group">
+                                    <label for="" class="form-label">Country</label>
+                                    <select class="wide" name="country" id="country">
+                                        <option value="">Select Country</option>
+                                        <option value="1">Czech Republic</option>
+                                        <option value="2">Slovakia</option>
+                                        <option value="3">Germany</option>
+                                        <option value="4">United Kingdom</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
-                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
-                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / row -->
-                        <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="name_booking" id="name_booking" class="form-control" placeholder="Name and Last Name">
+                                    <label>First Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+
+                            <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="email" name="email_booking" id="email_booking" class="form-control" placeholder="Email">
+                                    <label>Last Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-6">
+                                <div class="form-group">
+                                    <label>Address <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-6">
+                                <div class="form-group">
+                                    <label>Town / City <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>State / County <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Postcode / Zip <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Email Address <span class="required">*</span></label>
+                                    <input type="email" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Phone <span class="required">*</span></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="create-an-account">
+                                    <label class="form-check-label" for="create-an-account">Create an account?</label>
                                 </div>
                             </div>
                         </div>
-                        <!-- / row -->
-                        <hr>
-                        <div class="pb-4">
-                            <div class="row align-items-center justify-content-end">
-                                <div class="col-auto">
-                                    <label for="verify_booking" class="col-form-label"><strong>Are you human?</strong></label>
-                                </div>
-                                <div class="col-md-2 col-4">
-                                    <input type="text" name="verify_booking" id="verify_booking" class="form-control" placeholder="3 + 1 = ?">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / row -->
                     </div>
                     <!-- / booking_wrapper -->
-                    <p class="text-end mt-4"><input class="btn_1 outline" type="submit" value="Check Now" id="submit-booking"></p>
+                    <div class="col-lg-12 col-md-12">
+							<div class="payment-box">
+                                <div class="payment-method">
+                                    <p>
+                                        <input type="radio" id="direct-bank-transfer" name="radio-group" checked>
+                                        <label for="direct-bank-transfer">Direct Bank Transfer</label>
+                                        Make your payment directly into our bank account. Please use your Order
+                                        ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="paypal" name="radio-group">
+                                        <label for="paypal">PayPal</label>
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="cash-on-delivery" name="radio-group">
+                                        <label for="cash-on-delivery">Cash On Delivery</label>
+                                    </p>
+                                </div>
+
+                                <p class="text-end mt-4"><input class="btn_1 outline" type="submit" value="Place Order" id="submit-booking"></p>
+                            </div>
+						</div>
                 </form>
             </div>
             <!-- /data cue -->

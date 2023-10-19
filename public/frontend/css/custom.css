@@ -138,3 +138,280 @@
     background-color: #939794 !important;
     color: white;
 }
+
+/* Checkout Area */
+.billing-details {
+    margin-bottom: 30px;
+    /* background-color: #ffffff; */
+    padding: 50px 30px 25px 30px;
+    -webkit-box-shadow: 0 5px 28px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 5px 28px rgba(0, 0, 0, 0.07);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .billing-details h3 {
+    font-size: 24px;
+    color: #292323;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .billing-details .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .billing-details .form-group label {
+    color: #555555;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .billing-details .form-group label span {
+    color: #EE786C;
+  }
+  
+  .billing-details .form-group .form-control {
+    height: 50px;
+    color: #2d3652;
+    border: 1px solid #e8e8e8;
+    background-color: #fcfcff;
+    border-radius: 0;
+    padding: 10px 20px;
+    width: 100%;
+  }
+  
+  .billing-details .form-group .form-control:focus, .billing-details .form-group .form-control :hover {
+    outline: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border: 1px solid #555555;
+  }
+  
+  .billing-details .form-group .form-message {
+    font-size: 16px;
+    border: 1px solid #e8e8e8;
+    background-color: #fcfcff;
+    padding: 18px 18px;
+    font-weight: 400;
+    width: 100%;
+  }
+  
+  .billing-details .form-group .form-message:focus, .billing-details .form-group .form-message :hover {
+    outline: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border: 1px solid #555555;
+  }
+  
+  .billing-details .form-group .nice-select {
+    float: unset;
+    line-height: 45px;
+    color: #555555;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-weight: 500;
+  }
+  
+  .billing-details .form-group .nice-select .list {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.1);
+            box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.1);
+    border-radius: 0;
+    margin-top: 0;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .billing-details .form-group .nice-select .list .option {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .billing-details .form-group .nice-select .list .option:hover {
+    background-color: #292323 !important;
+    color: #ffffff;
+  }
+  
+  .billing-details .form-group .nice-select .list .option:focus {
+    border: none;
+    outline: none;
+  }
+  
+  .billing-details .form-group .nice-select .list .option .selected {
+    background-color: transparent;
+  }
+  
+  .billing-details .form-group .nice-select:after {
+    right: 20px;
+  }
+  
+  .billing-details .form-check {
+    margin-bottom: 15px;
+  }
+  
+  .billing-details .form-check .form-check-input {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .billing-details .form-check .form-check-label {
+    color: #555555;
+    margin-left: 5px;
+    font-weight: 500;
+  }
+  
+  .checkout-area .billing-details .form-group .nice-select .option:hover, .checkout-area .billing-details .form-group .nice-select .option.focus, .checkout-area .billing-details .form-group .nice-select .option.selected.focus {
+    background-color: #292323 !important;
+    color: #ffffff !important;
+    border: none;
+    outline: none;
+  }
+  
+  .payment-box {
+    background-color: #f5f2ee;
+    /* -webkit-box-shadow: 0 5px 28px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 5px 28px rgba(0, 0, 0, 0.07); */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 50px 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:checked {
+    display: none;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:checked + label {
+    padding-left: 27px;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    color: #978667;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:checked + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:checked + label::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #978667;
+    position: absolute;
+    top: 6px;
+    left: 3px;
+    border-radius: 50%;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  
+  .payment-box .payment-method p [type="radio"]:not(:checked) {
+    display: none;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:not(:checked) + label {
+    padding-left: 27px;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    color: #172541;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:not(:checked) + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+  
+  .payment-box .payment-method p [type="radio"]:not(:checked) + label::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #292323;
+    position: absolute;
+    top: 6px;
+    left: 3px;
+    border-radius: 50%;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  
+  .payment-box .order-btn {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px 27px;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #EE786C;
+  }
+  
+  .payment-box .order-btn::before {
+    content: "";
+    position: absolute;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #C890FF;
+    z-index: -1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+  
+  .payment-box .order-btn:hover {
+    color: #ffffff;
+    border: none;
+  }
+  
+  .payment-box .order-btn:hover::before {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
+  
+  .billing-details .form-group .nice-select .option:hover, .billing-details .form-group .nice-select .option.focus, .billing-details .form-group .nice-select .option.selected.focus {
+    background-color: #292323 !important;
+    color: #ffffff !important;
+  }
+  
