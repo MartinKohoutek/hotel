@@ -130,8 +130,8 @@ class BookingController extends Controller
         $data->discount = $discount;
         $data->total_price = $total_price;
         $data->payment_method = $request->payment_method;
-        $data->transaction_id = '';
-        $data->payment_status = 0;
+        $data->transaction_id = $transaction_id;
+        $data->payment_status = $payment_status;
 
         $data->name = $request->name;
         $data->email = $request->email;
