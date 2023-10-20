@@ -171,4 +171,9 @@ class BookingController extends Controller
         $bookings = Booking::orderBy('id', 'desc')->get();
         return view('backend.booking.booking_list', compact('bookings'));
     }
+
+    public function EditBooking($id) {
+        $booking = Booking::with('room')->find($id);
+        return view('backend.booking.edit_booking', compact('booking'));
+    }
 }
