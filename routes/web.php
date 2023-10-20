@@ -81,6 +81,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/delete/room/number/{id}', 'DeleteRoomNumber')->name('delete.room.number');
         Route::get('/delete/room/{id}', 'DeleteRoom')->name('delete.room');
     });
+
+    Route::controller(BookingController::class)->group(function(){
+        Route::get('/booking/list', 'BookingList')->name('booking.list');
+    });
 });
 
 Route::controller(AboutUsController::class)->group(function(){
