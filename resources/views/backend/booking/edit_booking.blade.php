@@ -12,8 +12,6 @@
                     <div class="card-body text-center">
                         <p class="mb-1 text-white">Booking Number</p>
                         <h3 class="mb-3 text-white">{{ $booking->code }}</h3>
-                        <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p>
-                        <div id="chart1"></div>
                     </div>
                 </div>
             </div>
@@ -22,8 +20,6 @@
                     <div class="card-body text-center">
                         <p class="mb-1 text-white">Booking Date</p>
                         <h3 class="mb-3 text-white">{{ \Carbon\Carbon::parse($booking->created_at)->format('d/m/Y') }}</h3>
-                        <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> last 7 days</p>
-                        <div id="chart2"></div>
                     </div>
                 </div>
             </div>
@@ -32,8 +28,6 @@
                     <div class="card-body text-center">
                         <p class="mb-1 text-white">Payment Method</p>
                         <h3 class="mb-3 text-white">{{ $booking->payment_method }}</h3>
-                        <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 3.6%</span> vs last 7 days</p>
-                        <div id="chart3"></div>
                     </div>
                 </div>
             </div>
@@ -48,8 +42,6 @@
                             <span class="text-danger">Pending</span>
                             @endif
                         </h3>
-                        <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 2.5%</span> vs last 7 days</p>
-                        <div id="chart4"></div>
                     </div>
                 </div>
             </div>
@@ -64,16 +56,14 @@
                             <span class="text-danger">Pending</span>
                             @endif
                         </h3>
-                        <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 5.2%</span> vs last 7 days</p>
-                        <div id="chart5"></div>
                     </div>
                 </div>
             </div>
         </div><!--end row-->
     </div>
 
-    <div class="row row-cols-1 row-cols-xl-1">
-        <div class="col d-flex">
+    <div class="row">
+        <div class="col-md-12 col-lg-8 d-flex">
             <div class="card radius-10 w-100">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -92,7 +82,7 @@
                                 <tr>
                                     <td>{{ $booking['room']['roomtype']['name'] }}</td>
                                     <td>{{ $booking->number_of_rooms }}</td>
-                                    <td>{{ $booking->actual_price }}</td>
+                                    <td>${{ $booking->actual_price }}</td>
                                     <td>
                                         <span class="badge bg-primary">{{ $booking->check_in }}</span><br>
                                         <span class="badge bg-warning text-dark">{{ $booking->check_out }}</span>
@@ -102,8 +92,87 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="col-md-6 mt-3" style="float: right;">
+                            <style>
+                                .test_table td {
+                                    text-align: right;
+                                }
+                            </style>
+                            <table class="table table-bordered test_table" style="float: right;">
+                                <tr>
+                                    <th>Subtotal</th>
+                                    <td>${{ $booking->subtotal }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Discount</th>
+                                    <td>- ${{ $booking->discount }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Price</th>
+                                    <td>${{ $booking->total_price }}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
+                    <form action="" method="post">
+                        <div class="row" style="margin-top: 40px;">
+                            <div class="col-md-6">
+                                <label for="">Payment Status</label>
+                                <select name="payment_status" id="payment_status" class="form-select">
+                                    <option selected="">Select Status...</option>
+                                    <option value="0" {{ $booking->status == '0' ? 'selected' : '' }}>Pending</option>
+                                    <option value="1" {{ $booking->status == '1' ? 'selected' : '' }}>Complete</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Booking Status</label>
+                                <select name="status" id="status" class="form-select">
+                                    <option selected="">Select Booking Status...</option>
+                                    <option value="0" {{ $booking->status == '0' ? 'selected' : '' }}>Pending</option>
+                                    <option value="1" {{ $booking->status == '1' ? 'selected' : '' }}>Active</option>
+                                </select>
+                            </div>
+                            <div class="com-md-12" style="margin-top: 20px;">
+                                <button type="submit" class="btn btn-primary">Update Booking</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4 d-flex">
+            <div class="card radius-10 w-100">
+            <div class="card-body">
+								<div class="d-flex align-items-center">
+									<h6 class="mb-0 font-weight-bold">Manage Room and Date</h6>
+								</div>
+								<div class="d-flex my-4">
+									<h1 class="mb-0 font-weight-bold">144</h1>
+									<p class="mb-0 ml-3 font-14 align-self-end text-secondary">Patients</p>
+								</div>
+								<form action="" method="post">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="">Check In</label>
+                                            <input type="date" name="check_in" class="form-control" required value="{{ $booking->check_in }}">
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <label for="">Check Out</label>
+                                            <input type="date" name="check_out" class="form-control" required value="{{ $booking->check_out }}">
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <label for="">Number Of Rooms</label>
+                                            <input type="number" name="number_of_rooms" class="form-control" required value="{{ $booking->number_of_rooms }}">
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <label for="">Availability: <span class="text-success availability"></span></label>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </form>
+							</div>
             </div>
         </div>
     </div>
