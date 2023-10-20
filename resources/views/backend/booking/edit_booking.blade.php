@@ -114,7 +114,8 @@
                             </table>
                         </div>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ route('update.booking.status', $booking->id) }}" method="post">
+                        @csrf
                         <div class="row" style="margin-top: 40px;">
                             <div class="col-md-6">
                                 <label for="">Payment Status</label>
@@ -140,39 +141,90 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-4 d-flex">
+        <div class="col-md-12 col-lg-4">
             <div class="card radius-10 w-100">
-            <div class="card-body">
-								<div class="d-flex align-items-center">
-									<h6 class="mb-0 font-weight-bold">Manage Room and Date</h6>
-								</div>
-								<div class="d-flex my-4">
-									<h1 class="mb-0 font-weight-bold">144</h1>
-									<p class="mb-0 ml-3 font-14 align-self-end text-secondary">Patients</p>
-								</div>
-								<form action="" method="post">
-                                    <div class="row">
-                                        <div class="col-md-12 mb-2">
-                                            <label for="">Check In</label>
-                                            <input type="date" name="check_in" class="form-control" required value="{{ $booking->check_in }}">
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                            <label for="">Check Out</label>
-                                            <input type="date" name="check_out" class="form-control" required value="{{ $booking->check_out }}">
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                            <label for="">Number Of Rooms</label>
-                                            <input type="number" name="number_of_rooms" class="form-control" required value="{{ $booking->number_of_rooms }}">
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                            <label for="">Availability: <span class="text-success availability"></span></label>
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                        </div>
-                                    </div>
-                                </form>
-							</div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 font-weight-bold">Manage Room and Date</h6>
+                    </div>
+                    <form action="" method="post">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label for="">Check In</label>
+                                <input type="date" name="check_in" class="form-control" required value="{{ $booking->check_in }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="">Check Out</label>
+                                <input type="date" name="check_out" class="form-control" required value="{{ $booking->check_out }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="">Number Of Rooms</label>
+                                <input type="number" name="number_of_rooms" class="form-control" required value="{{ $booking->number_of_rooms }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="">Availability: <span class="text-success availability"></span></label>
+                            </div>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card radius-10 w-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 font-weight-bold">Customer Information</h6>
+                    </div>
+                    <style>
+                        strong {
+                            font-weight: normal;
+                        }
+                    </style>
+                    <ul class="list-group mt-4 list-group-flush">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-success"></i>
+                            <span>Name:</span>
+                            <strong class="ms-auto">{{ $booking['user']['name'] }}</strong>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-danger"></i>
+                            <span>Email:</span>
+                            <strong class="ms-auto">{{ $booking['user']['email'] }}</strong>
+                        </li>
+                        @if (!empty($booking['user']['country']))
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-primary"></i>
+                            <span>Country:</span>
+                            <strong class="ms-auto">{{ $booking['user']['country'] }}</strong>
+                        </li>
+                        @endif
+                        @if (!empty($booking['user']['state']))
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-warning"></i>
+                            <span>State:</span>
+                            <strong class="ms-auto">{{ $booking['user']['state'] }}</strong>
+                        </li>
+                        @endif
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-warning"></i>
+                            <span>Address:</span>
+                            <strong class="ms-auto">{{ $booking['user']['address'] }}</strong>
+                        </li>
+                        @if (!empty($booking['user']['zip_code']))
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-warning"></i>
+                            <span>Zip Code:</span>
+                            <strong class="ms-auto">{{ $booking['user']['zip_code'] }}</strong>
+                        </li>
+                        @endif
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bx bxs-circle me-1 text-warning"></i>
+                            <span>Phone:</span>
+                            <strong class="ms-auto">{{ $booking['user']['phone'] }}</strong>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
