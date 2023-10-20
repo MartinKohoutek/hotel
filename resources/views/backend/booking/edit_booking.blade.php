@@ -112,6 +112,11 @@
                                 </tr>
                             </table>
                         </div>
+                        <div style="clear: both">
+                            <div style="margin-top: 40px; margin-bottom: 20px">
+                                <a href="javascript::void(0)" class="btn btn-primary assign_room">Assign Room</a>
+                            </div>
+                        </div>
                     </div>
                     <form action="{{ route('update.booking.status', $booking->id) }}" method="post">
                         @csrf
@@ -272,9 +277,32 @@
     </div><!--end row-->
 
 </div>
+
+<div class="modal fade myModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Available Rooms</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         getAvailability();
+
+        $('.assign_room').on('click', function(){
+            $.ajax({
+                url: "{{ route('assign_room', $booking->id) }}",
+                success: function(data) {
+                    $('.myModal .modal-body').html(data);
+                    $('.myModal').modal('show');
+                }, 
+            })
+            return false;
+        });
     });
 
     function getAvailability() {
@@ -285,7 +313,7 @@
         check_out = check_out.split("-").reverse().join("-");
 
         var room_id = "{{ $booking->rooms_id }}";
-        
+
         $.ajax({
             url: "/check_room_availability",
             data: {

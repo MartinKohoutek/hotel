@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\BookingRoomList;
 use App\Models\Room;
 use App\Models\RoomBookedDate;
+use App\Models\RoomNumber;
 use Auth;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -224,5 +226,27 @@ class BookingController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->back()->with($notification);
+    }
+
+    public function AssignRoom($id) {
+        $booking = Booking::find($id);
+        $booking_date_array = RoomBookedDate::where('booking_id', $id)->pluck('book_date')->toArray();
+        $check_date_booking_ids = RoomBookedDate::whereIn('book_date', $booking_date_array)
+            ->where('room_id', $booking->rooms_id)->distinct()->pluck('booking_id')->toArray();
+        $booking_ids = Booking::whereIn('id', $check_date_booking_ids)->pluck('id')->toArray();
+        $assign_room_ids = BookingRoomList::whereIn('booking_id', $booking_ids)->pluck('room_number_id')->toArray();
+        $room_numbers = RoomNumber::where('rooms_id', $booking->rooms_id)->whereNotIn('id', $assign_room_ids)
+            ->where('status', 'Active')->get();
+
+        return view('backend.booking.assign_room', compact('booking', 'room_numbers'));
+    }
+    
+    public function AssignRoomStore($booking_id, $room_number_id) {
+        $booking = Booking::find($booking_id);
+        $check_data = BookingRoomList::where('booking_id', $booking_id)->count();
+
+        if ($check_data < $booking->number_of_rooms) {
+            
+        }
     }
 }
