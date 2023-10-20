@@ -146,7 +146,8 @@
                     <div class="d-flex align-items-center">
                         <h6 class="mb-0 font-weight-bold">Manage Room and Date</h6>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ route('update.booking', $booking->id) }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <label for="">Check In</label>
@@ -162,7 +163,7 @@
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="">Availability: <span class="text-success availability"></span></label>
-                                <input type="hidden" name="available_room" id="available_room" class="form-control" value="{{ $booking->number_of_rooms }}">
+                                <input type="hidden" name="available_room" id="available_room" class="form-control">
                             </div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary">Update</button>

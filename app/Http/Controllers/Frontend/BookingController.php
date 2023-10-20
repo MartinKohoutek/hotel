@@ -189,4 +189,40 @@ class BookingController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+
+    public function UpdateBooking(Request $request, $id) {
+        if ($request->available_room < $request->number_of_rooms) {
+            $notification = [
+                'message' => 'There is not enough available rooms!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
+        }
+
+        $data = Booking::find($id);
+        $data->number_of_rooms = $request->number_of_rooms;
+        $data->check_in = date('Y-m-d', strtotime($request->check_in));
+        $data->check_out = date('Y-m-d', strtotime($request->check_out));
+        $data->save();
+
+        RoomBookedDate::where('booking_id', $id)->delete();
+
+        $start_date = date('Y-m-d', strtotime($request->check_in));
+        $end_date = date('Y-m-d', strtotime($request->check_out));
+        $end_last_date = Carbon::create($end_date)->subDay();
+        $d_period = CarbonPeriod::create($start_date, $end_last_date);
+        foreach ($d_period as $period) {
+            $booked_dates = new RoomBookedDate();
+            $booked_dates->booking_id = $data->id;
+            $booked_dates->room_id = $data->rooms_id;
+            $booked_dates->book_date = date('Y-m-d', strtotime($period));
+            $booked_dates->save();
+        }
+
+        $notification = [
+            'message' => 'Booking Updated Successfully!',
+            'alert-type' => 'success',
+        ];
+        return redirect()->back()->with($notification);
+    }
 }
