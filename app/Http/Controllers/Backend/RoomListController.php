@@ -12,7 +12,6 @@ use Auth;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class RoomListController extends Controller
 {

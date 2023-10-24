@@ -161,6 +161,7 @@
                             </div>
                             <div class="com-md-12" style="margin-top: 20px;">
                                 <button type="submit" class="btn btn-primary">Update Booking</button>
+                                <a href="{{ route('download.invoice', $booking->id) }}" class="btn btn-warning px-3 radius-10 text-white"><i class="lni lni-download"></i>Download Invoice</a>
                             </div>
                         </div>
                     </form>

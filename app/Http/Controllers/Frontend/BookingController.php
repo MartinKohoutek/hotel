@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\RoomBookedDate;
 use App\Models\RoomNumber;
 use Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -277,4 +278,12 @@ class BookingController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+
+    public function DownloadInvoice($id) {
+        $booking = Booking::with('room')->find($id);
+        $pdf = Pdf::loadView('backend.booking.booking_invoice', compact('booking'))
+            ->setPaper('a4')
+            ->setOption(['tempDir' => public_path(), 'chroot' => public_path()]);
+        return $pdf->download('invoice.pdf');
+    } 
 }

@@ -91,6 +91,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/assign_room/{id}', 'AssignRoom')->name('assign_room');
         Route::get('/assign/room/store/{booking_id}/{room_number_id}', 'AssignRoomStore')->name('assign_room_store');
         Route::get('/assign/room/delete/{id}', 'AssignRoomDelete')->name('assign_room_delete');
+        Route::get('/download/invoice/{id}', 'DownloadInvoice')->name('download.invoice');
     });
 
     Route::controller(RoomListController::class)->group(function(){
