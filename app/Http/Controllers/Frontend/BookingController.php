@@ -207,6 +207,7 @@ class BookingController extends Controller
         $data->check_out = date('Y-m-d', strtotime($request->check_out));
         $data->save();
 
+        BookingRoomList::where('booking_id', $id)->delete();
         RoomBookedDate::where('booking_id', $id)->delete();
 
         $start_date = date('Y-m-d', strtotime($request->check_in));
@@ -246,7 +247,23 @@ class BookingController extends Controller
         $check_data = BookingRoomList::where('booking_id', $booking_id)->count();
 
         if ($check_data < $booking->number_of_rooms) {
-            
+            $assign_data = new BookingRoomList();
+            $assign_data->booking_id = $booking_id;
+            $assign_data->room_id = $booking->rooms_id;
+            $assign_data->room_number_id = $room_number_id;
+            $assign_data->save();
+
+            $notification = [
+                'message' => 'Room Assigned Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
+        } else {
+            $notification = [
+                'message' => 'Room Already Assigned!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
         }
     }
 }
