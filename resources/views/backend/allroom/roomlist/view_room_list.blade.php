@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <a href="{{ route('add.team') }}" role="button" class="btn btn-primary">Add Booking</a>
+                <a href="{{ route('add.room.list') }}" role="button" class="btn btn-primary">Add Booking</a>
             </div>
         </div>
     </div>

@@ -397,7 +397,7 @@
                 type: 'GET',
                 url: '/check_room_availability',
                 data: {
-                    room_id: '1',
+                    room_id: room_id,
                     check_in: check_in,
                     check_out: check_out
                 },
