@@ -28,7 +28,8 @@
                                 <h5 class="mb-0 text-primary">Add Room List</h5>
                             </div>
                             <hr>
-                            <form class="row g-3">
+                            <form class="row g-3" action="{{ route('store.room.list') }}" method="post">
+                                @csrf
                                 <div class="col-md-4">
                                     <label for="roomtype_id" class="form-label">Room Type</label>
                                     <select name="room_id" id="room_id" class="form-select">
