@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\RoomController;
+use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
 use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -90,6 +91,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/assign_room/{id}', 'AssignRoom')->name('assign_room');
         Route::get('/assign/room/store/{booking_id}/{room_number_id}', 'AssignRoomStore')->name('assign_room_store');
         Route::get('/assign/room/delete/{id}', 'AssignRoomDelete')->name('assign_room_delete');
+    });
+
+    Route::controller(RoomListController::class)->group(function(){
+        Route::get('/room/list/view', 'RoomListView')->name('room.list.view');
     });
 });
 

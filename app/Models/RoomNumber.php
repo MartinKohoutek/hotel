@@ -9,4 +9,12 @@ class RoomNumber extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function room_type() {
+        return $this->belongsTo(RoomType::class, 'roomtype_id', 'id');
+    }
+
+    public function last_booking() {
+        return $this->hasOne(BookingRoomList::class, 'room_number_id', 'id')->latest();
+    }
 }

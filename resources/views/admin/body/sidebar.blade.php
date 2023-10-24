@@ -77,10 +77,10 @@
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-gift'></i>
                 </div>
-                <div class="menu-title">Components</div>
+                <div class="menu-title">Manage Room List</div>
             </a>
             <ul>
-                <li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Alerts</a>
+                <li> <a href="{{ route('room.list.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Room List</a>
                 </li>
                 <li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Accordions</a>
                 </li>
