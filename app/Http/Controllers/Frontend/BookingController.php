@@ -8,6 +8,7 @@ use App\Models\BookingRoomList;
 use App\Models\Room;
 use App\Models\RoomBookedDate;
 use App\Models\RoomNumber;
+use App\Models\User;
 use Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -286,4 +287,10 @@ class BookingController extends Controller
             ->setOption(['tempDir' => public_path(), 'chroot' => public_path()]);
         return $pdf->download('invoice.pdf');
     } 
+
+    public function UserBooking() {
+        $user_id = Auth::user()->id;
+        $bookings = Booking::where('user_id', $user_id)->orderBy('id', 'desc')->get();
+        return view('frontend.dashboard.user_booking', compact('bookings')); 
+    }
 }
