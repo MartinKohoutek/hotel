@@ -117,6 +117,24 @@
                                 <a href="javascript::void(0)" class="btn btn-primary assign_room">Assign Room</a>
                             </div>
                         </div>
+                        @php
+                            $assigned_rooms = \App\Models\BookingRoomList::with('room_number')->where('booking_id', $booking->id)->get();
+                        @endphp
+
+                        @if (count($assigned_rooms) > 0)
+                        <table class="table table-bordered">
+                                <tr>
+                                    <th>Room Number</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach ($assigned_rooms as $room)
+                                <tr>
+                                    <td>{{ $room->room_number->room_number }}</td>
+                                    <td><a href="">Delete</a></td>
+                                </tr>
+                                @endforeach
+                        </table>
+                        @endif
                     </div>
                     <form action="{{ route('update.booking.status', $booking->id) }}" method="post">
                         @csrf
