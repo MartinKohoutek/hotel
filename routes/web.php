@@ -122,6 +122,7 @@ Route::middleware(['auth'])->group(function(){
        Route::post('/checkout/store', 'CheckoutStore')->name('checkout.store');
        Route::match(['get', 'post'],'/stripe_pay', 'stripe_pay')->name('stripe_pay');
        Route::get('/user/booking', 'UserBooking')->name('user.booking');
+       Route::get('/user/invoice/{id}', 'UserInvoice')->name('user.invoice');
     });
 });
 

@@ -29,30 +29,43 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">First</th>
-                                                        <th scope="col">Last</th>
-                                                        <th scope="col">Handle</th>
+                                                        <th scope="col">Booking #</th>
+                                                        <th scope="col">Booking Date</th>
+                                                        <th scope="col">Customer</th>
+                                                        <th scope="col">Room</th>
+                                                        <th scope="col">Check In/Out</th>
+                                                        <th scope="col"># of Rooms</th>
+                                                        <th scope="col"># of Guests</th>
+                                                        <th scope="col">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($bookings as $booking)
                                                     <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
-                                                        <td>@mdo</td>
+                                                        <style>
+                                                            a:link {
+                                                                color: blue;
+                                                            }
+                                                        </style>
+                                                        <td><a href="{{ route('user.invoice', $booking->id) }}">{{ $booking->code }}</a></td>
+                                                        <td>{{ $booking->created_at->format('d-m-Y') }}</td>
+                                                        <td>{{ $booking->user->name }}</td>
+                                                        <td>{{ $booking->room->roomtype->name }}</td>
+                                                        <td>
+                                                            <span class="badge bg-primary">{{ $booking->check_in }}</span>
+                                                            <span class="badge bg-warning text-dark">{{ $booking->check_out }}</span>
+                                                        </td>
+                                                        <td>{{ $booking->number_of_rooms }}</td>
+                                                        <td>{{ $booking->person }}</td>
+                                                        <td>
+                                                            @if ($booking->status == 1)
+                                                                <span class="badge bg-success">Complete</span>
+                                                            @else
+                                                                <span class="badge bg-warning text-dark">Pending</span>
+                                                            @endif
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Jacob</td>
-                                                        <td>Thornton</td>
-                                                        <td>@fat</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td colspan="2">Larry the Bird</td>
-                                                        <td>@twitter</td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
