@@ -30,11 +30,11 @@
                             <hr>
                             <form class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="roomtype" class="form-label">Room Type</label>
-                                    <select name="room_id" id="roomtype" class="form-select">
+                                    <label for="roomtype_id" class="form-label">Room Type</label>
+                                    <select name="room_id" id="room_id" class="form-select">
                                         <option selected="">Select Room Type ...</option>
                                         @foreach ($roomtypes as $roomtype)
-                                        <option value="{{ $roomtype->room->id }}">{{ $roomtype->name }}</option>
+                                        <option value="{{ $roomtype->room->id }}" {{ collect(old('roomtype_id'))->contains($roomtype->id) ? 'selected' : '' }}>{{ $roomtype->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -49,7 +49,7 @@
                                 <div class="col-md-6">
                                     <label for="number_of_room" class="form-label">Number of Rooms</label>
                                     <input type="number" name="number_of_room" class="form-control" id="number_of_room">
-                                    <input type="hidden" name="available_rooms" class="form-control">
+                                    <input type="hidden" name="available_rooms" id="available_rooms" class="form-control">
                                     <div class="mt-2">
                                         <label>Availability: <span class="text-success availability"></span></label>
                                     </div>
@@ -137,5 +137,56 @@
             },
         });
     });
+</script>
+<script>
+$(document).ready(function() {
+        $('#room_id').on('change', function(){
+            $('#check_in').val('');
+            $('#check_out').val('');
+            $('.availability').text(0);
+            $('#available_rooms').val(0);
+        });
+
+        $('#check_out').on('change', function(){
+            getAvailability();
+        });
+
+
+    });
+
+    function getAvailability() {
+        var check_in = $('#check_in').val();
+        check_in = check_in.split("-").reverse().join("-");
+
+        var check_out = $('#check_out').val();
+        check_out = check_out.split("-").reverse().join("-");
+
+        var room_id = $('#room_id').val();
+        var startDate = new Date(check_in);
+        var endDate = new Date(check_out);
+
+        if (startDate > endDate) {
+            alert('Invalid Date');
+            $('#check_out').val('');
+            return false;
+        }
+
+        if (check_in != '' && check_out != '' && room_id != '') {
+            $.ajax({
+                url: "/check_room_availability",
+                data: {
+                    check_in: check_in,
+                    check_out: check_out,
+                    room_id: room_id,
+                },
+                success: function(data) {
+                    $('.availability').text(data['available_rooms']);
+                    $('#available_rooms').val(data['available_rooms']);
+                },
+            });
+        } else {
+            alert('Fields must not be empty!');
+        }
+    }
 </script>
 @endsection
