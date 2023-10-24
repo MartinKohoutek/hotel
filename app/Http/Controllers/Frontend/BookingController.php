@@ -266,4 +266,15 @@ class BookingController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function AssignRoomDelete($id) {
+        $room = BookingRoomList::find($id);
+        $room->delete();
+
+        $notification = [
+            'message' => 'Assign Room Deleted Successfully!',
+            'alert-type' => 'success',
+        ];
+        return redirect()->back()->with($notification);
+    }
 }

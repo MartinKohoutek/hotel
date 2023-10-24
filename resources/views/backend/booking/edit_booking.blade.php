@@ -130,10 +130,14 @@
                                 @foreach ($assigned_rooms as $room)
                                 <tr>
                                     <td>{{ $room->room_number->room_number }}</td>
-                                    <td><a href="">Delete</a></td>
+                                    <td><a href="{{ route('assign_room_delete', $room->id) }}" id="delete">Delete</a></td>
                                 </tr>
                                 @endforeach
                         </table>
+                        @else
+                        <div class="alert alert-danger text-center">
+                            No Room Assigned Yet!
+                        </div>
                         @endif
                     </div>
                     <form action="{{ route('update.booking.status', $booking->id) }}" method="post">
