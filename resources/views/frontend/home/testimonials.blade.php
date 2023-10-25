@@ -9,44 +9,25 @@
                         <h2>What Clients Says</h2>
                     </div>
                     <div class="carousel_testimonials owl-carousel owl-theme nav-dots-orizontal">
+                        @php
+                        $testimonials = \App\Models\Testimonial::latest()->get();
+                        @endphp
+
+                        @foreach ($testimonials as $testimonial)
                         <div>
                             <div class="box_overlay">
                                 <div class="pic">
-                                    <figure><img src="{{ asset('frontend/img/testimonial_1.jpg') }}" alt="" class="img-circle">
+                                    <figure><img src="{{ asset($testimonial->image) }}" alt="" class="img-circle">
                                     </figure>
-                                    <h4>Roberta<small>12 Oct</small></h4>
+                                    <h4>{{ $testimonial->name }}<small>{{ $testimonial->city }}</small></h4>
                                 </div>
                                 <div class="comment">
-                                    "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud."
+                                    {!! $testimonial->message !!}
                                 </div>
                             </div>
                             <!-- End box_overlay -->
                         </div>
-                        <div>
-                            <div class="box_overlay">
-                                <div class="pic">
-                                    <figure><img src="{{ asset('frontend/img/testimonial_1.jpg') }}" alt="" class="img-circle">
-                                    </figure>
-                                    <h4>Roberta<small>2 Nov</small></h4>
-                                </div>
-                                <div class="comment">
-                                    "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud."
-                                </div>
-                            </div>
-                            <!-- End box_overlay -->
-                        </div>
-                        <div>
-                            <div class="box_overlay">
-                                <div class="pic">
-                                    <figure><img src="{{ asset('frontend/img/testimonial_1.jpg') }}" alt="" class="img-circle">
-                                    </figure>
-                                    <h4>Roberta<small>3 Dec</small></h4>
-                                </div>
-                                <div class="comment">
-                                    "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud."
-                                </div>
-                            </div>
-                            <!-- End box_overlay -->
+                        @endforeach
                         </div>
                     </div>
                     <!-- End carousel_testimonials -->
