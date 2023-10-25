@@ -41,7 +41,7 @@
             <ul>
                 <li> <a href="{{ route('about.us.update') }}"><i class="bx bx-right-arrow-alt"></i>Update About Us</a>
                 </li>
-                <li> <a href="{{ecommerce-products-details.html}}"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
+                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
                 </li>
             </ul>
         </li>

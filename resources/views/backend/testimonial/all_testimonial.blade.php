@@ -40,12 +40,12 @@
                         @foreach ($testimonials as $key => $item)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td><img src="{{ asset($item->photo) }}" alt="" style="width: 60px; height: 50px"></td>
+                            <td><img src="{{ asset($item->image) }}" alt="" style="width: 60px; height: 50px"></td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->city }}</td>
                             <td>{{ Str::limit($item->message, 50) }}</td>
                             <td>
-                                <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="{{ route('edit.testimonial', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
                                 <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                             </td>
                         </tr>
