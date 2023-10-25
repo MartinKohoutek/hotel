@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -104,6 +105,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
     Route::controller(SettingController::class)->group(function(){
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('/smtp/update', 'SmtpUpdate')->name('smtp.update');
+    });
+
+    Route::controller(TestimonialController::class)->group(function(){
+        Route::get('/all/testimonial', 'AllTestimonial')->name('all.testimonial');
     });
 });
 

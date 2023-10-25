@@ -41,7 +41,20 @@
             <ul>
                 <li> <a href="{{ route('about.us.update') }}"><i class="bx bx-right-arrow-alt"></i>Update About Us</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
+                <li> <a href="{{ecommerce-products-details.html}}"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart-alt'></i>
+                </div>
+                <div class="menu-title">Testimonial</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.testimonial') }}"><i class="bx bx-right-arrow-alt"></i>All Testimonial</a>
+                </li>
+                <li> <a href="{{ route('add.testimonial') }}"><i class="bx bx-right-arrow-alt"></i>Add Testimonial</a>
                 </li>
             </ul>
         </li>
