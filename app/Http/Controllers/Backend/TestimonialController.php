@@ -72,4 +72,17 @@ class TestimonialController extends Controller
 
         return redirect()->route('all.testimonial')->with($notification);
     }
+
+    public function DeleteTestimonial($id) {
+        $testimonial = Testimonial::findOrFail($id);
+        @unlink($testimonial->image);
+        $testimonial->delete();
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Testimonial Deleted Successfully!',
+        ];
+
+        return back()->with($notification);
+    }
 }
