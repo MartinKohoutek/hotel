@@ -45,7 +45,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Message</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 text-secondary">
                                         <textarea class="form-control" name="message" id="message" rows="3">{!! $testimonial->message !!}</textarea>
                                     </div>
                                 </div>
@@ -98,10 +98,13 @@
                 name: {
                     required: true,
                 },
-                position: {
+                city: {
                     required: true,
                 },
-                photo: {
+                message: {
+                    required: true,
+                },
+                image: {
                     required: true,
                 },
             },
@@ -109,11 +112,14 @@
                 name: {
                     required: 'Please Enter Name',
                 },
-                position: {
-                    required: 'Please Enter Position'
+                city: {
+                    required: 'Please Enter City',
                 },
-                photo: {
-                    required: 'Please Enter Photo'
+                message: {
+                    required: 'Please Enter Message',
+                },
+                image: {
+                    required: 'Please Enter Photo',
                 },
             },
             errorElement: 'span',
