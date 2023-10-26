@@ -12,4 +12,18 @@ class BlogController extends Controller
         $categories = BlogCategory::latest()->get();
         return view('backend.blog.blog_category', compact('categories'));
     }
+
+    public function StoreBlogCategory(Request $request) {
+        BlogCategory::insert([
+            'category_name' => $request->category_name,
+            'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
+        ]);
+
+        $notification = [
+            'message' => 'Blog Category Inserted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }
