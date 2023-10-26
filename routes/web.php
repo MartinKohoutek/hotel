@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
@@ -114,6 +115,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/edit/testimonial/{id}', 'EditTestimonial')->name('edit.testimonial');
         Route::post('/update/testimonial', 'UpdateTestimonial')->name('testimonial.update');
         Route::get('/delete/testimonial/{id}', 'DeleteTestimonial')->name('delete.testimonial');
+    });
+
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('/blog/category', 'BlogCategory')->name('blog.category');
     });
 });
 
