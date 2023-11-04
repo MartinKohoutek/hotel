@@ -12,10 +12,8 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
-use App\Models\BlogPost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -135,6 +133,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/edit/blog/post/{id}', 'EditBlogPost')->name('edit.blog.post');
         Route::post('/update/blog/post', 'UpdateBlogPost')->name('update.blog.post');
         Route::get('/delete/blog/post/{id}', 'DeleteBlogPost')->name('delete.blog.post');
+    });
+
+    Route::controller(BlogCommentController::class)->group(function(){
+        Route::get('/all/comment', 'AllComment')->name('all.comment');
     });
 });
 

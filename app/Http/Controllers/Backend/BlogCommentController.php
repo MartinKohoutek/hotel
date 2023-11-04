@@ -24,4 +24,9 @@ class BlogCommentController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function AllComment() {
+        $comments = BlogComment::latest()->get();
+        return view('backend.blog.all_comment', compact('comments'));
+    }
 }

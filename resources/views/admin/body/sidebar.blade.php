@@ -110,6 +110,8 @@
                 </li>
                 <li> <a href="{{ route('all.blog.post') }}"><i class="bx bx-right-arrow-alt"></i>All Blog Posts</a>
                 </li>
+                <li> <a href="{{ route('all.comment') }}"><i class="bx bx-right-arrow-alt"></i>Manage Comments</a>
+                </li>
             </ul>
         </li>
         <li>
