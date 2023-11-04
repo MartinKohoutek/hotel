@@ -29,4 +29,17 @@ class BlogCommentController extends Controller
         $comments = BlogComment::latest()->get();
         return view('backend.blog.all_comment', compact('comments'));
     }
+
+    public function UpdateCommentStatus(Request $request) {
+        $comment_id = $request->input('comment_id');
+        $is_checked = $request->input('is_checked', 0);
+
+        $comment = BlogComment::find($comment_id);
+        if ($comment) {
+            $comment->status = $is_checked;
+            $comment->save();
+        }
+
+        return response()->json(['message' => 'Comment Status Updated Successfully!']);
+    }
 }
