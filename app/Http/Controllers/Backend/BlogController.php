@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -55,5 +56,10 @@ class BlogController extends Controller
         ];
 
         return redirect()->back()->with($notification);
+    }
+
+    public function BlogDetails($slug) {
+        $post = BlogPost::where('post_slug', $slug)->first();
+        return view('frontend.blog.blog_details', compact('post'));
     }
 }

@@ -10,7 +10,7 @@
         <div class="row justify-content-center home">
             @foreach ($posts as $post)
             <div class="item col-xl-4 col-lg-6">
-                <a href="news-post.html" class="box_contents" data-cue="slideInUp" data-delay="300">
+                <a href="{{ url('/blog/details/'.$post->post_slug) }}" class="box_contents" data-cue="slideInUp" data-delay="300">
                     <figure><img src="{{ asset($post->post_image) }}" alt="" class="img-fluid"><em>{{ $post->created_at->format('d.m Y') }}</em></figure>
                     <div class="wrapper">
                         <small>{{ $post->blogCategory->category_name }}<span></span></small>

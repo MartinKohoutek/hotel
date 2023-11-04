@@ -13,4 +13,8 @@ class BlogPost extends Model
     public function blogCategory() {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id', 'id');
     }
+
+    public function blogAuthor() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
+use App\Models\BlogPost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -149,6 +150,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/check_room_availability/', 'CheckRoomAvailability')->name('check_room_availability');
 });
 
+Route::controller(BlogController::class)->group(function(){
+    Route::get('/blog/details/{slug}', 'BlogDetails');
+});
 
 Route::middleware(['auth'])->group(function(){
     Route::controller(BookingController::class)->group(function(){
