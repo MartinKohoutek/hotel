@@ -152,6 +152,8 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::controller(BlogController::class)->group(function(){
     Route::get('/blog/details/{slug}', 'BlogDetails');
+    Route::get('/blog/category/list/{id}', 'BlogCategoryList');
+    Route::get('/blog/list', 'BlogList')->name('blog.list');
 });
 
 Route::middleware(['auth'])->group(function(){

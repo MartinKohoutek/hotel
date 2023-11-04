@@ -145,7 +145,10 @@
                     <ul>
                         @foreach ($categories as $category)
                         <li>
-                            <a href="#">{{ $category->category_name }}</a>
+                            @php
+                                $count = \App\Models\BlogPost::where('blog_category_id', $category->id)->count();
+                            @endphp
+                            <a href="{{ url('/blog/category/list/'.$category->id) }}">{{ $category->category_name }} <span class="badge bg-secondary position-absolute end-0" style="margin-right: 10px;">{{ $count }}</span></a> 
                         </li>
                         @endforeach
                     </ul>

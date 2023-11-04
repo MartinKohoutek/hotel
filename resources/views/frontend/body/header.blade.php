@@ -53,6 +53,7 @@
                             </li>
                             <li><a href="{{ route('about.us') }}">About</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="{{ route('blog.list') }}">Blog</a></li>
                             @auth
                             <li><a href="{{ route('dashboard') }}"><i class='bx bx-user'></i>Dashboard</a></li>
                             <li><a href="{{ route('user.logout') }}"><i class='bx bx-user'></i>Logout</a></li>
