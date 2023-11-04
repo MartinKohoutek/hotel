@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\RoomController;
@@ -164,6 +165,10 @@ Route::middleware(['auth'])->group(function(){
        Route::match(['get', 'post'],'/stripe_pay', 'stripe_pay')->name('stripe_pay');
        Route::get('/user/booking', 'UserBooking')->name('user.booking');
        Route::get('/user/invoice/{id}', 'UserInvoice')->name('user.invoice');
+    });
+
+    Route::controller(BlogCommentController::class)->group(function(){
+        Route::post('/store/blog/comment', 'StoreBlogComment')->name('store.blog.comment');
     });
 });
 

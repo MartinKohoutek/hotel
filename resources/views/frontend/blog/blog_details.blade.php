@@ -270,14 +270,14 @@
                 @endphp
 
                 @auth  
-                <form action="" method="post">
+                <form action="{{ route('store.blog.comment') }}" method="post">
                     @csrf
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     @if ($userData)
                         <input type="hidden" name="user_id" value="{{ $userData->id }}">
                     @endif
                     <div class="form-group">
-                        <textarea class="form-control" name="comments" id="comments2" rows="6" placeholder="Message"></textarea>
+                        <textarea class="form-control" name="message" id="comments2" rows="6" placeholder="Message"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="submit" id="submit2" class="btn_1 outline mb-3">Submit</button>
