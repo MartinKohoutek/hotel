@@ -28,7 +28,8 @@
                                 <h5 class="mb-0 text-primary">Add New Post</h5>
                             </div>
                             <hr>
-                            <form class="row g-3">
+                            <form class="row g-3" method="post" action="{{ route('store.blog.post') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="col-md-6">
                                     <label for="inputState" class="form-label">Blog Category</label>
                                     <select name="blog_category_id" id="inputState" class="form-select">

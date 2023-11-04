@@ -40,7 +40,7 @@
                         <tr>
                             <td>{{ $key+1 }}</td>
                             <td>{{ $item->post_title }}</td>
-                            <td>{{ $item->blog_category_id }}</td>
+                            <td>{{ $item['blogCategory']['category_name'] }}</td>
                             <td><img src="{{ asset($item->post_image) }}" alt="" style="width: 60px; height: 50px"></td>
                             <td>
                                 <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
