@@ -1,5 +1,12 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<style>
+    .large-checkbox {
+        transform: scale(1.5);
+    }
+</style>
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -27,7 +34,7 @@
                             <th>User Name</th>
                             <th>Post Name</th>
                             <th>Message</th>
-                            <th>Action</th>
+                            <th>Approve Comment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +45,10 @@
                             <td>{{ Str::limit($item->post->post_title, 40) }}</td>
                             <td>{{ Str::limit($item->message, 50) }}</td>
                             <td>
-                                <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
-                                <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                <div class="form-check-danger form-check form-switch">
+									<input class="form-check-input large-checkbox status-toggle" type="checkbox" id="flexSwitchCheckCheckedDanger" data-comment-id="{{ $item->id }}" {{ $item->status ? 'checked' : '' }}>
+									<label class="form-check-label" for="flexSwitchCheckCheckedDanger"></label>
+								</div>
                             </td>
                         </tr>
                         @endforeach
@@ -47,11 +56,10 @@
                     <tfoot>
                         <tr>
                             <th>Id</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Social Media</th>
-                            <th>Action</th>
+                            <th>User Name</th>
+                            <th>Post Name</th>
+                            <th>Message</th>
+                            <th>Approve Comment</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -59,4 +67,28 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.status-toggle').on('change', function(){
+            var comment_id = $(this).data('comment-id');
+            var is_checked = $(this).is(':checked');
+            
+            $.ajax({
+               url: "{{ route('update.comment.status') }}",
+               method: "post",
+               data: {
+                 comment_id: comment_id,
+                 is_checked: is_checked ? 1 : 0,
+                 _token: "{{ csrf_token() }}",
+               },
+               success: function(response) {
+                 toastr.success(response.message);
+               },
+               error: function() {
+
+               }
+            });
+        });
+    });
+</script>
 @endsection
