@@ -146,9 +146,9 @@
                         @foreach ($categories as $category)
                         <li>
                             @php
-                                $count = \App\Models\BlogPost::where('blog_category_id', $category->id)->count();
+                            $count = \App\Models\BlogPost::where('blog_category_id', $category->id)->count();
                             @endphp
-                            <a href="{{ url('/blog/category/list/'.$category->id) }}">{{ $category->category_name }} <span class="badge bg-secondary position-absolute end-0" style="margin-right: 10px;">{{ $count }}</span></a> 
+                            <a href="{{ url('/blog/category/list/'.$category->id) }}">{{ $category->category_name }} <span class="badge bg-secondary position-absolute end-0" style="margin-right: 10px;">{{ $count }}</span></a>
                         </li>
                         @endforeach
                     </ul>
@@ -206,75 +206,51 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div id="comments">
+                    @php
+                    $comments = \App\Models\BlogComment::where('post_id', $post->id)->where('status', '1')->limit(5)->get();
+                    @endphp
                     <h3>Comments</h3>
                     <ul>
+                        @foreach ($comments as $comment)
                         <li>
                             <div class="avatar">
-                                <a href="#"><img src="img/avatar1.jpg" alt="">
+                                <a href="#"><img src="{{ (!empty($comment->user->photo)) ? url('upload/user_images/'.$comment->user->photo) : url('upload/no_image.jpg') }}" alt="">
                                 </a>
                             </div>
                             <div class="comment_right clearfix">
                                 <div class="comment_info">
-                                    By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+                                    By <a href="#">{{ $comment->user->name }}</a><span>|</span>{{ $comment->created_at->format('d.m.Y') }}
                                 </div>
                                 <p>
-                                    Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-                                </p>
-                            </div>
-                            <ul class="replied-to">
-                                <li>
-                                    <div class="avatar">
-                                        <a href="#"><img src="img/avatar4.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="comment_right clearfix">
-                                        <div class="comment_info">
-                                            By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
-                                        </div>
-                                        <p>
-                                            Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-                                        </p>
-                                        <p>
-                                            Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="avatar">
-                                <a href="#"><img src="img/avatar1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="comment_right clearfix">
-                                <div class="comment_info">
-                                    By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
-                                </div>
-                                <p>
-                                    Cursus tellus quis magna porta adipiscin
+                                    {!! $comment->message !!}
                                 </p>
                             </div>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
+                @if (count($comments) > 0)
                 <hr class="more_margin">
+                @else
+                <p>No comments yet!</p>
+                @endif
                 <h5 class="mb-3">Leave a comment</h5>
 
                 @php
                 if (Auth::check()) {
-                    $id = Auth::user()->id;
-                    $userData = \App\Models\User::find($id);
+                $id = Auth::user()->id;
+                $userData = \App\Models\User::find($id);
                 } else {
-                    $userData = null;
+                $userData = null;
                 }
                 @endphp
 
-                @auth  
+                @auth
                 <form action="{{ route('store.blog.comment') }}" method="post">
                     @csrf
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     @if ($userData)
-                        <input type="hidden" name="user_id" value="{{ $userData->id }}">
+                    <input type="hidden" name="user_id" value="{{ $userData->id }}">
                     @endif
                     <div class="form-group">
                         <textarea class="form-control" name="message" id="comments2" rows="6" placeholder="Message"></textarea>
@@ -284,7 +260,7 @@
                     </div>
                 </form>
                 @else
-                    <p>Please <a href="{{ route('login') }}">login</a> first to Add Comment</p>
+                <p>Please <a href="{{ route('login') }}">login</a> first to Add Comment</p>
                 @endauth
             </div>
         </div>
