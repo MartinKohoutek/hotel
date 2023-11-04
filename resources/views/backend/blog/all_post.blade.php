@@ -43,8 +43,8 @@
                             <td>{{ $item['blogCategory']['category_name'] }}</td>
                             <td><img src="{{ asset($item->post_image) }}" alt="" style="width: 60px; height: 50px"></td>
                             <td>
-                                <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
-                                <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                <a href="{{ route('edit.blog.post', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="{{ route('delete.blog.post', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                             </td>
                         </tr>
                         @endforeach
