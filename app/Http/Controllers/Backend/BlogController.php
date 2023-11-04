@@ -72,8 +72,8 @@ class BlogController extends Controller
     }
 
     public function BlogList() {
-        $posts = BlogPost::latest()->get();
-        // $category_name = BlogCategory::find($id)->first();
+        $posts = BlogPost::latest()->paginate(3);
+        
         return view('frontend.blog.blog_all_list', compact('posts'));
     }
 }

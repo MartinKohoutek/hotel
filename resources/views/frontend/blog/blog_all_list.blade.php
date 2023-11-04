@@ -33,22 +33,7 @@
     <!--/isotope-wrapper -->
 
     <div class="pagination__wrapper">
-        <ul class="pagination">
-            <li><a href="#0" class="prev"><i class="bi bi-arrow-left-short"></i></a></li>
-            <li>
-                <a href="#0" class="active">1</a>
-            </li>
-            <li>
-                <a href="#0">2</a>
-            </li>
-            <li>
-                <a href="#0">3</a>
-            </li>
-            <li>
-                <a href="#0">4</a>
-            </li>
-            <li><a href="#0" class="next"><i class="bi bi-arrow-right-short"></i></a></li>
-        </ul>
+        {{ $posts->links('vendor.pagination.custom') }}
     </div>
     <!-- /pagination -->
 
