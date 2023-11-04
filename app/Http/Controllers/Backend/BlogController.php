@@ -66,7 +66,7 @@ class BlogController extends Controller
     }
 
     public function BlogCategoryList($id) {
-        $posts = BlogPost::where('blog_category_id', $id)->get();
+        $posts = BlogPost::where('blog_category_id', $id)->paginate(3);
         $category_name = BlogCategory::find($id)->first();
         return view('frontend.blog.blog_categories_list', compact('posts', 'category_name'));
     }
