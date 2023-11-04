@@ -42,8 +42,8 @@
                             <td>{{ $item->category_slug }}</td>
                             <td>
                             <button type="button" class="btn btn-primary px-3 radius-30" data-bs-toggle="modal" data-bs-target="#category" id="{{ $item->id }}" onclick="categoryEdit(this.id)">Edit</button>
-                                <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
-                                <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                <!-- <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a> -->
+                                <a href="{{ route('delete.blog.category', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                             </td>
                         </tr>
                         @endforeach
@@ -91,9 +91,9 @@
                 <h5 class="modal-title" id="exampleModalLabel">Edit Blog Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('store.blog.category') }}" method="post">
+            <form action="{{ route('update.blog.category') }}" method="post">
                 @csrf
-                <input type="text" name="cat_id" id="cat_id">
+                <input type="hidden" name="cat_id" id="cat_id">
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label for="category_name" class="form-label">Blog Category Name</label>

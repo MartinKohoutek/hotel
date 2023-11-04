@@ -31,4 +31,29 @@ class BlogController extends Controller
         $category = BlogCategory::find($id);
         return response()->json($category);
     }
+
+    public function UpdateBlogCategory(Request $request) {
+        BlogCategory::find($request->cat_id)->update([
+            'category_name' => $request->category_name,
+            'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
+        ]);
+
+        $notification = [
+            'message' => 'Blog Category Updated Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function DeleteBlogCategory($id) {
+        BlogCategory::find($id)->delete();
+
+        $notification = [
+            'message' => 'Blog Category Deleted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }
