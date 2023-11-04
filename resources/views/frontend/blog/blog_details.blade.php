@@ -164,7 +164,7 @@
                         </a>
                         <div class="info">
                             <h4 class="title-text">
-                                <a href="{{ url('/blog/details/'.$item->post_slug) }}">
+                                <a href="{{ url('/blog/details/'.$item->post_slug) }}" style="margin-bottom: 0;">
                                     {{ $item->post_title }}
                                 </a>
                             </h4>
