@@ -108,7 +108,7 @@
             <ul>
                 <li> <a href="{{ route('blog.category') }}"><i class="bx bx-right-arrow-alt"></i>Blog Categories</a>
                 </li>
-                <li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Accordions</a>
+                <li> <a href="{{ route('all.blog.post') }}"><i class="bx bx-right-arrow-alt"></i>All Blog Posts</a>
                 </li>
             </ul>
         </li>

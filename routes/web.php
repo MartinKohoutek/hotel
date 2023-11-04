@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
@@ -123,6 +124,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/edit/blog/category/{id}', 'EditBlogCategory');
         Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
         Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
+    });
+
+    Route::controller(BlogPostController::class)->group(function(){
+        Route::get('/all/blog/post', 'AllBlogPost')->name('all.blog.post');
     });
 });
 
