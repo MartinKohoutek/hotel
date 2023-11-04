@@ -259,29 +259,33 @@
                 </div>
                 <hr class="more_margin">
                 <h5 class="mb-3">Leave a comment</h5>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="form-group">
-                            <input type="text" name="name" id="name2" class="form-control" placeholder="Name">
-                        </div>
+
+                @php
+                if (Auth::check()) {
+                    $id = Auth::user()->id;
+                    $userData = \App\Models\User::find($id);
+                } else {
+                    $userData = null;
+                }
+                @endphp
+
+                @auth  
+                <form action="" method="post">
+                    @csrf
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    @if ($userData)
+                        <input type="hidden" name="user_id" value="{{ $userData->id }}">
+                    @endif
+                    <div class="form-group">
+                        <textarea class="form-control" name="comments" id="comments2" rows="6" placeholder="Message"></textarea>
                     </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="form-group">
-                            <input type="text" name="email" id="email2" class="form-control" placeholder="Email">
-                        </div>
+                    <div class="form-group">
+                        <button type="submit" id="submit2" class="btn_1 outline mb-3">Submit</button>
                     </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="form-group">
-                            <input type="text" name="email" id="website3" class="form-control" placeholder="Website">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="comments" id="comments2" rows="6" placeholder="Comment"></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" id="submit2" class="btn_1 outline mb-3">Submit</button>
-                </div>
+                </form>
+                @else
+                    <p>Please <a href="{{ route('login') }}">login</a> first to Add Comment</p>
+                @endauth
             </div>
         </div>
     </div>
