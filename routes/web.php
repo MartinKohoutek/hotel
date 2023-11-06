@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogPostController;
+use App\Http\Controllers\Backend\GallerySetting;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
@@ -146,6 +147,15 @@ Route::middleware('auth', 'role:admin')->group(function(){
     Route::controller(ReportController::class)->group(function(){
         Route::get('/booking/report', 'BookingReport')->name('booking.report');
         Route::post('/search/by/date', 'SearchByDate')->name('search.by.date');
+    });
+
+    Route::controller(GallerySetting::class)->group(function(){
+        Route::get('all/gallery/setting', 'AllGallerySetting')->name('all.gallery.setting');
+        Route::get('add/gallery/setting', 'AddGallerySetting')->name('add.gallery.setting');
+        Route::post('store/gallery/setting', 'StoreGallerySetting')->name('store.gallery.setting');
+        Route::get('edit/gallery/setting/{id}', 'EditGallerySetting')->name('edit.gallery.setting');
+        Route::post('update/gallery/setting', 'UpdateGallerySetting')->name('update.gallery.setting');
+        Route::get('delete/gallery/setting/{id}', 'DeleteGallerySetting')->name('delete.gallery.setting');
     });
 });
 

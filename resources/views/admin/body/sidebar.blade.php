@@ -138,6 +138,8 @@
                 </li>
                 <li> <a href="{{ route('site.setting') }}"><i class="bx bx-right-arrow-alt"></i>Site Setting</a>
                 </li>
+                <li> <a href="{{ route('all.gallery.setting') }}"><i class="bx bx-right-arrow-alt"></i>Gallery Setting</a>
+                </li>
             </ul>
         </li>
        
