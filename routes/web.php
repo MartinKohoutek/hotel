@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogPostController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\GallerySetting;
 use App\Http\Controllers\Backend\GallerySettingController;
 use App\Http\Controllers\Backend\ReportController;
@@ -159,6 +160,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('delete/gallery/setting/{id}', 'DeleteGallerySetting')->name('delete.gallery.setting');
         Route::post('delete/gallery/multiple', 'DeleteGalleryMultiple')->name('delete.gallery.multiple');
     });
+
+    Route::controller(ContactController::class)->group(function(){
+        Route::get('all/contact/message', 'AllContactMessage')->name('all.contact.message');
+    });
 });
 
 Route::controller(AboutUsController::class)->group(function(){
@@ -182,6 +187,11 @@ Route::controller(BlogController::class)->group(function(){
 
 Route::controller(GallerySettingController::class)->group(function(){
     Route::get('/show/gallery', 'ShowGallery')->name('show.gallery');
+});
+
+Route::controller(ContactController::class)->group(function(){
+    Route::get('/contact/hotel', 'ContactUs')->name('contact.us');
+    Route::post('/contact/store', 'ContactStore')->name('contact.store');
 });
 
 Route::middleware(['auth'])->group(function(){

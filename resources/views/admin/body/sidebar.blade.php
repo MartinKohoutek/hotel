@@ -142,6 +142,17 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class='bx bx-gift'></i>
+                </div>
+                <div class="menu-title">Messages</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.contact.message') }}"><i class="bx bx-right-arrow-alt"></i>Contact Messages</a>
+                </li>
+            </ul>
+        </li>
        
         <li class="menu-label">Others</li>
         <li>

@@ -56,7 +56,7 @@
                                 </ul>
                             </li> -->
                             <li><a href="{{ route('about.us') }}">About</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="{{ route('contact.us') }}">Contacts</a></li>
                             <li><a href="{{ route('blog.list') }}">Blog</a></li>
                             <li><a href="{{ route('show.gallery') }}">Gallery</a></li>
                             @auth
