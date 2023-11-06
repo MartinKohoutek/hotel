@@ -1,5 +1,17 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+
+@php
+    $bookings = \App\Models\Booking::latest()->get();
+    $pendingBookings = \App\Models\Booking::where('status', '0')->get();
+    $completeBookings = \App\Models\Booking::where('status', '1')->get();
+    $totalPrice = \App\Models\Booking::sum('total_price');
+
+    $today = Carbon\Carbon::now()->toDateString();
+    $todayPrice = App\Models\Booking::where('created_at', $today)->sum('total_price');
+    $messages = \App\Models\Contact::latest()->get();
+    $todayMessages = \App\Models\Contact::whereDate('created_at', $today)->get();
+@endphp
 <script src="{{ asset('backend/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
 <script src="{{ asset('backend/assets/js/index.js') }}"></script>
@@ -10,9 +22,9 @@
             <div class="col border-end border-light-2">
                 <div class="card bg-transparent shadow-none mb-0">
                     <div class="card-body text-center">
-                        <p class="mb-1 text-white">Sessions</p>
-                        <h3 class="mb-3 text-white">876</h3>
-                        <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p>
+                        <p class="mb-1 text-white">Total Booking</p>
+                        <h3 class="mb-3 text-white">{{ count($bookings) }}</h3>
+                        <p class="font-13 text-white">Today Sell: <span class="text-success">{{ $todayPrice }}</span></p>
                         <div id="chart1"></div>
                     </div>
                 </div>
@@ -20,8 +32,8 @@
             <div class="col border-end border-light-2">
                 <div class="card bg-transparent shadow-none mb-0">
                     <div class="card-body text-center">
-                        <p class="mb-1 text-white">Total Users</p>
-                        <h3 class="mb-3 text-white">4.5M</h3>
+                        <p class="mb-1 text-white">Pending Booking</p>
+                        <h3 class="mb-3 text-white">{{ count($pendingBookings) }}</h3>
                         <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> last 7 days</p>
                         <div id="chart2"></div>
                     </div>
@@ -30,8 +42,8 @@
             <div class="col border-end border-light-2">
                 <div class="card bg-transparent shadow-none mb-0">
                     <div class="card-body text-center">
-                        <p class="mb-1 text-white">Page Views</p>
-                        <h3 class="mb-3 text-white">64,835</h3>
+                        <p class="mb-1 text-white">Complete Booking</p>
+                        <h3 class="mb-3 text-white">{{ count($completeBookings) }}</h3>
                         <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 3.6%</span> vs last 7 days</p>
                         <div id="chart3"></div>
                     </div>
@@ -40,8 +52,8 @@
             <div class="col border-end border-light-2">
                 <div class="card bg-transparent shadow-none mb-0">
                     <div class="card-body text-center">
-                        <p class="mb-1 text-white">Bounce Rate</p>
-                        <h3 class="mb-3 text-white">42.68%</h3>
+                        <p class="mb-1 text-white">Total Price</p>
+                        <h3 class="mb-3 text-white">${{ $totalPrice }}</h3>
                         <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 2.5%</span> vs last 7 days</p>
                         <div id="chart4"></div>
                     </div>
@@ -50,9 +62,9 @@
             <div class="col">
                 <div class="card bg-transparent shadow-none mb-0">
                     <div class="card-body text-center">
-                        <p class="mb-1 text-white">Avg. Session Duration</p>
-                        <h3 class="mb-3 text-white">00:04:60</h3>
-                        <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 5.2%</span> vs last 7 days</p>
+                        <p class="mb-1 text-white">Messages</p>
+                        <h3 class="mb-3 text-white">{{ count($messages) }}</h3>
+                        <p class="font-13 text-white">Today Messagess: <span class="text-danger">{{ count($todayMessages) }}</span></p>
                         <div id="chart5"></div>
                     </div>
                 </div>
