@@ -71,6 +71,19 @@
                 <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
                 </li>
             </ul>
+        </li><li class="menu-label">Booking Report</li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart-alt'></i>
+                </div>
+                <div class="menu-title">Booking Report</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('booking.report') }}"><i class="bx bx-right-arrow-alt"></i>Booking Report</a>
+                </li>
+                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
+                </li>
+            </ul>
         </li>
         <li class="menu-label">Booking Manage</li>
         <li>
