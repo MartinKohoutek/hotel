@@ -79,4 +79,21 @@ class GallerySetting extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function DeleteGalleryMultiple(Request $request) {
+        $selected_items = $request->input('selected_item', []);
+        foreach ($selected_items as $itemId) {
+            $item = Gallery::find($itemId);
+            $image = $item->photo;
+            unlink($image);
+            $item->delete();
+        }
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Selected Images Deleted Successfully!',
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
 }

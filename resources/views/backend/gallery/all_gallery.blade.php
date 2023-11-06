@@ -24,36 +24,43 @@
     <hr />
     <div class="card">
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($gallery as $key => $item)
-                        <tr>
-                            <td>{{ $key+1 }}</td>
-                            <td><img src="{{ asset($item->photo) }}" alt="" style="width: 60px; height: 50px"></td>
-                            <td>
-                                <a href="{{ route('edit.gallery.setting', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
-                                <a href="{{ route('delete.gallery.setting', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+            <form action="{{ route('delete.gallery.multiple') }}" method="post">
+                @csrf
+                 <div class="table-responsive">
+                    <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">Select</th>
+                                <th style="width: 50px;">Id</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($gallery as $key => $item)
+                            <tr>
+                                <td><input type="checkbox" name="selected_item[]" value="{{ $item->id }}"></td>
+                                <td>{{ $key+1 }}</td>
+                                <td><img src="{{ asset($item->photo) }}" alt="" style="width: 60px; height: 50px"></td>
+                                <td>
+                                    <a href="{{ route('edit.gallery.setting', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                    <a href="{{ route('delete.gallery.setting', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Select</th>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <button type="submit" class="btn btn-danger mt-3">Delete Selected Images</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

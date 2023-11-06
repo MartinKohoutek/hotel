@@ -156,6 +156,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('edit/gallery/setting/{id}', 'EditGallerySetting')->name('edit.gallery.setting');
         Route::post('update/gallery/setting', 'UpdateGallerySetting')->name('update.gallery.setting');
         Route::get('delete/gallery/setting/{id}', 'DeleteGallerySetting')->name('delete.gallery.setting');
+        Route::post('delete/gallery/multiple', 'DeleteGalleryMultiple')->name('delete.gallery.multiple');
     });
 });
 
