@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\GallerySetting;
+use App\Http\Controllers\Backend\GallerySettingController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
@@ -149,7 +150,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::post('/search/by/date', 'SearchByDate')->name('search.by.date');
     });
 
-    Route::controller(GallerySetting::class)->group(function(){
+    Route::controller(GallerySettingController::class)->group(function(){
         Route::get('all/gallery/setting', 'AllGallerySetting')->name('all.gallery.setting');
         Route::get('add/gallery/setting', 'AddGallerySetting')->name('add.gallery.setting');
         Route::post('store/gallery/setting', 'StoreGallerySetting')->name('store.gallery.setting');
@@ -177,6 +178,10 @@ Route::controller(BlogController::class)->group(function(){
     Route::get('/blog/details/{slug}', 'BlogDetails');
     Route::get('/blog/category/list/{id}', 'BlogCategoryList');
     Route::get('/blog/list', 'BlogList')->name('blog.list');
+});
+
+Route::controller(GallerySettingController::class)->group(function(){
+    Route::get('/show/gallery', 'ShowGallery')->name('show.gallery');
 });
 
 Route::middleware(['auth'])->group(function(){

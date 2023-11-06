@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Facades\Image;
 
-class GallerySetting extends Controller
+class GallerySettingController extends Controller
 {
     public function AllGallerySetting() {
         $gallery = Gallery::latest()->get();
@@ -96,4 +96,8 @@ class GallerySetting extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function ShowGallery() {
+        $gallery = Gallery::latest()->paginate(6);
+        return view('frontend.gallery.show_gallery', compact('gallery'));
+    }
 }
