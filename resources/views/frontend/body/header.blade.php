@@ -1,15 +1,19 @@
 <header class="fixed_header menu_v4 submenu_version">
     <div class="layer"></div><!-- Opacity Mask -->
+    @php
+      $site_settings = \App\Models\SiteSetting::find(1);
+    @endphp
     <div class="container">
         <div class="row align-items-center">
             <div class="col-3">
                 <a href="{{ url('/') }}" class="logo_normal"><img src="{{ asset('frontend/img/logo.png') }}" width="135" height="45" alt=""></a>
-                <a href="{{ url('/') }}" class="logo_sticky"><img src="{{ asset('frontend/img/logo_sticky.png') }}" width="135" height="45" alt=""></a>
+                <a href="{{ url('/') }}" class="logo_sticky"><img src="{{ asset($site_settings->logo) }}" width="135" height="45" alt=""></a>
             </div>
             <div class="col-9">
                 <div class="main-menu">
                     <a href="#" class="closebt open_close_menu"><i class="bi bi-x"></i></a>
-                    <div class="logo_panel"><img src="{{ asset('frontend/img/logo_sticky.png    ') }}" width="135" height="45" alt=""></div>
+
+                    <div class="logo_panel"><img src="{{ asset($site_settings->logo) }}" width="135" height="45" alt=""></div>
                     <nav id="mainNav">
                         <ul>
                             <li class="submenu">
@@ -27,7 +31,7 @@
                             <li class="submenu">
                                 <a href="{{ route('rooms') }}" class="show-submenu">Rooms & Suites</a>
                                 @php
-                                    $rooms = \App\Models\Room::latest()->get();
+                                  $rooms = \App\Models\Room::latest()->get();
                                 @endphp
                                 <ul>
                                     @foreach ($rooms as $room)

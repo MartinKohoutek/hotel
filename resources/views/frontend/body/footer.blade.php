@@ -1,23 +1,26 @@
 <footer class="revealed">
+    @php
+        $site_settings = \App\Models\SiteSetting::find(1);
+    @endphp
     <div class="footer_bg">
         <div class="gradient_over"></div>
-        <div class="background-image" data-background="url({{ asset('frontend/img/rooms/3.jpg') }})"></div>
+        <div class="background-image" data-background="url({{ asset($site_settings->footer_background) }})"></div>
     </div>
     <div class="container">
         <div class="row move_content">
             <div class="col-lg-4 col-md-12">
                 <h5>Contacts</h5>
                 <ul>
-                    <li>Baker Street 567, Los Angeles 11023<br>California - US<br><br></li>
-                    <li><strong><a href="#0">info@paradisehotel.com</a></strong></li>
-                    <li><strong><a href="#0">+434 43242232</a></strong></li>
+                    <li>{{ $site_settings->address }}<br><br></li>
+                    <li><strong><a href="mailto:{{ $site_settings->email }}">{{ $site_settings->email }}</a></strong><br><br></li>
+                    <li><strong><a href="tel:{{ $site_settings->phone }}">{{ $site_settings->phone }}</a></strong></li>
                 </ul>
                 <div class="social">
                     <ul>
-                        <li><a href="#0"><i class="bi bi-instagram"></i></a></li>
-                        <li><a href="#0"><i class="bi bi-whatsapp"></i></a></li>
-                        <li><a href="#0"><i class="bi bi-facebook"></i></a></li>
-                        <li><a href="#0"><i class="bi bi-twitter"></i></a></li>
+                        <li><a href="{{ $site_settings->instagram }}"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="{{ $site_settings->whatsapp }}"><i class="bi bi-whatsapp"></i></a></li>
+                        <li><a href="{{ $site_settings->facebook }}"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="{{ $site_settings->twitter }}"><i class="bi bi-twitter"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -53,7 +56,7 @@
     <!--/container-->
     <div class="copy">
         <div class="container">
-            © Paradise - by <a href="#">Ansonika</a>
+            {{ $site_settings->copyright }}
         </div>
     </div>
 </footer>
