@@ -22,9 +22,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('smtp.update') }}" method="post" id="myForm">
-                                <input type="hidden" name="id" value="{{ $settings->id }}">
+                            <form action="{{ route('site.update') }}" method="post" id="myForm" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $settings->id }}">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Phone</h6>
@@ -94,7 +94,7 @@
                                         <h6 class="mb-0">Logo</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="logo" class="form-control" value="{{ $settings->logo }}" />
+                                        <input type="file" name="logo" id="image" class="form-control" value="{{ $settings->logo }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -102,7 +102,7 @@
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img src="" alt="" style="width: 80px; height: 80px">
+                                        <img src="{{ (!empty($settings->logo)) ? asset($settings->logo) : url('/upload/no_image.jpg') }}" alt="" id="showImage" style="width: 80px; height: 80px">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -110,7 +110,7 @@
                                         <h6 class="mb-0">Footer Background</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="footer_background" class="form-control" value="{{ $settings->footer_background }}" />
+                                        <input type="file" id="image1"  name="footer_background" class="form-control" value="{{ $settings->footer_background }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -118,7 +118,7 @@
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img src="" alt="" style="width: 120px; height: 80px">
+                                        <img src="{{ (!empty($settings->footer_background)) ? asset($settings->footer_background) : url('/upload/no_image.jpg') }}" id="showImage1" alt="" style="width: 120px; height: 80px">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -135,7 +135,25 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#image').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
 
+        $('#image1').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#showImage1').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function (){
         $('#myForm').validate({
