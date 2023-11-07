@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\GallerySetting;
 use App\Http\Controllers\Backend\GallerySettingController;
+use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
@@ -207,6 +208,11 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(BlogCommentController::class)->group(function(){
         Route::post('/store/blog/comment', 'StoreBlogComment')->name('store.blog.comment');
     });
+});
+
+Route::controller(NotificationController::class)->group(function(){
+    Route::post('/mark-notification-as-read/{notification}', 'MarkAsRead');
+    Route::get('/mark-all-as-read', 'MarkAllAsRead')->name('mark-all-as-read');
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
