@@ -26,12 +26,12 @@
                             <i class='bx bx-bell'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="javascript:;">
+                            <!-- <a href="javascript:;"> -->
                                 <div class="msg-header">
                                     <p class="msg-header-title">Notifications</p>
                                     <p class="msg-header-clear ms-auto"><a href="{{ route('mark-all-as-read') }}">Marks all as read</a></p>
                                 </div>
-                            </a>
+                            <!-- </a> -->
                             <div class="header-notifications-list">
                                 @php
                                     $user = Auth::user();
