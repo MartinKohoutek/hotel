@@ -177,6 +177,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
 
         Route::get('/import/permission', 'ImportPermission')->name('import.permission');
         Route::get('/export', 'Export')->name('export');
+        Route::post('/import', 'Import')->name('import');
     });
 });
 

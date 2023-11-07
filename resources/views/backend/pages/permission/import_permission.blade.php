@@ -10,9 +10,14 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page"> <a href="{{ route('export') }}" role="button" class="btn btn-warning">Export Excel File</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Import Permissons</li>
                 </ol>
             </nav>
+        </div>
+        <div class="ms-auto">
+        <div class="btn-group">
+                <a href="{{ route('export') }}" role="button" class="btn btn-danger">Export Permissions</a>
+            </div>
         </div>
     </div>
     <!--end breadcrumb-->
@@ -25,18 +30,18 @@
                             <div class="card-title d-flex align-items-center">
                                 <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                                 </div>
-                                <h5 class="mb-0 text-primary">Add Permission</h5>
+                                <h5 class="mb-0 text-primary">Import Permissions</h5>
                             </div>
                             <hr>
-                            <form class="row g-3" method="post" action="{{ route('store.permission') }}">
+                            <form class="row g-3" method="post" action="{{ route('import') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-6">
-                                    <label for="inputFirstName" class="form-label">Excel File Import</label>
+                                    <label for="inputFirstName" class="form-label">Choose Excel File</label>
                                     <input type="file" name="import_file" class="form-control" >
                                 </div> 
                                 
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-5">Upload File</button>
+                                    <button type="submit" class="btn btn-primary px-5">Import File</button>
                                 </div>
                             </form>
                         </div>
