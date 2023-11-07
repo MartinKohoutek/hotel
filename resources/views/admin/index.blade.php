@@ -2,15 +2,17 @@
 @section('admin')
 
 @php
-    $bookings = \App\Models\Booking::latest()->get();
-    $pendingBookings = \App\Models\Booking::where('status', '0')->get();
-    $completeBookings = \App\Models\Booking::where('status', '1')->get();
-    $totalPrice = \App\Models\Booking::sum('total_price');
+$bookings = \App\Models\Booking::latest()->get();
+$pendingBookings = \App\Models\Booking::where('status', '0')->get();
+$completeBookings = \App\Models\Booking::where('status', '1')->get();
+$totalPrice = \App\Models\Booking::sum('total_price');
 
-    $today = Carbon\Carbon::now()->toDateString();
-    $todayPrice = App\Models\Booking::where('created_at', $today)->sum('total_price');
-    $messages = \App\Models\Contact::latest()->get();
-    $todayMessages = \App\Models\Contact::whereDate('created_at', $today)->get();
+$today = Carbon\Carbon::now()->toDateString();
+$todayPrice = App\Models\Booking::where('created_at', $today)->sum('total_price');
+$messages = \App\Models\Contact::latest()->get();
+$todayMessages = \App\Models\Contact::whereDate('created_at', $today)->get();
+
+$allData = \App\Models\Booking::orderBy('id', 'DESC')->limit(10)->get();
 @endphp
 <script src="{{ asset('backend/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
@@ -119,174 +121,62 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <h5 class="mb-1">Recent Orders</h5>
-                        </div>
-                        <div class="ms-auto">
-                            <a href="javscript:;" class="btn btn-primary btn-sm radius-30">View All Products</a>
+                            <h5 class="mb-1">Recent Booking</h5>
                         </div>
                     </div>
 
                     <div class="table-responsive mt-3">
-                        <table class="table align-middle mb-0">
-                            <thead class="table-light">
+                        <table class="table table-striped table-bordered" style="width:100%">
+                            <thead>
                                 <tr>
-                                    <th>Tracking ID</th>
-                                    <th>Products Name</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
+                                    <th>Id</th>
+                                    <th>Code</th>
+                                    <th>Booking Date</th>
+                                    <th>Customer</th>
+                                    <th>Room</th>
+                                    <th>Check In/Out</th>
+                                    <th># Rooms</th>
+                                    <th>Guest</th>
+                                    <th>Payment</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($allData as $key => $item)
                                 <tr>
-                                    <td>#55879</td>
+                                    <td>{{ $key+1 }}</td>
+                                    <td><a href="{{ route('edit_booking', $item->id) }}">{{ $item->code }}</a></td>
+                                    <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $item['user']['name'] }}</td>
+                                    <td>{{ $item['room']['roomtype']['name'] }}</td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/15.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Light Red T-Shirt</h6>
-                                            </div>
-                                        </div>
+                                        <span class="badge bg-primary">{{ $item->check_in }}</span><br>
+                                        <span class="badge bg-warning text-dark">{{ $item->check_out }}</span>
                                     </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-success text-success w-100">Completed</span></td>
-                                    <td>#149.25</td>
+                                    <td>{{ $item->number_of_rooms }}</td>
+                                    <td>{{ $item->person }}</td>
                                     <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
+                                        @if ($item->payment_status == '1')
+                                        <span class="text-success">Complete</span>
+                                        @else
+                                        <span class="text-danger">Pending</span>
+                                        @endif
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>#88379</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/16.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Grey Headphone</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-danger text-danger w-100">Cancelled</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#68823</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/19.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Grey Hand Watch</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-warning text-warning w-100">Pending</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#54869</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/07.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Brown Sofa</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-success text-success w-100">Completed</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#22536</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/17.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Black iPhone 11</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-success text-success w-100">Completed</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#25796</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/14.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Men Yellow T-Shirt</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-warning text-warning w-100">Pending</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#98754</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="recent-product-img">
-                                                <img src="assets/images/products/08.png" alt="">
-                                            </div>
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-14">Grey Stand Table</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>22 Jun, 2020</td>
-                                    <td class=""><span class="badge bg-light-danger text-danger w-100">Cancelled</span></td>
-                                    <td>#149.25</td>
-                                    <td>
-                                        <div class="d-flex order-actions"> <a href="javascript:;" class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
-                                            <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Booking Number</th>
+                                    <th>Booking Date</th>
+                                    <th>Customer</th>
+                                    <th>Room</th>
+                                    <th>Check In/Out</th>
+                                    <th>Total Room</th>
+                                    <th>Guest</th>
+                                    <th>Payment</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 
