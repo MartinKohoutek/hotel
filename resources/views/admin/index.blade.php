@@ -371,8 +371,6 @@ $dates = $dates->merge( $posts );
     var chart = new ApexCharts(document.querySelector("#myChart"), options);
     chart.render();
 
-
-    console.log(Object.values(messages));
     // chart 5
     var options = {
         series: [{

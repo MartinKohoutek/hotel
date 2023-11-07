@@ -10,11 +10,13 @@ use App\Models\Room;
 use App\Models\RoomBookedDate;
 use App\Models\RoomNumber;
 use App\Models\User;
+use App\Notifications\BookingComplete;
 use Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use Mail;
 use Stripe;
@@ -170,6 +172,10 @@ class BookingController extends Controller
             'message' => 'Booking Stored Successfully!',
             'alert-type' => 'success'
         ];
+
+        $user = User::where('role', 'admin')->get();
+        Notification::send($user, new BookingComplete($request->name));
+
         return redirect('/')->with($notification);
     }
 
