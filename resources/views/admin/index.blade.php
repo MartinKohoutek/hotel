@@ -123,7 +123,7 @@ $dates = $dates->merge( $posts );
                         <p class="mb-1 text-white">Pending Booking</p>
                         <h3 class="mb-3 text-danger">{{ count($pendingBookings) }}</h3>
                         <p class="mb-1 text-white">Complete Booking</p>
-                        <h3 class="mb-3 text-success">{{ count($pendingBookings) }}</h3>
+                        <h3 class="mb-3 text-success">{{ count($completeBookings) }}</h3>
                     </div>
                 </div>
             </div>
