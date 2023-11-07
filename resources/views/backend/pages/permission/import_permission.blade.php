@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page"> <a href="{{ route('import.permission') }}" role="button" class="btn btn-warning">Download Excel File</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> <a href="{{ route('export') }}" role="button" class="btn btn-warning">Export Excel File</a></li>
                 </ol>
             </nav>
         </div>
