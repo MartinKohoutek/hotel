@@ -31,7 +31,7 @@ class ContactController extends Controller
             'message' => 'Your Message Send Successfully!',
         ];
 
-        return redirect()->url('/')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function AllContactMessage() {
