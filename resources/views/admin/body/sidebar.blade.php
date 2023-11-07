@@ -31,6 +31,19 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-spa'></i>
+                </div>
+                <div class="menu-title">Role & Permisson</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.permission') }}"><i class="bx bx-right-arrow-alt"></i>All Permission</a>
+                </li>
+                <li> <a href="{{ route('add.team') }}"><i class="bx bx-right-arrow-alt"></i>Add Team Member</a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-label">Sections Setup</li>
         <li>
             <a href="javascript:;" class="has-arrow">

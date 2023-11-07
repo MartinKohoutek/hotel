@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\GallerySetting;
 use App\Http\Controllers\Backend\GallerySettingController;
 use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
@@ -164,6 +165,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
 
     Route::controller(ContactController::class)->group(function(){
         Route::get('all/contact/message', 'AllContactMessage')->name('all.contact.message');
+    });
+
+    Route::controller(RoleController::class)->group(function(){
+        Route::get('/all/permission', 'AllPermission')->name('all.permission');
     });
 });
 
