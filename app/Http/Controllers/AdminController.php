@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 use function Ramsey\Uuid\v1;
 
@@ -93,5 +94,10 @@ class AdminController extends Controller
     public function AllAdmin() {
         $admins = User::where('role', 'admin')->get();
         return view('backend.pages.admin.all_admin', compact('admins'));
+    }
+
+    public function AddAdmin() {
+        $roles = Role::all();
+        return view('backend.pages.admin.add_admin', compact('roles'));
     }
 }
