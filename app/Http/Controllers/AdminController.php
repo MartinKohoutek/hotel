@@ -123,4 +123,47 @@ class AdminController extends Controller
 
         return redirect()->route('all.admin')->with($notification);
     }
+
+    public function EditAdmin($id) {
+        $admin = User::find($id);
+        $roles = Role::latest()->get();
+        return view('backend.pages.admin.edit_admin', compact('admin', 'roles'));
+    }
+
+    public function UpdateAdmin(Request $request, $id) {
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Admin Account Updated Successfully!',
+        ];
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function DeleteAdmin($id) {
+        $admin = User::find($id);
+        if (!is_null($admin)) {
+            $admin->delete();
+        }
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Admin Account Deleted Successfully!',
+        ];
+
+        return redirect()->route('all.admin')->with($notification);
+    }
 }
