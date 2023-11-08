@@ -7,6 +7,7 @@ use App\Exports\RolesExport;
 use App\Http\Controllers\Controller;
 use App\Imports\PermissionImport;
 use App\Imports\RolesImport;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
@@ -162,6 +163,7 @@ class RoleController extends Controller
     public function AddRolesPermission() {
         $permissions = Permission::latest()->get();
         $roles = Role::latest()->get();
-        return view('backend.pages.setup.add_roles_permission', compact('roles', 'permissions'));
+        $permission_groups = User::getPermissionGroups();
+        return view('backend.pages.setup.add_roles_permission', compact('roles', 'permissions', 'permission_groups'));
     }
 }
