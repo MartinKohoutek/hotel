@@ -194,6 +194,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/all/roles/permission', 'AllRolesPermission')->name('all.roles.permission');
         Route::get('/edit/roles/permission/{id}', 'EditRolesPermission')->name('edit.roles.permission');
         Route::post('/update/roles/permission/{id}', 'UpdateRolesPermission')->name('update.roles.permission');
+        Route::get('/delete/roles/permission/{id}', 'DeleteRolesPermission')->name('delete.roles.permission');
     });
 });
 
