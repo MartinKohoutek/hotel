@@ -6,7 +6,6 @@ use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\ContactController;
-use App\Http\Controllers\Backend\GallerySetting;
 use App\Http\Controllers\Backend\GallerySettingController;
 use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\Backend\ReportController;
@@ -189,6 +188,8 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/export/roles', 'ExportRoles')->name('export.roles');
         Route::get('/import/roles/view', 'ImportRolesView')->name('import.roles.view');
         Route::post('/import/roles/store', 'ImportRolesStore')->name('import.roles.store');
+
+        Route::get('/add/roles/permission', 'AddRolesPermission')->name('add.roles.permission');
     });
 });
 
