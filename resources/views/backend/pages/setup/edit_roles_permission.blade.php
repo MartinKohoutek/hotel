@@ -33,15 +33,16 @@
                                 <h5 class="mb-0 text-primary">Edit Roles in Permission</h5>
                             </div>
                             <hr>
-                            <form class="row g-3" method="post" action="{{ route('role.permission.store') }}">
+                            <form class="row g-3" method="post" action="{{ route('update.roles.permission', $role->id) }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <label for="inputFirstName" class="form-label">Role</label>
-                                    <select name="role_id" class="form-select mb-3" aria-label="Default select example">
+                                    <h3>{{ $role->name }}</h3>
+                                    <!-- <select name="role_id" class="form-select mb-3" aria-label="Default select example">
                                         @foreach ($roles as $item)
 									        <option value="{{ $item->id }}" {{ ($item->name == $role->name) ? 'selected' : '' }}>{{ $item->name }}</option>
                                         @endforeach
-								    </select>
+								    </select> -->
                                 </div>  
                                 <div class="form-check">
 									<input class="form-check-input" type="checkbox" value="" id="checkAll">
@@ -62,7 +63,7 @@
                                     <div class="col-9">   
                                         @foreach ($permissions as $permission)
                                         <div class="form-check">
-                                            <input class="form-check-input" name="permission[]" type="checkbox" id="id{{ $permission->id }}" value="{{ $permission->id }}" {{ $role->hasPermissionTo($permission->name) ? 'checked' : 'empty' }} >
+                                        <input class="form-check-input" type="checkbox" name="permission[]"  id="id{{ $permission->id }}" value="{{ $permission->name }}" {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="id{{ $permission->id }}">{{ $permission->name }}</label>
                                         </div>
                                         @endforeach

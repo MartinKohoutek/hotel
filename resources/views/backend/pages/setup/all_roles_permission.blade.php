@@ -40,9 +40,11 @@
                             <td>{{ $key+1 }}</td>                           
                             <td>{{ $item->name }}</td>                         
                             <td>
-                                @foreach ($item->permissions as $perm)
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach ($item->permissions as $perm)
                                     <span class="badge bg-danger">{{ $perm->name }}</span>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </td>
                             <td>
                                 <a href="{{ route('edit.roles.permission', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
