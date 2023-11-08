@@ -28,7 +28,7 @@
                                 <h5 class="mb-0 text-primary">Add Admin User</h5>
                             </div>
                             <hr>
-                            <form class="row g-3" method="post" action="{{ route('store.permission') }}">
+                            <form class="row g-3" method="post" action="{{ route('store.admin') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <label for="inputFirstName" class="form-label">Name</label>
@@ -55,7 +55,7 @@
                                     <select name="roles" class="form-select mb-3" aria-label="Default select example">
 									<option selected="" disabled>Select Role</option>
                                     @foreach ($roles as $role)
-									<option value="{{ $role->id }}">{{ $role->name }}</option>
+									<option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
 								
 								    </select>

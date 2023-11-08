@@ -100,4 +100,27 @@ class AdminController extends Controller
         $roles = Role::all();
         return view('backend.pages.admin.add_admin', compact('roles'));
     }
+
+    public function StoreAdmin(Request $request) {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'New Admin Account Created Successfully!',
+        ];
+
+        return redirect()->route('all.admin')->with($notification);
+    }
 }

@@ -45,7 +45,11 @@
                             <td>{{ $item->name }}</td>  
                             <td>{{ $item->email }}</td>                       
                             <td>{{ $item->phone }}</td>
-                            <td>Role</td>
+                            <td>
+                                @foreach ($item->roles as $role)
+                                    <span class="badge bg-danger">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ route('edit.roles', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
                                 <a href="{{ route('delete.roles', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
