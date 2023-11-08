@@ -182,6 +182,13 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/all/roles', 'AllRoles')->name('all.roles');
         Route::get('/add/roles', 'AddRoles')->name('add.roles');
         Route::post('/store/roles', 'StoreRoles')->name('store.roles');
+        Route::get('/edit/roles/{id}', 'EditRoles')->name('edit.roles');
+        Route::post('/update/roles', 'UpdateRoles')->name('update.roles');
+        Route::get('/delete/roles/{id}', 'DeleteRoles')->name('delete.roles');
+
+        Route::get('/export/roles', 'ExportRoles')->name('export.roles');
+        Route::get('/import/roles/view', 'ImportRolesView')->name('import.roles.view');
+        Route::post('/import/roles/store', 'ImportRolesStore')->name('import.roles.store');
     });
 });
 

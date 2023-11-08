@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Exports\PermissionExport;
+use App\Exports\RolesExport;
 use App\Http\Controllers\Controller;
 use App\Imports\PermissionImport;
+use App\Imports\RolesImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
@@ -83,7 +85,7 @@ class RoleController extends Controller
             'message' => 'Permission Imported Successfully!',
         ];
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('all.permission')->with($notification);
     }
 
     public function AllRoles() {
@@ -103,6 +105,55 @@ class RoleController extends Controller
         $notification = [
             'alert-type' => 'success',
             'message' => 'Role Created Successfully!',
+        ];
+
+        return redirect()->route('all.roles')->with($notification);
+    }
+
+    public function EditRoles($id) {
+        $role = Role::find($id);
+        return view('backend.pages.roles.edit_roles', compact('role'));
+    }
+
+    public function UpdateRoles(Request $request) {
+        $role = Role::find($request->id);
+        $role->update([
+            'name' => $request->name,
+        ]);
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Role Updated Successfully!',
+        ];
+
+        return redirect()->route('all.roles')->with($notification);
+    }
+
+    public function DeleteRoles($id) {
+        Role::find($id)->delete();
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Role Deleted Successfully!',
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function ExportRoles() {
+        return Excel::download(new RolesExport, 'roles.xlsx');
+    }
+
+    public function ImportRolesView() {
+        return view('backend.pages.roles.import_roles');
+    }
+
+    public function ImportRolesStore(Request $request) {
+        Excel::import(new RolesImport, $request->file('import_roles'));
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Roles Imported Successfully!',
         ];
 
         return redirect()->route('all.roles')->with($notification);

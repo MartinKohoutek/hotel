@@ -18,10 +18,10 @@
                 <a href="{{ route('add.roles') }}" role="button" class="btn btn-primary">Add Role</a>
             </div>
             <div class="btn-group">
-                <a href="{{ route('import.permission') }}" role="button" class="btn btn-warning">Import Roles</a>
+                <a href="{{ route('import.roles.view') }}" role="button" class="btn btn-warning">Import Roles</a>
             </div>
             <div class="btn-group">
-                <a href="{{ route('export') }}" role="button" class="btn btn-danger">Export Roles</a>
+                <a href="{{ route('export.roles') }}" role="button" class="btn btn-danger">Export Roles</a>
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
                             <td>{{ $key+1 }}</td>                           
                             <td>{{ $item->name }}</td>                         
                             <td>
-                                <a href="{{ route('edit.permission', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
-                                <a href="{{ route('delete.permission', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                <a href="{{ route('edit.roles', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="{{ route('delete.roles', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                             </td>
                         </tr>
                         @endforeach
