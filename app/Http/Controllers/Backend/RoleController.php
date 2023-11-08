@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -83,5 +84,27 @@ class RoleController extends Controller
         ];
 
         return redirect()->back()->with($notification);
+    }
+
+    public function AllRoles() {
+        $roles = Role::latest()->get();
+        return view('backend.pages.roles.all_roles', compact('roles'));
+    }
+    
+    public function AddRoles() {
+        return view('backend.pages.roles.add_roles');
+    }
+
+    public function StoreRoles(Request $request) {
+        Role::create([
+            'name' => $request->name,
+        ]);
+
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Role Created Successfully!',
+        ];
+
+        return redirect()->route('all.roles')->with($notification);
     }
 }

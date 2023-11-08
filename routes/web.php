@@ -178,6 +178,10 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/import/permission', 'ImportPermission')->name('import.permission');
         Route::get('/export', 'Export')->name('export');
         Route::post('/import', 'Import')->name('import');
+
+        Route::get('/all/roles', 'AllRoles')->name('all.roles');
+        Route::get('/add/roles', 'AddRoles')->name('add.roles');
+        Route::post('/store/roles', 'StoreRoles')->name('store.roles');
     });
 });
 
