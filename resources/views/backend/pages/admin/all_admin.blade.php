@@ -3,24 +3,26 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Manage Admin Users</div>
+        <div class="breadcrumb-title pe-3">Manage Employees</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">All Admin Users</li>
+                    <li class="breadcrumb-item active" aria-current="page">All Employees</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <a href="{{ route('add.admin') }}" role="button" class="btn btn-primary">Add Admin</a>
+                @if (Auth::user()->can('employee.add'))
+                <a href="{{ route('add.admin') }}" role="button" class="btn btn-primary">Add Employee</a>
+                @endif
             </div>
         </div>
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">All Roles</h6>
+    <h6 class="mb-0 text-uppercase">All Employees</h6>
     <hr />
     <div class="card">
         <div class="card-body">
@@ -51,8 +53,12 @@
                                 @endforeach
                             </td>
                             <td>
+                                @if (Auth::user()->can('employee.edit'))
                                 <a href="{{ route('edit.admin', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                @endif
+                                @if (Auth::user()->can('employee.delete'))
                                 <a href="{{ route('delete.admin', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

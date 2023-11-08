@@ -144,4 +144,14 @@ class RoomListController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+
+    public function DeleteBooking($id) {
+        Booking::find($id)->delete();
+        RoomBookedDate::where('booking_id', $id)->delete();
+        $notification = [
+            'message' => 'Booking Deleted Successfully!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
 }

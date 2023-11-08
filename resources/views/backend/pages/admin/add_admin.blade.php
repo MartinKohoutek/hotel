@@ -4,13 +4,13 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Manage Admin Users</div>
+        <div class="breadcrumb-title pe-3">Manage Employees</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Admin User</li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Employee</li>
                 </ol>
             </nav>
         </div>
@@ -25,7 +25,7 @@
                             <div class="card-title d-flex align-items-center">
                                 <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                                 </div>
-                                <h5 class="mb-0 text-primary">Add Admin User</h5>
+                                <h5 class="mb-0 text-primary">Add Employee</h5>
                             </div>
                             <hr>
                             <form class="row g-3" method="post" action="{{ route('store.admin') }}">
@@ -62,7 +62,7 @@
                                 </div>     
                                 
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-5">Save New User</button>
+                                    <button type="submit" class="btn btn-primary px-5">Save Employee</button>
                                 </div>
                             </form>
                         </div>

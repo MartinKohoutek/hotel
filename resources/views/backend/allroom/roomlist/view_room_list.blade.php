@@ -15,12 +15,14 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
+                @if (Auth::user()->can('booking.add'))
                 <a href="{{ route('add.room.list') }}" role="button" class="btn btn-primary">Add Booking</a>
+                @endif
             </div>
         </div>
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">All CheapHotel Team Members</h6>
+    <h6 class="mb-0 text-uppercase">All Room List</h6>
     <hr />
     <div class="card">
         <div class="card-body">

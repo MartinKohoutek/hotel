@@ -15,12 +15,14 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
+                @if (Auth::user()->can('blog.category.add'))
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Blog Category</button>
+                @endif
             </div>
         </div>
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">All CheapHotel Team Members</h6>
+    <h6 class="mb-0 text-uppercase">All Blog Categories</h6>
     <hr />
     <div class="card">
         <div class="card-body">
@@ -41,9 +43,13 @@
                             <td>{{ $item->category_name }}</td>
                             <td>{{ $item->category_slug }}</td>
                             <td>
-                            <button type="button" class="btn btn-primary px-3 radius-30" data-bs-toggle="modal" data-bs-target="#category" id="{{ $item->id }}" onclick="categoryEdit(this.id)">Edit</button>
+                                @if (Auth::user()->can('blog.category.edit'))
+                                    <button type="button" class="btn btn-primary px-3 radius-30" data-bs-toggle="modal" data-bs-target="#category" id="{{ $item->id }}" onclick="categoryEdit(this.id)">Edit</button>
                                 <!-- <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a> -->
-                                <a href="{{ route('delete.blog.category', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                @endif
+                                @if (Auth::user()->can('blog.category.delete'))
+                                    <a href="{{ route('delete.blog.category', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                @endif`
                             </td>
                         </tr>
                         @endforeach

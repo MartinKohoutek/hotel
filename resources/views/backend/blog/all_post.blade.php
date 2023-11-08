@@ -15,7 +15,9 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
+                @if (Auth::user()->can('blog.post.add'))
                 <a href="{{ route('add.blog.post') }}" role="button" class="btn btn-primary">Add Post</a>
+                @endif
             </div>
         </div>
     </div>
@@ -43,8 +45,12 @@
                             <td>{{ $item['blogCategory']['category_name'] }}</td>
                             <td><img src="{{ asset($item->post_image) }}" alt="" style="width: 60px; height: 50px"></td>
                             <td>
+                                @if (Auth::user()->can('blog.post.edit'))
                                 <a href="{{ route('edit.blog.post', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                @endif
+                                @if (Auth::user()->can('blog.post.delete'))
                                 <a href="{{ route('delete.blog.post', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -107,6 +107,7 @@ Route::middleware('auth', 'role:admin')->group(function(){
         Route::get('/room/list/view', 'RoomListView')->name('room.list.view');
         Route::get('/add/room/list', 'AddRoomList')->name('add.room.list');
         Route::post('/store/room/list', 'StoreRoomList')->name('store.room.list');
+        Route::get('/delete/booking/{id}', 'DeleteBooking')->name('delete.booking');
     });
 
     Route::controller(SettingController::class)->group(function(){

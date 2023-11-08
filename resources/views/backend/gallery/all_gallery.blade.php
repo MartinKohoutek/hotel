@@ -15,7 +15,9 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
+                @if (Auth::user()->can('setting.gallery.add'))
                 <a href="{{ route('add.gallery.setting') }}" role="button" class="btn btn-primary">Add Gallery Items</a>
+                @endif
             </div>
         </div>
     </div>
@@ -43,8 +45,12 @@
                                 <td>{{ $key+1 }}</td>
                                 <td><img src="{{ asset($item->photo) }}" alt="" style="width: 60px; height: 50px"></td>
                                 <td>
+                                    @if (Auth::user()->can('setting.gallery.edit'))
                                     <a href="{{ route('edit.gallery.setting', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                    @endif
+                                    @if (Auth::user()->can('setting.gallery.delete'))
                                     <a href="{{ route('delete.gallery.setting', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -58,7 +64,9 @@
                             </tr>
                         </tfoot>
                     </table>
+                    @if (Auth::user()->can('setting.gallery.delete'))
                     <button type="submit" class="btn btn-danger mt-3">Delete Selected Images</button>
+                    @endif
                 </div>
             </form>
         </div>

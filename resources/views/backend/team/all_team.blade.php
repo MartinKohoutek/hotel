@@ -15,7 +15,9 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
+                @if (Auth::user()->can('team.add'))
                 <a href="{{ route('add.team') }}" role="button" class="btn btn-primary">Add Team Member</a>
+                @endif
             </div>
         </div>
     </div>
@@ -69,8 +71,12 @@
                                 @endif
                             </td>
                             <td>
+                                @if (Auth::user()->can('team.edit'))
                                 <a href="{{ route('edit.team', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                @endif
+                                @if (Auth::user()->can('team.delete'))
                                 <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

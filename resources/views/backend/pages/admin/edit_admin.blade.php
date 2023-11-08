@@ -25,7 +25,7 @@
                             <div class="card-title d-flex align-items-center">
                                 <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                                 </div>
-                                <h5 class="mb-0 text-primary">Edit Admin User</h5>
+                                <h5 class="mb-0 text-primary">Edit Employee</h5>
                             </div>
                             <hr>
                             <form class="row g-3" method="post" action="{{ route('update.admin', $admin->id) }}">
@@ -58,7 +58,7 @@
                                 </div>     
                                 
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-5">Update User</button>
+                                    <button type="submit" class="btn btn-primary px-5">Update Employee</button>
                                 </div>
                             </form>
                         </div>
