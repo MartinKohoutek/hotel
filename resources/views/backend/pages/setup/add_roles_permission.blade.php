@@ -1,5 +1,10 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+<style>
+    .form-check-label {
+        text-transform: capitalize;
+    }
+</style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <div class="page-content">
     <!--breadcrumb-->
@@ -40,8 +45,8 @@
 								    </select>
                                 </div>  
                                 <div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-									<label class="form-check-label" for="flexCheckDefault">Permission All</label>
+									<input class="form-check-input" type="checkbox" value="" id="checkAll">
+									<label class="form-check-label" for="checkAll">Select All Permissions</label>
 								</div>
                                 <hr>
                                 @foreach ($permission_groups as $group)
@@ -78,6 +83,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#checkAll').click(function(){
+        if ($(this).is(':checked')) {
+            $('input[type=checkbox]').prop('checked', true);
+        } else {
+            $('input[type=checkbox]').prop('checked', false);
+        }
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
