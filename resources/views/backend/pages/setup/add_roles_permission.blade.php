@@ -33,7 +33,7 @@
                                 <h5 class="mb-0 text-primary">Add Roles in Permission</h5>
                             </div>
                             <hr>
-                            <form class="row g-3" method="post" action="{{ route('store.roles') }}">
+                            <form class="row g-3" method="post" action="{{ route('role.permission.store') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <label for="inputFirstName" class="form-label">Permission Group</label>
@@ -63,7 +63,7 @@
                                         @endphp
                                         @foreach ($permissions as $permission)
                                         <div class="form-check">
-                                            <input class="form-check-input" name="permission[]" type="checkbox" value="" id="id{{ $permission->id }}" value="{{ $permission->id }}">
+                                            <input class="form-check-input" name="permission[]" type="checkbox" id="id{{ $permission->id }}" value="{{ $permission->id }}">
                                             <label class="form-check-label" for="id{{ $permission->id }}">{{ $permission->name }}</label>
                                         </div>
                                         @endforeach
