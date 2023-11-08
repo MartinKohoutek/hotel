@@ -55,8 +55,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                             <th>Id</th>
+                            <th>Id</th>
                             <th>Role Name</th>
+                            <th>Permission</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
