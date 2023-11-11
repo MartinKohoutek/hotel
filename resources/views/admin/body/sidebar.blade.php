@@ -152,6 +152,8 @@
             <ul>
                 <li> <a href="{{ route('all.menu.category') }}"><i class="bx bx-right-arrow-alt"></i>Menu Categories</a>
                 </li>
+                <li> <a href="{{ route('all.menu.items') }}"><i class="bx bx-right-arrow-alt"></i>Menu Items</a>
+                </li>
             </ul>
         </li>
 

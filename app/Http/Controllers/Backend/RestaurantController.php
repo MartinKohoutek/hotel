@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\MenuCategory;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class RestaurantController extends Controller
 {
@@ -51,6 +53,84 @@ class RestaurantController extends Controller
         MenuCategory::find($id)->delete();
         $notification = [
             'message' => 'Menu Category Deleted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function AllMenuItems() {
+        $items = MenuItem::latest()->get();
+        return view('backend.restaurant.menu.all_items', compact('items'));
+    }
+    
+    public function AddMenuItem() {
+        $categories = MenuCategory::orderBy('category_name')->get();
+        return view('backend.restaurant.menu.add_item', compact('categories'));
+    }
+
+    public function StoreMenuItem(Request $request) {
+        $menuItem = New MenuItem();
+        if ($request->file('image')) {
+            $img = $request->file('image');
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(400, 400)->save('upload/menu/'.$imgName);
+            $menuItem->image = 'upload/menu/'.$imgName;
+        }
+
+        $menuItem['title'] = $request->title;
+        $menuItem['category_id'] = $request->category_id;
+        $menuItem['ingredients'] = $request->ingredients;
+        $menuItem['price'] = $request->price;
+        $menuItem->save();
+
+        $notification = [
+            'message' => 'Menu Item Inserted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.items')->with($notification);
+    }
+
+    public function EditMenuItem($id) {
+        $menuItem = MenuItem::find($id);
+        $categories = MenuCategory::orderBy('category_name')->get();
+        return view('backend.restaurant.menu.edit_item', compact('menuItem', 'categories'));
+    }
+
+    public function UpdateMenuItem(Request $request, $id) {
+        $menuItem = MenuItem::find($id);
+        if ($request->file('image')) {
+            $img = $request->file('image');
+            unlink($menuItem->image);
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(400, 400)->save('upload/menu/'.$imgName);
+            $menuItem->image = 'upload/menu/'.$imgName;
+        }
+
+        $menuItem['title'] = $request->title;
+        $menuItem['category_id'] = $request->category_id;
+        $menuItem['ingredients'] = $request->ingredients;
+        $menuItem['price'] = $request->price;
+        $menuItem->save();
+
+        $notification = [
+            'message' => 'Menu Item Updated Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.items')->with($notification);
+    }
+
+    public function DeleteMenuItem($id) {
+        $menuItem = MenuItem::find($id);
+        if (!is_null($menuItem->image)) {
+            unlink($menuItem->image);
+        }
+        $menuItem->delete();
+
+        $notification = [
+            'message' => 'Menu Item Deleted Successfully!',
             'alert-type' => 'success', 
         ];
 
