@@ -142,6 +142,19 @@
         </li>
         @endif
 
+        <li class="menu-label">Restaurant</li>
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class='bx bx-envelope-open'></i>
+                </div>
+                <div class="menu-title">Restaurant Menu</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.menu.category') }}"><i class="bx bx-right-arrow-alt"></i>Menu Categories</a>
+                </li>
+            </ul>
+        </li>
+
         @if (Auth::user()->can('messages.menu') || Auth::user()->can('blog.menu'))
         <li class="menu-label">Messages & Blog</li>
         @endif
