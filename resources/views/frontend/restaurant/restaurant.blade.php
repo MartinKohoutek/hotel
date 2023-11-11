@@ -68,28 +68,28 @@
         <div class="col-lg-5">
             <div class="intro">
                 <div class="title">
-                    <small>Paradise Hotel</small>
-                    <h2>The Restaurant</h2>
+                    <small>{{ $info->title1 }}</small>
+                    <h2>{{ $info->title2 }}</h2>
                 </div>
-                <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab.</p>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-                <p><em>Enjoy...the Chef</em></p>
+                <p class="lead">{{ $info->short_description }}</p>
+                <p>{{ $info->long_description }}</p>
+                <p><em>{{ $info->footer }}</em></p>
             </div>
         </div>
         <div class="col-lg-5">
             <div>
                 <ul class="list-unstyled mb-4">
                     <li class="d-flex justify-content-between mb-2 text-end">
-                        <strong>Breakfast</strong> <span>7.00am – 10.30am</span>
+                        <strong>Breakfast</strong> <span>{{ $info->breakfast_time }}</span>
                     </li>
                     <li class="d-flex justify-content-between mb-2 text-end">
-                        <strong>Lunch</strong> <span>12.00am – 2.00pm</span>
+                        <strong>Lunch</strong> <span>{{ $info->lunch_time }}</span>
                     </li>
                     <li class="d-flex justify-content-between mb-2 text-end">
-                        <strong>Dinner</strong> <span>open from 7.30pm<br><small>(kitchen close at 11.30pm)</small></span>
+                        <strong>Dinner</strong> <span>{{ $info->dinner_time }}</span>
                     </li>
                 </ul>
-                <p class="phone_element"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Reservations</em>+41 934 121 1334</span></a></p>
+                <p class="phone_element"><a href="tel:{{ $info->phone }}"><i class="bi bi-telephone"></i><span><em>Reservations</em>{{ $info->phone }}</span></a></p>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use App\Models\RestaurantBanner;
 use App\Models\RestaurantCarousel;
+use App\Models\RestaurantInfo;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -143,7 +144,8 @@ class RestaurantController extends Controller
         $items = MenuItem::latest()->get();
         $categories = MenuCategory::orderBy('category_name')->get();
         $carousel = RestaurantCarousel::latest()->get();
-        return view('frontend.restaurant.restaurant', compact('items', 'categories', 'carousel'));
+        $info = RestaurantInfo::find(1);
+        return view('frontend.restaurant.restaurant', compact('items', 'categories', 'carousel', 'info'));
     }
 
     public function AllMenuBanner() {
@@ -281,5 +283,72 @@ class RestaurantController extends Controller
         ];
 
         return redirect()->route('all.menu.carousel')->with($notification);
+    }
+
+    public function EditMenuCarousel($id) {
+        $carousel = RestaurantCarousel::find($id);
+        return view('backend.restaurant.carousel.edit_carousel', compact('carousel'));
+    }
+
+    public function UpdateMenuCarousel(Request $request, $id) {
+        $carousel = RestaurantCarousel::find($id);
+        if ($request->file('image')) {
+            $img = $request->file('image');
+            unlink($carousel->image);
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(1600, 1000)->save('upload/restaurant/carousel/'.$imgName);
+            $carousel->update(['image' => 'upload/restaurant/carousel/'.$imgName,]);
+        }
+
+        $carousel->update([
+            'title' => $request->title,
+            'small_title' => $request->short_title,
+        ]);
+
+        $notification = [
+            'message' => 'Carousel Item Updated Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.carousel')->with($notification);
+    }
+
+    public function DeleteMenuCarousel($id) {
+        $carousel = RestaurantCarousel::find($id);
+        unlink($carousel->image);
+        $carousel->delete();
+
+        $notification = [
+            'message' => 'Carousel Item Deleted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function EditMenuInfo() {
+        $info = RestaurantInfo::find(1);
+        return view('backend.restaurant.info.edit_info', compact('info'));
+    }
+
+    public function UpdateMenuInfo(Request $request) {
+        RestaurantInfo::find(1)->update([
+            'title1' => $request->title1,
+            'title2' => $request->title2,
+            'short_description' => $request->short_description,
+            'long_description' => $request->long_description,
+            'footer' => $request->footer,
+            'breakfast_time' => $request->breakfast_time,
+            'lunch_time' => $request->lunch_time,
+            'dinner_time' => $request->dinner_time,
+            'phone' => $request->phone,
+        ]);
+
+        $notification = [
+            'message' => 'Restaurant Info Updated Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

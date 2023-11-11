@@ -158,6 +158,8 @@
                 </li>
                 <li> <a href="{{ route('all.menu.carousel') }}"><i class="bx bx-right-arrow-alt"></i>Carousel</a>
                 </li>
+                <li> <a href="{{ route('edit.menu.info') }}"><i class="bx bx-right-arrow-alt"></i>Restaurant Info</a>
+                </li>
             </ul>
         </li>
 

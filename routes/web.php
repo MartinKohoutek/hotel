@@ -201,6 +201,12 @@ Route::middleware('auth', 'roles:admin')->group(function(){
         Route::get('/all/menu/carousel', 'AllMenuCarousel')->name('all.menu.carousel');
         Route::get('/add/menu/carousel', 'AddMenuCarousel')->name('add.menu.carousel');
         Route::post('/store/menu/carousel', 'StoreMenuCarousel')->name('store.menu.carousel');
+        Route::get('/edit/menu/carousel/{id}', 'EditMenuCarousel')->name('edit.menu.carousel');
+        Route::post('/update/menu/carousel/{id}', 'UpdateMenuCarousel')->name('update.menu.carousel');
+        Route::get('/delete/menu/carousel/{id}', 'DeleteMenuCarousel')->name('delete.menu.carousel');
+
+        Route::get('/edit/menu/info', 'EditMenuInfo')->name('edit.menu.info');
+        Route::post('/update/menu/info', 'UpdateMenuInfo')->name('update.menu.info');
     });
 });
 

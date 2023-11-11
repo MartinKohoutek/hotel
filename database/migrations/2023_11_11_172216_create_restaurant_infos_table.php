@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('restaurant_infos', function (Blueprint $table) {
             $table->id();
+            $table->string('title1')->nullable();
+            $table->string('title2')->nullable();
+            $table->string('short_description')->nullable();
+            $table->text('long_description')->nullable();
+            $table->string('footer')->nullable();
+            $table->string('breakfast_time')->nullable();
+            $table->string('lunch_time')->nullable();
+            $table->string('dinner_time')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

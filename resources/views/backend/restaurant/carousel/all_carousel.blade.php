@@ -46,10 +46,10 @@
                             <td>{{ $item->title }}</td>
                             <td>
                                 @if (Auth::user()->can('blog.post.edit'))
-                                <a href="{{ route('edit.menu.item', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
+                                <a href="{{ route('edit.menu.carousel', $item->id) }}" class="btn btn-primary px-3 radius-30">Edit</a>
                                 @endif
                                 @if (Auth::user()->can('blog.post.delete'))
-                                <a href="{{ route('delete.menu.item', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                <a href="{{ route('delete.menu.carousel', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
                                 @endif
                             </td>
                         </tr>
