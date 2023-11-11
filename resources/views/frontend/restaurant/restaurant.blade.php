@@ -132,11 +132,9 @@
                                         <small>{{ $banner->offer }}</small>
                                         <h3>{{ $banner->title }}</h3>
                                         <p>{{ $banner->short_description }}</p>
-                                        <!-- <p>{{ $banner->long_description }}</p> -->
-                                        
-                                        <a href="menu-of-the-day.html" class="btn_1">View Menu</a>
+                                        <p style="width: 80%;">{{ $banner->long_description }}</p>
                                     </div>
-                                    <figure class="d-none d-lg-block"><img src="{{ url($banner->banner) }}" alt="" width="200" height="200" class="img-fluid"></figure>
+                                    <figure class="d-none d-lg-block"><img src="{{ url($banner->banner) }}" alt="" width="200" height="200"></figure>
                                 </div>
                                 <!-- /wrapper -->
                             </div>
@@ -172,7 +170,6 @@
             <!-- /tab-content -->
         </div>
         <!-- /tabs_menu-->
-        <p class="text-center mt-5"><a href="menu-of-the-day.html" class="btn_1 outline">View Day Menu</a></p>
     </div>
     <!-- /container -->
 </div>
