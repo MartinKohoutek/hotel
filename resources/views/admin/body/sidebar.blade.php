@@ -154,6 +154,10 @@
                 </li>
                 <li> <a href="{{ route('all.menu.items') }}"><i class="bx bx-right-arrow-alt"></i>Menu Items</a>
                 </li>
+                <li> <a href="{{ route('all.menu.banner') }}"><i class="bx bx-right-arrow-alt"></i>Banners</a>
+                </li>
+                <li> <a href="{{ route('all.menu.carousel') }}"><i class="bx bx-right-arrow-alt"></i>Carousel</a>
+                </li>
             </ul>
         </li>
 

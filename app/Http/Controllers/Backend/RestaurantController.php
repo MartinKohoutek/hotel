@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\MenuCategory;
 use App\Models\MenuItem;
+use App\Models\RestaurantBanner;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -141,5 +142,114 @@ class RestaurantController extends Controller
         $items = MenuItem::latest()->get();
         $categories = MenuCategory::orderBy('category_name')->get();
         return view('frontend.restaurant.restaurant', compact('items', 'categories'));
+    }
+
+    public function AllMenuBanner() {
+        $banners = RestaurantBanner::latest()->get();
+        $categories = MenuCategory::latest()->get();
+        return view('backend.restaurant.banner.all_banner', compact('banners', 'categories'));
+    }
+
+    public function AddMenuBanner() {
+        $categories = MenuCategory::orderBy('category_name')->get();
+        return view('backend.restaurant.banner.add_banner', compact('categories'));
+    }
+
+    public function StoreMenuBanner(Request $request) {
+        if (RestaurantBanner::where('category_id', $request->category_id)->first()) {
+            $notification = [
+                'message' => 'Banner for this category already exists, try different category!',
+                'alert-type' => 'error', 
+            ];
+    
+            return redirect()->back()->with($notification);
+        }
+
+        $banner = new RestaurantBanner();
+        
+        if ($request->file('banner')) {
+            $img = $request->file('banner');
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(200, 200)->save('upload/restaurant/banner/'.$imgName);
+            $banner->banner = 'upload/restaurant/banner/'.$imgName;
+        }
+
+        if ($request->file('background')) {
+            $img = $request->file('background');
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(1200, 600)->save('upload/restaurant/background/'.$imgName);
+            $banner->background = 'upload/restaurant/background/'.$imgName;
+        }
+
+        $banner['offer'] = $request->offer;
+        $banner['title'] = $request->title;
+        $banner['short_description'] = $request->short_description;
+        $banner['long_description'] = $request->long_description;
+        $banner['category_id'] = $request->category_id;
+        $banner->save();
+
+        $notification = [
+            'message' => 'Banner Inserted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.banner')->with($notification);
+    }
+
+    public function EditMenuBanner($id) {
+        $banner = RestaurantBanner::find($id);
+        $categories = MenuCategory::orderBy('category_name')->get();
+        return view('backend.restaurant.banner.edit_banner', compact('banner', 'categories'));
+    }
+
+    public function UpdateMenuBanner(Request $request, $id) {
+        $banner = RestaurantBanner::find($id);
+        
+        if ($request->file('banner')) {
+            $img = $request->file('banner');
+            unlink($banner->banner);
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(200, 200)->save('upload/restaurant/banner/'.$imgName);
+            $banner->banner = 'upload/restaurant/banner/'.$imgName;
+        }
+
+        if ($request->file('background')) {
+            $img = $request->file('background');
+            unlink($banner->background);
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(1200, 600)->save('upload/restaurant/background/'.$imgName);
+            $banner->background = 'upload/restaurant/background/'.$imgName;
+        }
+
+        $banner['offer'] = $request->offer;
+        $banner['title'] = $request->title;
+        $banner['short_description'] = $request->short_description;
+        $banner['long_description'] = $request->long_description;
+        $banner->update();
+
+        $notification = [
+            'message' => 'Banner Updated Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.banner')->with($notification);
+    }
+
+    public function DeleteMenuBanner($id) {
+        $banner = RestaurantBanner::find($id);
+        if (!is_null($banner->banner)) {
+            unlink($banner->banner);
+        }
+        if (!is_null($banner->background)) {
+            unlink($banner->background);
+        }
+        $banner->delete();
+
+        $notification = [
+            'message' => 'Banner Deleted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

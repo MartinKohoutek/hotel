@@ -120,15 +120,20 @@
                     </div>
                     <div id="collapse-{{ $category->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $category->id }}">
                         <div class="card-body">
-                            <div class="banner background-image" data-background="url(img/restaurant/banner_bg_2.jpg)">
+                            @php
+                                $banner = App\Models\RestaurantBanner::where('category_id', $category->id)->first();
+                            @endphp
+                            <div class="banner background-image" data-background="url({{ url($banner->background) }})">
                                 <div class="wrapper d-flex align-items-center justify-content-between opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
                                     <div>
-                                        <small>Starters Special Offer</small>
-                                        <h3>Mix Starters Menu $18 only</h3>
-                                        <p>Hamburgher, Chips, Mix Sausages, Beer, Muffin</p>
+                                        <small>{{ $banner->offer }}</small>
+                                        <h3>{{ $banner->title }}</h3>
+                                        <p>{{ $banner->short_description }}</p>
+                                        <!-- <p>{{ $banner->long_description }}</p> -->
+                                        
                                         <a href="menu-of-the-day.html" class="btn_1">View Menu</a>
                                     </div>
-                                    <figure class="d-none d-lg-block"><img src="img/restaurant/banner.svg" alt="" width="200" height="200" class="img-fluid"></figure>
+                                    <figure class="d-none d-lg-block"><img src="{{ $banner->banner }}" alt="" width="200" height="200" class="img-fluid"></figure>
                                 </div>
                                 <!-- /wrapper -->
                             </div>

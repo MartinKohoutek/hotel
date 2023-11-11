@@ -190,6 +190,13 @@ Route::middleware('auth', 'roles:admin')->group(function(){
         Route::get('/edit/menu/item/{id}', 'EditMenuItem')->name('edit.menu.item');
         Route::post('/update/menu/item/{id}', 'UpdateMenuItem')->name('update.menu.item');
         Route::get('/delete/menu/item/{id}', 'DeleteMenuItem')->name('delete.menu.item');
+
+        Route::get('/all/menu/banner', 'AllMenuBanner')->name('all.menu.banner');
+        Route::get('/add/menu/banner', 'AddMenuBanner')->name('add.menu.banner');
+        Route::post('/store/menu/banner', 'StoreMenuBanner')->name('store.menu.banner');
+        Route::get('/edit/menu/banner/{id}', 'EditMenuBanner')->name('edit.menu.banner');
+        Route::post('/update/menu/banner/{id}', 'UpdateMenuBanner')->name('update.menu.banner');
+        Route::get('/delete/menu/banner/{id}', 'DeleteMenuBanner')->name('delete.menu.banner');
     });
 });
 
