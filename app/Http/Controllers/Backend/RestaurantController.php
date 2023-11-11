@@ -136,4 +136,10 @@ class RestaurantController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function ShowRestaurant() {
+        $items = MenuItem::latest()->get();
+        $categories = MenuCategory::orderBy('category_name')->get();
+        return view('frontend.restaurant.restaurant', compact('items', 'categories'));
+    }
 }

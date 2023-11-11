@@ -57,14 +57,14 @@
                             </li> -->
                             <li><a href="{{ route('about.us') }}">About</a></li>
                             <li><a href="{{ route('contact.us') }}">Contacts</a></li>
+                            <li><a href="{{ route('show.restaurant') }}">Restaurant</a></li>
                             <li><a href="{{ route('blog.list') }}">Blog</a></li>
                             <li><a href="{{ route('show.gallery') }}">Gallery</a></li>
                             @auth
                             <li><a href="{{ route('dashboard') }}"><i class='bx bx-user'></i>Dashboard</a></li>
                             <li><a href="{{ route('user.logout') }}"><i class='bx bx-user'></i>Logout</a></li>
                             @else
-                            <li><a href="{{ route('login') }}"><i class='bx bx-user'></i>Login</a></li>
-                            <li><a href="{{ route('register') }}"><i class='bx bx-user'></i>Register</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
                             @endauth
                             <li><a href="#booking_section" class="btn_1">Book Now</a></li>
                         </ul>

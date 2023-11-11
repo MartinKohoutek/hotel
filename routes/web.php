@@ -230,6 +230,10 @@ Route::controller(AboutUsController::class)->group(function(){
     Route::get('/aboutus', 'AboutUs')->name('about.us');
 });
 
+Route::controller(RestaurantController::class)->group(function(){
+    Route::get('/show.restaurant', 'ShowRestaurant')->name('show.restaurant');
+});
+
 Route::controller(HomeController::class)->group(function(){
     Route::get('/rooms', 'Rooms')->name('rooms');
     Route::get('/room/details/{id}', 'RoomDetails')->name('room.details');
