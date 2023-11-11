@@ -197,6 +197,10 @@ Route::middleware('auth', 'roles:admin')->group(function(){
         Route::get('/edit/menu/banner/{id}', 'EditMenuBanner')->name('edit.menu.banner');
         Route::post('/update/menu/banner/{id}', 'UpdateMenuBanner')->name('update.menu.banner');
         Route::get('/delete/menu/banner/{id}', 'DeleteMenuBanner')->name('delete.menu.banner');
+
+        Route::get('/all/menu/carousel', 'AllMenuCarousel')->name('all.menu.carousel');
+        Route::get('/add/menu/carousel', 'AddMenuCarousel')->name('add.menu.carousel');
+        Route::post('/store/menu/carousel', 'StoreMenuCarousel')->name('store.menu.carousel');
     });
 });
 
@@ -238,7 +242,7 @@ Route::controller(AboutUsController::class)->group(function(){
 });
 
 Route::controller(RestaurantController::class)->group(function(){
-    Route::get('/show.restaurant', 'ShowRestaurant')->name('show.restaurant');
+    Route::get('/show/restaurant', 'ShowRestaurant')->name('show.restaurant');
 });
 
 Route::controller(HomeController::class)->group(function(){

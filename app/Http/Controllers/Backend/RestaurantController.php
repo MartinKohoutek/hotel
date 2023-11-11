@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use App\Models\RestaurantBanner;
+use App\Models\RestaurantCarousel;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -141,7 +142,8 @@ class RestaurantController extends Controller
     public function ShowRestaurant() {
         $items = MenuItem::latest()->get();
         $categories = MenuCategory::orderBy('category_name')->get();
-        return view('frontend.restaurant.restaurant', compact('items', 'categories'));
+        $carousel = RestaurantCarousel::latest()->get();
+        return view('frontend.restaurant.restaurant', compact('items', 'categories', 'carousel'));
     }
 
     public function AllMenuBanner() {
@@ -251,5 +253,33 @@ class RestaurantController extends Controller
         ];
 
         return redirect()->back()->with($notification);
+    }
+
+    public function AllMenuCarousel() {
+        $carousel = RestaurantCarousel::latest()->get();
+        return view('backend.restaurant.carousel.all_carousel', compact('carousel'));
+    }
+
+    public function AddMenuCarousel() {
+        return view('backend.restaurant.carousel.add_carousel');
+    }
+
+    public function StoreMenuCarousel(Request $request) {
+        $img = $request->file('image');
+        $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+        Image::make($img)->resize(1600, 1000)->save('upload/restaurant/carousel/'.$imgName);
+
+        RestaurantCarousel::insert([
+            'title' => $request->title,
+            'small_title' => $request->short_title,
+            'image' => 'upload/restaurant/carousel/'.$imgName,
+        ]);
+
+        $notification = [
+            'message' => 'Carousel Item Inserted Successfully!',
+            'alert-type' => 'success', 
+        ];
+
+        return redirect()->route('all.menu.carousel')->with($notification);
     }
 }

@@ -5,11 +5,11 @@
     @endphp
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-3">
+            <div class="col-2">
                 <a href="{{ url('/') }}" class="logo_normal"><img src="{{ asset('frontend/img/logo.png') }}" width="135" height="45" alt=""></a>
                 <a href="{{ url('/') }}" class="logo_sticky"><img src="{{ asset($site_settings->logo) }}" width="135" height="45" alt=""></a>
             </div>
-            <div class="col-9">
+            <div class="col-10">
                 <div class="main-menu">
                     <a href="#" class="closebt open_close_menu"><i class="bi bi-x"></i></a>
 
